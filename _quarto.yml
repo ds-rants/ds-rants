@@ -1,8 +1,9 @@
 project:
+  title: "Data Science Rants"
   type: website
 
 website:
-  title: "DS Rants"
+  title: "Data Science Rants"
   navbar:
     right:
       - about.qmd
@@ -13,8 +14,11 @@ website:
 format:
   html:
     theme:
-      - zephyr
-      - brand
+      - sandstone
+
     css: styles.css
     grid:
       body-width: 600px
+    toc: true
+    code-block-border-left: true
+    highlight-style: breezedark

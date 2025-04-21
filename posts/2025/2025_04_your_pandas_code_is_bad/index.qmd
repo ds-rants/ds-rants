@@ -26,29 +26,29 @@ Alright, nothing that can't be fixed with a little bit of explanation and starti
 
 The second time felt awfully similar. I got called for support by a senior contractor because their code on our MLOPS pipeline in Vertex AI had crashed, apparently due to an out-of-memory error. For those who don’t know, Vertex AI is a GCP service that allows you to run machine learning jobs, using Kubernetes under the hood, so basically you can scale up the machine running your job quite a bit. Any data scientist would think logically that the thing crashed during the training, but it was the prediction part that had crashed, AFTER RUNNING FOR TWO DAYS!
 
-> What kind of unholy job are you guys running there? Ah, you’re running a PyTorch model to classify texts, great! Are you trying to classify the whole internet for it to take this long? What’s the size of your dataset? 20K text samples and the whole size is around a few 100s MB? Mother… I don’t know how you’re doing it, but you really managed to mess this one up. In the absolute worst case, this should run in a matter of hours, not days!
+What kind of unholy job are you guys running there? Ah, you’re running a PyTorch model to classify texts, great! Are you trying to classify the whole internet for it to take this long? What’s the size of your dataset? 20K text samples and the whole size is around a few 100s MB? Mother… I don’t know how you’re doing it, but you really managed to mess this one up. In the absolute worst case, this should run in a matter of hours, not days!
 
 Alright! Time to deep dive and see what ungodly horrors lie at the bottom of this…
 
-> My good sir, I thank you for creating functions, but yours are 50+ lines long, take 10 different arguments, and modify things in place… I hope you have tests for this (who am I kidding) … Anyway, where is your logic for the prediction? … Within a class with snake-case naming, not the worst thing I will see today, I am sure… Ah, this is the meat of all, the “predict” method… And…
+My good sir, I thank you for creating functions, but yours are 50+ lines long, take 10 different arguments, and modify things in place… I hope you have tests for this (who am I kidding) … Anyway, where is your logic for the prediction? … Within a class with snake-case naming, not the worst thing I will see today, I am sure… Ah, this is the meat of all, the “predict” method… And…
 
-Oh no! GOD NO! Please! NO!
+NO! GOD! NO! PLEASE! NO!
 
-You sir, are guilty of the sin of abusing the for loop and `pd.concat` pattern. Don’t tell me you are redoing this for each line of your dataframe? Of course you are!! Are you even aware that for prediction you are basically writing a whole new dataframe, which according to you is several 100s MB, that contains just an extra prediction compared to the old one, then doing an in-place operation to replace the old one, and you are wondering why your code takes this long? You’re not even wondering because it did not occur to you that such a job running for several days was a horrible mistake. Oh, and by the way, do you know that you have a triple-nested for loop here in this sub-function of your method “predict”?
+You sir, are guilty of the sin of abusing the for loop and `pd.concat` pattern. Don’t tell me you are redoing this for each line of your dataframe? Of course you are! Are you even aware that for each line you are basically writing a whole new dataframe, which according to you is several 100s MB, that contains just an extra prediction compared to the old one, then doing an in-place operation to replace the old one, and you are wondering why your code takes this long? You’re not even wondering because it did not occur to you that such a job running for several days was a horrible mistake. Oh, and by the way, do you know that you have a triple-nested for loop here in this sub-function of your method “predict”?
 
-Yeah, this thing is going to scale.
+Yeah, this thing is going places.
 
 ## There is nothing sacred anymore
 
-The pinnacle of incompetence was definitely reached by a few members of a consulting firm, you know one of the BIG players that sell their ~~meat~~ highly trained experts for a modest 2000-4000 dollars a day. Same scenario, I get added to a meeting whose objective was to determine if the MLOPS pipeline we developed can accommodate scaling up the model they developed because currently their prediction is taking 3-4 hours and they have only implemented 1 of the 100 possible cases. Obviously, it will be very difficult to run the job for all cases within a day. Obviously, they are using the largest machine they can for their Vertex AI job. Obviously, they are trying to say that their “high-end” solution is in danger, although we paid a hefty price for it. Obviously, it’s about blame shifting. Sadly, for them, I already know that they are full of shit.
+The pinnacle of incompetence was definitely reached by a few members of a consulting firm, you know one of the BIG players that sell their ~~meat~~ "highly trained experts" for a modest 2000-4000 dollars a day. Same scenario, I get added to a meeting whose objective was to determine if the MLOPS pipeline we developed can accommodate scaling up the model they developed because currently their prediction is taking 3-4 hours and they have only implemented 1 of the 100 possible cases. Obviously, it will be very difficult to run the job for all cases within a day. Obviously, they are using the largest machine they can for their Vertex AI job. Obviously, they are trying to say that their “high-end” solution is in danger, although we paid a hefty price for it. Obviously, it’s about blame shifting. Sadly, for them, I already know that they are full of shit.
 
-The first reason is that a few days ago, I had already heard of one of their “great” engineers reaching for help because his highly efficient unit tests were not working in the CI because he did a bunch of calls to Google Storage and BigQuery in them. Calling the database in unit tests, genius… But the second and most important reason why they are full of shit is my secret weapon. It is because our generic MLOPS pipeline does quite a bit **between** jobs but almost nothing within the job per se, just a little bit of I/O at the start and the end, everything else is just the logic implemented by the “business”. In other words, if things go sideways **during** the job, then you sir, you are the problem! Sorry, I’m not sorry.
+The first reason is that a few days ago, I had already heard of one of their “great” engineers reaching for help because his highly efficient unit tests were not working in the CI because he did a bunch of calls to Google Storage and BigQuery in them. Calling the database in unit tests, genius… But the second and most important reason why they are full of shit is my secret weapon. It is because our generic MLOPS pipeline does quite a bit **between** jobs but almost nothing within the job per se, just a little bit of I/O at the start and the end, everything else is just the logic implemented by the "customer" data scientist. In other words, if things go sideways **during** the job, then you sir, you are the problem! Sorry, I’m not sorry.
 
 Let’s speed up the next 25 minutes of the discussion:
 
-> So, let’s see the logs… Apparently, for each round you’re spending **many** minutes in method X doing some preprocessing… let’s pull up the corresponding code…
+So, let’s see the logs… Apparently, so you have about 100 configurations and for every one of them you’re spending **many minutes** in method X doing some preprocessing… let’s pull up the corresponding code… And…
 
-And… Oh no! GOD NO! Please! NO!
+NO! GOD! NO! PLEASE! NO!
 
 ``` python
 

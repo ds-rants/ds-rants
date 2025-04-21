@@ -1,5 +1,5 @@
 ---
-title: "Data Science Rants"
+title: "Homepage"
 listing:
   contents: posts
   sort: "date desc"
@@ -9,5 +9,4 @@ listing:
   filter-ui: false
 page-layout: full
 title-block-banner: true
-theme: zephyr
 ---
