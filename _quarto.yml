@@ -22,3 +22,9 @@ format:
     toc: true
     code-block-border-left: true
     highlight-style: breezedark
+
+    listing:
+      type: default
+      contents: posts
+      fields:
+        [image, date, title, author, description, categories, reading-time]
