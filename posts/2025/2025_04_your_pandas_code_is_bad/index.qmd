@@ -2,13 +2,15 @@
 title: "Your Pandas Code Is Bad And You Should Feel Bad!"
 author: "DS Rants"
 date: "2025-04-13"
-categories: [pandas, code, performance]
+categories: [pandas, code, performance, production]
 image: "bad_pandas_code.png"
 ---
 
-![](bad_pandas_code.png){fig-align="center" width="40%"}
+![](bad_pandas_code.png){fig-align="center" width="60%"}
 
-That’s it! Three times! Three times is the charm! It has been three times, THIS VERY WEEK, that I’ve been pulled into a meeting because someone had a performance problem with their pandas code. Each time it’s the same problem: some kind of genius decides to remove all safety belts, starts hacking and typing until their code regurgitates something. Then that person just hopefully and magically wishes that it will produce the expected outcome. Well, the outcome is me being called, and I’m deeply aggravated:
+That’s it! Three times! The third time is the charm as they say!
+
+It has been three times, THIS VERY WEEK, that I’ve been pulled into a meeting because someone had a performance problem with their pandas code. Each time it’s the same problem: some kind of genius decides to remove all safety belts, starts hacking and typing until their code regurgitates something. Then that person just hopefully and magically wishes that it will produce the expected outcome. Well, the outcome is me being called, and I’m deeply aggravated:
 
 IF YOU HAVE FOR LOOPS IN YOUR PANDAS CODE, YOU ARE WRONG!
 
@@ -95,7 +97,7 @@ I guess shipping garbage that barely works is definitely a good way to get your 
 
 ## Final thought:
 
-So please kids, do not abuse your pandas. Keep them safe from the bad influence of for loops. Believe me, it's much easier to make your code not suck rather than spending days trying to optimize a clunky piece. I fully agree here with everything [Casey Muratori](https://www.youtube.com/watch?v=pgoetgxecw8) says and this needs to be heard everywhere:
+So please kids, do not abuse your pandas. Keep them safe from the bad influence of for loops. Believe me, it's much easier to make your code not suck rather than spending days trying to optimize a clunky piece. I fully agree here with what [Casey Muratori](https://www.youtube.com/watch?v=pgoetgxecw8) says about `non-pessimization` and this needs to be heard everywhere:
 
 > Non-pessimization, it’s simply not introducing tons of extra work for the computer to do!
 

@@ -1,5 +1,5 @@
 ---
-title: "I Will Not Attend Your Pre-Pre-Pre-Sprint-Planning"
+title: "I Will Not Attend Your Pre-Pre-Pre-Sprint-Planning Meeting"
 author: "DS Rants"
 date: "2025-04-20"
 categories: [software engineering, fake agile, scrum clusterfuck, meetings]
@@ -24,7 +24,7 @@ You could have chosen many other paths. You could have selected carefully a few 
 
 The work could have been managed very differently. Who said that you were not supposed to take up another task during the week if you're done early with the first? Who said that its not possible to add a new task on the board if something comes up in the middle of the work? You never said such things, yet they probably came in your mind in a malformed way. You probably imagined deep down that your engineers were not "stream-aligned", "business-oriented", hard-working enough, and you imagined they needed actual supervision, thus you started patronizing your team but you don't know it yet.
 
-And soon you will find that this pre-sprint-planning meeting does not produce the results you hoped for. Your team does not deliver more features, you still think they need better synchronization, better teamwork and more engagement. So you will think really hard about it because you're not dumb, because you have faced issues before and things kinda worked out, we just need more of all those things. You will work, fight, overcome this hardship and you will do it:
+And soon you will find that this pre-sprint-planning meeting does not produce the results you hoped for. Your team does not deliver enough features, you still think they need better synchronization, more teamwork and stronger engagement. So you will think really hard about it because you're not dumb, because you have faced issues before and things kinda worked out, we just need more of all those things. You will work, fight, overcome this hardship and you will do it:
 
 You will add another meeting to prepare for the pre-sprint-planning meeting.
 

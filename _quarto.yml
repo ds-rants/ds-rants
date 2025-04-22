@@ -9,22 +9,14 @@ website:
       - about.qmd
       - icon: github
         href: https://github.com/
-      - icon: twitter
-        href: https://twitter.com
+
 format:
   html:
     theme:
       - sandstone
-
     css: styles.css
     grid:
       body-width: 600px
     toc: true
     code-block-border-left: true
     highlight-style: breezedark
-
-    listing:
-      type: default
-      contents: posts
-      fields:
-        [image, date, title, author, description, categories, reading-time]

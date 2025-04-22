@@ -1,5 +1,5 @@
 ---
-title: "Save Yourself: Cancel A 5.5M$ Consultancy Deal"
+title: "Save Yourself: Cancel A 5.5M€ Consultancy Deal"
 author: "DS Rants"
 date: "2025-04-19"
 categories: [data science, grifters, consultants]
@@ -8,7 +8,7 @@ draft-mode: unlinked
 
 ---
 
-There are some days where you feel like your work is pointless, void, and without meaning. But thankfully, there are also a very few days when you feel and know that you actually made a difference. By working in data science, and more broadly in software engineering, it is particularly easy to lose a sense of purpose and become overwhelmed by the sheer amount of bullshit that tends to plague our profession. However, I have never felt more helpful than when I contributed to canceling a small contract of 5.5M$ with a **very large and influential consulting firm**. All the events described here happened in only a couple of months with two distinct phases.
+There are some days where you feel like your work is pointless, void, and without meaning. But thankfully, there are also a very few days when you feel and know that you actually made a difference. By working in data science, and more broadly in software engineering, it is particularly easy to lose a sense of purpose and become overwhelmed by the sheer amount of bullshit that tends to plague our profession. However, I have never felt more helpful than when I contributed to canceling a small contract of 5.5M€ with a **very large and influential consulting firm**. All the events described here happened in only a couple of months with two distinct phases.
 
 ## The First Nail In The Coffin
 
@@ -55,6 +55,6 @@ Because everyone in their right mind should. The primary reason behind their dre
 
 These PowerPoint virtuosos are one of the reasons why all the big companies tend to have the exact same strategies. Did you ever wonder why they all decided to brand themselves as "agile" while being neck-deep in month-long procedures? Or why in the end of the 2010s all the big industrial players suddenly started spawning a subsidiary responsible for their "digital and data transformation"? Why so many of them decided to bring back the worst of waterfall combined with the worst of scrum under the infamous man-made horror called *SAFe* when they failed at actually being agile? Why when OpenAI and ChatGPT skyrocketed, each company was suddenly sitting on billions of dollars in the form of data and how AI is going to liberate and enable this value? Because of the chronic intellectual inbreeding of the strategy consulting groups who repeat pretty much the same mantra to all their clients. Each of them being so caught up in the Fear Of Missing Out on an opportunity (whose actual value does not appear to be questioned anywhere...), that they will happily burn 100's of millions of dollars in contracts, transformations, and reorganization.
 
-Consultants have the ears of executives, speak the same language they do, creep up inside every large institution thanks to their ever-growing large phone book. Be careful, they have honed their skills in plausible but empty bullshit talk and use their full reputation to distort reality with their [lvl. 20 halo effect](https://en.wikipedia.org/wiki/Halo_effect).
+Consultants have the ears of executives, speak the same language they do. They creep up inside every large institution thanks to their ever-growing large phone book. Be careful, they have honed their skills in plausible but empty bullshit talk and use their full reputation to distort reality with their [lvl. 20 halo effect](https://en.wikipedia.org/wiki/Halo_effect).
 
 Save yourself, save your friends, save the planet, keep the goblin consultants at bay.
