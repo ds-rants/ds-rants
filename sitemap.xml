@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ds-rants.github.io/ds-rants/index.html</loc>
-    <lastmod>2025-04-22T21:51:48.516Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ds-rants.github.io/ds-rants/posts/2025/2025_04_20_pre-pre-sprint-planning/index.html</loc>
-    <lastmod>2025-04-22T21:51:48.517Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ds-rants.github.io/ds-rants/posts/2025/2025_04_your_pandas_code_is_bad/index.html</loc>
-    <lastmod>2025-04-22T21:51:48.518Z</lastmod>
+    <loc>https://ds-rants.github.io/ds-rants/twitter.html</loc>
+    <lastmod>2025-04-23T05:48:23.201Z</lastmod>
   </url>
   <url>
     <loc>https://ds-rants.github.io/ds-rants/about.html</loc>
-    <lastmod>2025-04-22T21:51:48.516Z</lastmod>
+    <lastmod>2025-04-23T05:48:23.199Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ds-rants.github.io/ds-rants/index.html</loc>
+    <lastmod>2025-04-23T05:48:23.199Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ds-rants.github.io/ds-rants/posts/2025/2025_04_20_pre-pre-sprint-planning/index.html</loc>
+    <lastmod>2025-04-23T05:48:23.200Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ds-rants.github.io/ds-rants/posts/2025/2025_04_your_pandas_code_is_bad/index.html</loc>
+    <lastmod>2025-04-23T05:48:23.201Z</lastmod>
   </url>
 </urlset>

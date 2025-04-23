@@ -1,5 +1,19 @@
 [
   {
+    "objectID": "twitter.html",
+    "href": "twitter.html",
+    "title": "Surprise…",
+    "section": "",
+    "text": "You really should get off that stupid platform that promotes the absence of thinking in 280 characters.\nThere is nothing of value that can be said in such a short format, its only a slogan.\nAnd don’t get me started on the nazi in chief who uses that for political interference and insider trading.\nSeriously, do a favor for your brain."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "I like data science but I hate unnecessary things and a despise projects made up to answer problems that are not even there.\nThis site will provide a collection of reflections on modern data science problems, the bloat surrounding them, and the fact that most of project completely fail or just don’t bring any value whatsoever.\nSwearing will be abundant, people doing stupid things will be called stupid and more…\nEnjoy!"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "DS Rants Main Page",
@@ -54,12 +68,5 @@
     "title": "Your Pandas Code Is Bad And You Should Feel Bad!",
     "section": "Disclaimer:",
     "text": "Disclaimer:\nThe style of this post may remind some of you of the comrade Ludicity and I must confess I am a deep fan and an active reader of his work.\nThough I tried not to imitate his style too much, this post MUST be a strong rant because some things need to be said out loud. Also, because of my own swearing nature and my shortcomings in writing, I doubt that I managed efficiently to do so. Ludicity, if you’re reading this, I apologize deeply."
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this blog"
   }
 ]
