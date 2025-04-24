@@ -41,7 +41,7 @@ But this was only a nice start.
 
 ## The Second Nail In The Coffin
 
-The second part of this rant is a follow-up to some events described at [the end of this post](../../2025/2025_04_your_pandas_code_is_bad/index.qmd), where a coworker and I had the pleasure to audit an outstanding piece of garbage code produced by this big player of the consulting world.
+The second part of this rant is a follow-up to some events described at [the end of this post](../../2025/2025_04_13_your_pandas_code_is_bad/index.qmd), where a coworker and I had the pleasure to audit an outstanding piece of garbage code produced by this big player of the consulting world.
 Some people in our organization wanted to gauge the quality of the work done before the potential renewal of their contract.
 The one-page report we produced was basically a call for a human sacrifice to appease the wrath of the gods in the face of the insanity they dared try to release in the wild and call a product.
 
