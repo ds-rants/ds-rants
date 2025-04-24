@@ -7,7 +7,7 @@ draft: true
 draft-mode: unlinked
 ---
 
-There are some days where you feel like your work is pointless, void, and without meaning.
+There are some days when you feel like your work is pointless, void, and without meaning.
 But thankfully, there are also a very few days when you feel and know that you actually made a difference.
 By working in data science, and more broadly in software engineering, it is particularly easy to lose a sense of purpose and become overwhelmed by the sheer amount of bullshit that tends to plague our profession.
 However, I have never felt more helpful than when I contributed to canceling a small contract of 5.5M€ with a **very large and influential consulting firm**.

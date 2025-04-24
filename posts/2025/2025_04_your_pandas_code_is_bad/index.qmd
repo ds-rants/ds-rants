@@ -8,7 +8,7 @@ image: "bad_pandas_code.png"
 
 ![](bad_pandas_code.png){fig-align="center" width="60%"}
 
-That’s it! Three times! The third time is the charm as they say!
+That’s it! Three times! The third time is the charm, as they say!
 
 It has been three times, THIS VERY WEEK, that I’ve been pulled into a meeting because someone had a performance problem with their pandas code.
 Each time it’s the same problem: some kind of genius decides to remove all safety belts, starts hacking and typing until their code regurgitates something.
@@ -19,12 +19,13 @@ IF YOU HAVE FOR LOOPS IN YOUR PANDAS CODE, YOU ARE WRONG!
 
 There, I said it…
 
-## The not so good
+## The not-so-good
 
 The first time was a young data analyst who produced a notebook to perform some anomaly detection on curves.
 It was running slow even though it was running on a GCP machine that could probably crack half of the Internet passwords in an hour.
 The first rookie mistake was trying to plot about 500 examples of curves with about 5000 points per curve because the sampling rate is under a millisecond.
 I mean, `plotly` is a great library, no doubt about it, but that is a lot of things to print on your screen.
+
 The machine breathes a sigh of relief...
 
 But the signs of abuse were deeper.
@@ -32,7 +33,7 @@ I will overlook the code blocks with a width on screen of 700 characters because
 I will purposely ignore the function that does data pre-processing AND plotting, for now...
 But I cannot turn a blind eye to the double-nested for loop with print statements every 10ms and in-place modification of your gigantic dataframe that propels your machine into locked-in syndrome.
 
-Alright, nothing that can't be fixed with a little bit of explanation and starting from the basics: down-sampling large data, method chaining in pandas, use vectorization it is your friend, and no for loops, please.
+Alright, nothing that can't be fixed with a little bit of explanation and starting from the basics: down-sampling large data, method chaining in pandas, and no for loops, please.
 
 ## The bad
 
@@ -127,7 +128,7 @@ Oh, and by the way, the huge machine they were using was running at 20% of CPU a
 
 I guess shipping garbage that barely works is definitely a good way to get your contract renewed and be paid to continue maintaining it… But this is a different story.
 
-## Final thought:
+## Final thoughts
 
 So please kids, do not abuse your pandas.
 Keep them safe from the bad influence of for loops.
@@ -136,7 +137,7 @@ I fully agree here with what [Casey Muratori](https://www.youtube.com/watch?v=pg
 
 > Non-pessimization, it’s simply not introducing tons of extra work for the computer to do!
 
-## Disclaimer:
+## Disclaimer
 
 The style of this post may remind some of you of [the comrade Ludicity](https://ludic.mataroa.blog/) and I must confess I am a deep fan and an active reader of his work.
 
