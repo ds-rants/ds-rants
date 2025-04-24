@@ -74,7 +74,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-1f209a96a0b943f00bb8f0cdf3ecf223.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-b2d22617993ac071ad52cd4142d8cfaa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-59edb11b171c5957b9e5882861902cb7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -183,11 +183,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-not-so-good" id="toc-the-not-so-good" class="nav-link active" data-scroll-target="#the-not-so-good">The not so good</a></li>
+  <li><a href="#the-not-so-good" id="toc-the-not-so-good" class="nav-link active" data-scroll-target="#the-not-so-good">The not-so-good</a></li>
   <li><a href="#the-bad" id="toc-the-bad" class="nav-link" data-scroll-target="#the-bad">The bad</a></li>
   <li><a href="#there-is-nothing-sacred-anymore" id="toc-there-is-nothing-sacred-anymore" class="nav-link" data-scroll-target="#there-is-nothing-sacred-anymore">There is nothing sacred anymore</a></li>
-  <li><a href="#final-thought" id="toc-final-thought" class="nav-link" data-scroll-target="#final-thought">Final thought:</a></li>
-  <li><a href="#disclaimer" id="toc-disclaimer" class="nav-link" data-scroll-target="#disclaimer">Disclaimer:</a></li>
+  <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts">Final thoughts</a></li>
+  <li><a href="#disclaimer" id="toc-disclaimer" class="nav-link" data-scroll-target="#disclaimer">Disclaimer</a></li>
   </ul>
 </nav>
     </div>
@@ -203,15 +203,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="bad_pandas_code.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
 </figure>
 </div>
-<p>That’s it! Three times! The third time is the charm as they say!</p>
+<p>That’s it! Three times! The third time is the charm, as they say!</p>
 <p>It has been three times, THIS VERY WEEK, that I’ve been pulled into a meeting because someone had a performance problem with their pandas code. Each time it’s the same problem: some kind of genius decides to remove all safety belts, starts hacking and typing until their code regurgitates something. Then that person just hopefully and magically wishes that it will produce the expected outcome. Well, the outcome is me being called, and I’m deeply aggravated:</p>
 <p>IF YOU HAVE FOR LOOPS IN YOUR PANDAS CODE, YOU ARE WRONG!</p>
 <p>There, I said it…</p>
 <section id="the-not-so-good" class="level2">
-<h2 class="anchored" data-anchor-id="the-not-so-good">The not so good</h2>
-<p>The first time was a young data analyst who produced a notebook to perform some anomaly detection on curves. It was running slow even though it was running on a GCP machine that could probably crack half of the Internet passwords in an hour. The first rookie mistake was trying to plot about 500 examples of curves with about 5000 points per curve because the sampling rate is under a millisecond. I mean, <code>plotly</code> is a great library, no doubt about it, but that is a lot of things to print on your screen. The machine breathes a sigh of relief…</p>
+<h2 class="anchored" data-anchor-id="the-not-so-good">The not-so-good</h2>
+<p>The first time was a young data analyst who produced a notebook to perform some anomaly detection on curves. It was running slow even though it was running on a GCP machine that could probably crack half of the Internet passwords in an hour. The first rookie mistake was trying to plot about 500 examples of curves with about 5000 points per curve because the sampling rate is under a millisecond. I mean, <code>plotly</code> is a great library, no doubt about it, but that is a lot of things to print on your screen.</p>
+<p>The machine breathes a sigh of relief…</p>
 <p>But the signs of abuse were deeper. I will overlook the code blocks with a width on screen of 700 characters because everyone loves to scroll right and left (Please just run <code>ruff</code> on your notebooks). I will purposely ignore the function that does data pre-processing AND plotting, for now… But I cannot turn a blind eye to the double-nested for loop with print statements every 10ms and in-place modification of your gigantic dataframe that propels your machine into locked-in syndrome.</p>
-<p>Alright, nothing that can’t be fixed with a little bit of explanation and starting from the basics: down-sampling large data, method chaining in pandas, use vectorization it is your friend, and no for loops, please.</p>
+<p>Alright, nothing that can’t be fixed with a little bit of explanation and starting from the basics: down-sampling large data, method chaining in pandas, and no for loops, please.</p>
 </section>
 <section id="the-bad" class="level2">
 <h2 class="anchored" data-anchor-id="the-bad">The bad</h2>
@@ -228,7 +229,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The pinnacle of incompetence was definitely reached by a few members of a consulting firm, you know one of the BIG players that sell their <del>meat</del> “highly trained experts” for a modest 2000-4000 dollars a day. Same scenario, I get added to a meeting whose objective was to determine if the MLOPS pipeline we developed can accommodate scaling up the model they developed because currently their prediction is taking 3-4 hours and they have only implemented 1 of the 100 possible cases. Obviously, it will be very difficult to run the job for all cases within a day. Obviously, they are using the largest machine they can for their Vertex AI job. Obviously, they are trying to say that their “high-end” solution is in danger, although we paid a hefty price for it. Obviously, it’s about blame shifting. Sadly, for them, I already know that they are full of shit.</p>
 <p>The first reason is that a few days ago, I had already heard of one of their “great” engineers reaching for help because his highly efficient unit tests were not working in the CI because he did a bunch of calls to Google Storage and BigQuery in them. Calling the database in unit tests, genius… But the second and most important reason why they are full of shit is my secret weapon. It is because our generic MLOPS pipeline does quite a bit <strong>between</strong> jobs but almost nothing within the job per se, just a little bit of I/O at the start and the end, everything else is just the logic implemented by the “customer” data scientist. In other words, if things go sideways <strong>during</strong> the job, then you sir, you are the problem! Sorry, I’m not sorry.</p>
 <p>Let’s speed up the next 25 minutes of the discussion:</p>
-<p>So, let’s see the logs… Apparently, so you have about 100 configurations and for every one of them you’re spending <strong>many minutes</strong> in method X doing some preprocessing… let’s pull up the corresponding code… And…</p>
+<p>So, let’s see the logs… Apparently, so you have about 100 configurations and for every one of them you’re spending <strong>many minutes</strong> in method X doing some pre-processing… let’s pull up the corresponding code… And…</p>
 <p>NO! GOD! NO! PLEASE! NO!</p>
 <div class="sourceCode" id="annotated-cell-1"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-1-2" class="code-annotation-target"><a href="#annotated-cell-1-2" aria-hidden="true" tabindex="-1"></a>default_dict_of_df : <span class="bu">dict</span>[<span class="bu">str</span>, <span class="bu">list</span>[pd.DataFrame]] <span class="op">=</span> ...</span>
@@ -284,15 +285,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In the end, a team of so-called “expert” consulting engineers wrote something so egregious it threatened the whole project. Any junior writing such a thing should be taught better. None of them bothered to check the logs to investigate the issue. Oh, and by the way, the huge machine they were using was running at 20% of CPU and RAM load all the time, they did not check that either! Oh and they did the same mistake in two places within the codebase, so now we have to wait twice as much.</p>
 <p>I guess shipping garbage that barely works is definitely a good way to get your contract renewed and be paid to continue maintaining it… But this is a different story.</p>
 </section>
-<section id="final-thought" class="level2">
-<h2 class="anchored" data-anchor-id="final-thought">Final thought:</h2>
+<section id="final-thoughts" class="level2">
+<h2 class="anchored" data-anchor-id="final-thoughts">Final thoughts</h2>
 <p>So please kids, do not abuse your pandas. Keep them safe from the bad influence of for loops. Believe me, it’s much easier to make your code not suck rather than spending days trying to optimize a clunky piece. I fully agree here with what <a href="https://www.youtube.com/watch?v=pgoetgxecw8">Casey Muratori</a> says about <code>non-pessimization</code> and this needs to be heard everywhere:</p>
 <blockquote class="blockquote">
 <p>Non-pessimization, it’s simply not introducing tons of extra work for the computer to do!</p>
 </blockquote>
 </section>
 <section id="disclaimer" class="level2">
-<h2 class="anchored" data-anchor-id="disclaimer">Disclaimer:</h2>
+<h2 class="anchored" data-anchor-id="disclaimer">Disclaimer</h2>
 <p>The style of this post may remind some of you of <a href="https://ludic.mataroa.blog/">the comrade Ludicity</a> and I must confess I am a deep fan and an active reader of his work.</p>
 <p>Though I tried not to imitate his style too much, this post MUST be a strong rant because some things need to be said out loud. Also, because of my own swearing nature and my shortcomings in writing, I doubt that I managed efficiently to do so. Ludicity, if you’re reading this, I apologize deeply.</p>
 
