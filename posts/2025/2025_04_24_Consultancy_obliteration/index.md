@@ -10,9 +10,10 @@ draft-mode: unlinked
 ## The Recap
 
 Sorry, dear readers, this is a multi-steps story.
-For those currently boarding the train, here is a quick recap of the situation: The _big consulting firm_ was offering for a few **millions euros** (clearly pocket money...) to create one a solution to analyze JIRA tickets and deliver another machine learning project around stock prediction ([See more details here](../2025_04_19_Cancel_A_5.7M$_Deal/index.md)).
+
+For those currently boarding the train, here is a quick summary of the situation: The _big consulting firm_ was offering for a few **millions euros** (clearly pocket money...) to create one a solution to analyze JIRA tickets and deliver another machine learning project around stock prediction ([See more details here](../2025_04_19_Cancel_A_5.7M$_Deal/index.md)).
 Your servitor, completely clueless, did a little bit of data analysis that made the JIRA solution irrelevant.
-With the help of a very competent colleague, we demonstrated that the code for the ML project had been regurgitated by a junior high on vibe-coding kool-aid.
+With the help of a very competent colleague, we demonstrated that the code for the ML project was a regurgitation from a junior high on the vibe-coding Kool-Aid.
 In the next 10 minutes, we also showed that for the _seniors_ reading logs and CPU loads on a Web GUI was beneath them and/or outside their skill set.
 Too bad, that would have helped them understand why their solution was not working.
 
@@ -36,26 +37,29 @@ Less than a week later, as the _big consulting firm_ is about to stop working on
 As I am not working directly on the project, I reluctantly accept the invitation.
 I hate the smell of code garbage in the morning...
 
-## The First Bloodbath Smashing Consultant Brains
+## The First Taste Of Blood
 
-The meeting starts, they are 2 of them _"seniors"_, 5 of us including on product leader for the department.
+The meeting starts, they are 2 of them, _"seniors"_, and there 5 of us, including one product leader for the department.
 The atmosphere is tense. They don't like me one bit, good, neither do I...
 
 > Thank you for being here, we'd like to show you the last ameliorations we did on the project before we leave things to you guys. We used multi-threading to significantly improve the performance of our code, and it should now scale.
 
 Some of you know where this is going...I thought:
 
-> Wait,... what? Multi-threading? On pandas code so dumb that it could have been written by my dead grand-ma' tripping on codein?
+> Wait,... what? Multi-threading?
+>
+> On pandas code so dumb that it could have been written by my dead grand-ma' tripping on codein?
 >
 > What about the low hanging fruits for performance we showed them?
 > What about the so needed design improvements for maintainability?
-> None of that obviously.
+>
+>None of that obviously.
 
 They start showing the very simple Merge Request, telling us how they managed to improve the running time.
 Something is off, something is fishy.
 I quickly use my ultimate power: the all-seeing eye.
 I open their project in the GCP console, navigate to the Machine Learning pipelines.
-Their previous garbage pipeline ran in 4 hours, a new one has been running for...
+Their previous garbage pipeline ran in 4 hours, a new one has been running for [REDACTED].
 
 I now feel the taste of blood between my teeth. I yearn for their demise.
 I will inflect permanent damage on them.
@@ -66,8 +70,8 @@ The smell of blood goes up to my nose...
 
 > Can you please give me the commit ID of your merge request? I asked innocently.
 
-The trap has already been set in motion. I already looked a the tags on the pipeline that has been running for ... I know which commit trigger it.
-It's theirs.
+The trap has already been set in motion. I already looked a the tags on the pipeline that has been running for [REDACTED]. I know which commit triggered it.
+**IT'S THEIRS.**
 And sadly for them, I like to play with my food before I eat it.
 
 So I let them look for the commit ID. They give it to me. I double-check. I triple-check. And then:
@@ -76,6 +80,86 @@ So I let them look for the commit ID. They give it to me. I double-check. I trip
 > Can you tell me how you manage to improve a runtime of 4 hours to **4 DAYS**?
 
 The smell of Death is everywhere...
+
+## The Wounded Consultants Attempts To Fight Back
+
+The silence is deafening.
+
+> - "Well, I set this up on my local installation and it reduced the processing time from 2 hours to 1 hour", said _big firm consultant_ (BFC) N°1.
+> - "Are you telling it works on your machine?", I asked slowly. "I will point out that the only thing that matters is that it runs on GCP, everything else is useless...".
+> - "Sure, sure... there seems to be an issue with the current version of the code...".
+> - "That's the least you could say.", as I uttered these word I am getting ready for the kill.
+> - "I don't seem to have the possibility to stop the current job from running, do you..."
+> - "There it's dead...", I said with an awoken appetite from killing the server job and already looking for another pray.
+> - "Thank you, there seem to be a different behavior on the distant machine.", said BFC N°1
+> - "Yes, you're attempting to spread the load on multiple threads or CPUs, but the behavior is highly dependent on which hardware you run it. You did not check that, this seems highly unprofessional.", I pronounced calmly, thus striking the first blow to the leg.
+> - "That's not right, you have no right to call us unprofessional.", interceded BFG N°2.
+"You only reviewed our code and only gave negative feedback.
+There was nothing constructive in what you said".
+> - "We did gave you constructive feedback, when we handed our audit report, we pointed out to two areas of the code base where the major bottlenecks were.
+They consist in 2 blocks of 15 lines each filled with poor pandas code.
+We even showed them to you live on our first meeting, by just reading the logs.
+For some reason, you decided to address the problem very differently.", I said slowly, boiling with rage and fuelled by anger. "Besides, on your previous runs, the CPU load was around 15-20% and now it's peaking at 1%. Whatever you did made the situation clearly worse. You did not check that your _'optimization'_ actually works on the hardware running the job."
+
+At this point, a senior MLOps engineer intervenes.
+The dude is a totally legit contractor, probably better than I am in many areas, with really strong software engineering skills.
+He rightfully points out that we can look at the logs to see what's really going out, and try to figure out why the job was stuck.
+
+I retreat to my cave, still growling...
+
+## Spiralling Down Into Madness
+
+The logs are a clusterfuck, with only the message "A job is running" every minute for 4 whole days.
+The reason behind this: when a Kubeflow job is running for a long time, there is basically a signal sent every minute to tell the user: "Hey, I'm still alive".
+We only see that.
+The senior tells the two clowns to go back to the very beginning of the job, they update the search.
+
+Quickly, it appears that the job got stuck in a very particular place, right after the start of the program.
+Where? In the same fucking preprocessing function that we uncovered in our audit!
+What are the odds? (Dear concurrency experts reading, if you know exactly where this is going, I apologize.)
+Who would have thought that sweeping garbage under the carpet does not make your room smell like orange perfume?
+
+I sense some exasperation pearling through the words of my colleague:
+> "How many threads did you set-up for this job?"
+
+We take a closer look at the merge request. They put 16. My colleague quietly says:
+
+> "I believe you have put too many threads in your configuration and the CPU is in a deadlock."
+
+Again, trying to run concurrently multiple versions of the same dumpster code, what are the odds that something fucking stupid will happen?
+He adds another line:
+
+> "As my colleague tried to tell you earlier, the behavior of sub-process or multi-threading is highly dependant on the hardware actually running the job."
+>
+> "The optimization you did locally, does
+ not work on the kubernetes cluster running your job because the hardware is fundamentally different from your machine."
+
+I'm stepping out from my cave, craving for blood and violence...
+
+## A Methodic Verbal Annihilation
+
+> "It appears that your solution is useless", I say.
+
+The room is silent. The consultants know that a storm is coming, I can sense their fear. The Grim Reaper smiles...
+
+> "You have put multi-processing on code that was deeply defective in an attempt to hide its mediocrity. You tried to call this an optimization but it made the situation worse in all aspects."
+>
+> "You did the same mistakes as last time, you did not even check that the job was running properly, you did not check the logs, you did not check the CPU load, all of which is one click away in the web GUI."
+>
+> "And finally you call everyone in a meeting, saying: 'We improved the situation', and nothing works! This is what I call highly unprofessional!"
+
+The consultants lay there, silent, brain-dead, skulls cracked open.
+
+## The Aftermath
+
+We quickly end the meeting there because there is nothing more to discuss.
+The good thing was that one representative of the business side witness the whole exchange.
+The Senior Engineer and I repeat a few additional piece of information, in order for him to fully grasp the details of the situation.
+
+I ask him for a favor, because I saw the _leeching consultants_ recorded the teams meeting but we don't have access to it. He kindly accepts to ask them a copy of said recording.
+
+We are still waiting for a reply to this email request.
+
 
 ## A Case Defense Of Casey Muratori: Non-Pessimization Vs. Optimization
 
