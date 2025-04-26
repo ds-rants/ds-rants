@@ -84,24 +84,27 @@ The silence is deafening.
 > - "Well, I set this up on my local installation and it reduced the processing time from 2 hours to 1 hour." says _big firm consultant_ (BFC) N°1.
 > - "Are you telling me it works on your machine?" I ask slowly. "I will point out that the only thing that matters is that it runs on GCP, everything else is useless...".
 > - "Sure, sure... there seems to be an issue with the current version of the code...".
-> - "That's the least you could say." as I utter these words, I am getting ready for the kill.
+> - "That's the least you could say." as I utter these words, and thus strike the first blow to the leg.
 > - "I don't seem to have the possibility to stop the current job from running, do you..."
-> - "There, it's dead..." I say with an awoken appetite from killing the server job and already looking for another prey.
+> - "There, it's already dead..." I say with an awoken appetite from killing the server job and already looking for another prey.
 > - "Thank you, there seems to be a different behavior on the distant machine," says BFC N°1.
-> - "Yes, you're attempting to spread the load on multiple threads or CPUs, but the behavior is highly dependent on which hardware you run it. You did not check that, this seems highly unprofessional," I pronounce calmly, as I strike the first blow to the leg.
+> - "Yes, you're attempting to spread the load on multiple threads or CPUs, but the behavior is highly dependent on which hardware you run it. You did not check that, this seems highly unprofessional." I continue calmly but now trying to bite their arms.
 > - "That's not right, you have no right to call us unprofessional," interceded BFC N°2.
 >   "You only reviewed our code and only gave negative feedback.
 >   There was nothing constructive in what you said."
 > - "We did give you constructive feedback. When we handed our audit report, we pointed out two areas of the code base where the major bottlenecks were.
 >   They consist of 2 blocks of 15 lines each filled with poor pandas code.
 >   We even showed them to you live in our first meeting, by just reading the logs.
->   For some reason, you decided to address the problem very differently," I said slowly, boiling with rage and fueled by anger.
+>   For some reason, you decided to address the problem very differently," I say slowly, boiling with rage and fueled by anger.
+>   I decide to push through and continue with a direct attack.
 >   "Besides, on your previous runs, the CPU load was around 15-20% and now it's peaking at 1%. Whatever you did made the situation clearly worse.
 >   You did not check that your _'optimization'_ actually works on the hardware running the job."
 
-At this point, a senior MLOps engineer intervenes.
+At this point, another senior MLOps engineer intervenes.
 The dude is a totally legit contractor, probably better than I am in many areas, with really strong software engineering skills.
 He rightfully points out that we can look at the logs to see what's really going on, and try to figure out why the job was stuck.
+
+The opportunity for a killing blow will come later.
 
 I retreat to my cave, still growling...
 
@@ -110,7 +113,7 @@ I retreat to my cave, still growling...
 The logs are a clusterfuck, with only the message "A job is running" every minute for 4 whole days.
 The reason behind this: when a Kubeflow job is running for a long time, there is basically a signal sent every minute to tell the user: "Hey, I'm still alive".
 We only see that.
-The senior tells the two clowns to go back to the very beginning of the job, they update the search.
+The other senior tells the two consulting clowns to go back to the very beginning of the job. They update the search.
 
 Quickly, it appears that the job got stuck in a very particular place, right after the start of the program.
 Where? In the same fucking preprocessing function that we uncovered in our audit!
@@ -125,10 +128,14 @@ We take a closer look at the merge request. Motherfucker, They put **16**. My co
 
 > "I believe you have put too many threads in your configuration and the CPU is in a deadlock."
 
-Again, trying to run concurrently multiple versions of the same dumpster code, what are the odds that something fucking stupid will happen?
-He adds another line:
+Calling it a deadlock at this point is making them a favor.
+The CPU is not locked, it is basically being chocked to death by the most absurd computer BDSM practice of the year.
+This guys managed to send one of the beefiest Kubernetes machine directly in a drooling vegetative state, banned for eternity in the quantum dimension.
 
-> "As my colleague tried to tell you earlier, the behavior of sub-process or multi-threading is highly dependent on the hardware actually running the job."
+Again, trying to run concurrently multiple versions of the same dumpster code, what are the odds that something fucking stupid will happen?
+My colleague adds another couple lines:
+
+> "As we tried to tell you earlier, the behavior of a sub-process or a multi-threading job is highly dependent on the hardware actually running the job."
 >
 > "The optimization you did locally does not work on the Kubernetes cluster running your job because the hardware is fundamentally different from the one on your machine."
 
@@ -138,7 +145,7 @@ I'm stepping out from my cave, craving for blood and violence...
 
 > "It appears that your solution is useless." I say.
 
-The room is silent. The consultants know that a storm is coming, I can sense their fear. The Grim Reaper smiles...
+The room is silent. A storm is coming. The consultants are frozen by fear. I can sense it. The Grim Reaper smiles...
 
 > "You have put multi-processing on code that was deeply defective in an attempt to hide its mediocrity. You tried to call this an optimization but it made the situation worse in all aspects."
 >
