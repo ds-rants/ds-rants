@@ -17,10 +17,12 @@ about:
 
 ---
 
-I like data science but I **hate** unnecessary things and a despise projects made up to answer problems that are not even there.
+I like data science but I **hate**  unnecessary [complexity](https://grugbrain.dev/#grug-on-complexity), convoluted things and a despise projects made up to answer problems that are not even there.
 
-This site will provide a collection of reflections on modern data science problems, the bloat surrounding them, and the fact that most of project completely fail or just don't bring any value whatsoever.
+This site will provide a collection of reflections on hopefully modern data science problems, the bloat surrounding them, and the sad fact that most of projects completely fail or just don't bring any value whatsoever.
 
 Swearing will be abundant, people doing stupid things will be called stupid and more...
 
-Enjoy!
+Thankfully, there is no amount of swearing that cannot be nicely illustrated by memes, so buckle up!
+
+And Enjoy!
