@@ -12,26 +12,22 @@ draft-mode: unlinked
 Sorry, dear readers, this is a multi-steps story.
 
 For those currently boarding the train, here is a quick summary of the situation: The _big consulting firm_ was offering for a few **millions euros** (clearly pocket money...) to create one a solution to analyze JIRA tickets and deliver another machine learning project around stock prediction ([See more details here](../2025_04_19_Cancel_A_5.7M$_Deal/index.md)).
+
 Your servitor, completely clueless, did a little bit of data analysis that made the JIRA solution irrelevant.
 With the help of a very competent colleague, we demonstrated that the code for the ML project was a regurgitation from a junior high on the vibe-coding Kool-Aid.
-In the next 10 minutes, we also showed that for the _seniors_ reading logs and CPU loads on a Web GUI was beneath them and/or outside their skill set.
+In just 10 minutes, we also showed that for the _seniors_ reading logs and CPU loads on a Web GUI was beneath them and/or outside their skill set.
 Too bad, that would have helped them understand why their solution was not working.
 
 As a result, the negotiations for the several million contract were short, and the _big consulting firm_ was kindly requested to keep their incompetent hands off the code and stick to their primary area of non-expertise: powerpoint and global strategy.
 Sadly, it's impossible to completely get rid of leeches in large industrial companies, but hey... you have take the small wins.
-
 
 ## The Set-Up
 
 With the audit we made, a few recommendations were given to remove the garbage from the existing code base, and produce something that has a minor chance of working.
 They were overall pretty simple:
 
-1. Don't do garbage within your pandas code (No for loops, pretty please).
-    - Estimated rework time: 2 weeks for a senior.
-    - Extremely high potential for faster execution
-2. Reduce general complexity and improve design:
-    - Estimated rework time: 1 month for a senior.
-    - Few gains for execution time, but necessary for maintainability.
+1. Don't do garbage within your pandas code (No for loops, pretty please), with a high potential for faster execution and a limited amount of work for a senior (probably a couple of weeks)
+2. Reduce general complexity and improve design, that should yield fewer gains for execution time, but is necessary for maintainability, and requires more time to fix.
 
 Less than a week later, as the _big consulting firm_ is about to stop working on the code, and hand-over everything to my colleagues in a couple of weeks, we suddenly receive an invitation for a meeting: "last improvements and hand-over".
 As I am not working directly on the project, I reluctantly accept the invitation.
@@ -53,16 +49,16 @@ Some of you know where this is going...I thought:
 > What about the low hanging fruits for performance we showed them?
 > What about the so needed design improvements for maintainability?
 >
->None of that obviously.
+> None of that obviously.
 
 They start showing the very simple Merge Request, telling us how they managed to improve the running time.
 Something is off, something is fishy.
 I quickly use my ultimate power: the all-seeing eye.
 I open their project in the GCP console, navigate to the Machine Learning pipelines.
-Their previous garbage pipeline ran in 4 hours, a new one has been running for [REDACTED].
+Their previous garbage pipeline ran in 4 hours, a new one has been running for **[REDACTED]**.
 
 I now feel the taste of blood between my teeth. I yearn for their demise.
-I will inflect permanent damage on them.
+I will inflect permanent damage to them.
 From this point, I a not a Data Scientist, I morphed into the most dangerous and ungodly species on earth, not even human anymore... I am now a lawyer.
 Because, the only thing I have for them are questions, but of the most dangerous kind, the kind for which you already know all the answers...
 
@@ -70,9 +66,9 @@ The smell of blood goes up to my nose...
 
 > Can you please give me the commit ID of your merge request? I asked innocently.
 
-The trap has already been set in motion. I already looked a the tags on the pipeline that has been running for [REDACTED]. I know which commit triggered it.
+The trap has already been set in motion. I already looked a the tags on the pipeline that has been running for **[REDACTED]**. I know which commit triggered it.
 **IT'S THEIRS.**
-And sadly for them, I like to play with my food before I eat it.
+And sadly for them, I like to play with my food before eating it.
 
 So I let them look for the commit ID. They give it to me. I double-check. I triple-check. And then:
 
@@ -94,12 +90,14 @@ The silence is deafening.
 > - "Thank you, there seem to be a different behavior on the distant machine.", said BFC N°1
 > - "Yes, you're attempting to spread the load on multiple threads or CPUs, but the behavior is highly dependent on which hardware you run it. You did not check that, this seems highly unprofessional.", I pronounced calmly, thus striking the first blow to the leg.
 > - "That's not right, you have no right to call us unprofessional.", interceded BFG N°2.
-"You only reviewed our code and only gave negative feedback.
-There was nothing constructive in what you said".
+>   "You only reviewed our code and only gave negative feedback.
+>   There was nothing constructive in what you said".
 > - "We did gave you constructive feedback, when we handed our audit report, we pointed out to two areas of the code base where the major bottlenecks were.
-They consist in 2 blocks of 15 lines each filled with poor pandas code.
-We even showed them to you live on our first meeting, by just reading the logs.
-For some reason, you decided to address the problem very differently.", I said slowly, boiling with rage and fuelled by anger. "Besides, on your previous runs, the CPU load was around 15-20% and now it's peaking at 1%. Whatever you did made the situation clearly worse. You did not check that your _'optimization'_ actually works on the hardware running the job."
+>   They consist in 2 blocks of 15 lines each filled with poor pandas code.
+>   We even showed them to you live on our first meeting, by just reading the logs.
+>   For some reason, you decided to address the problem very differently.", I said slowly, boiling with rage and fuelled by anger.
+>   "Besides, on your previous runs, the CPU load was around 15-20% and now it's peaking at 1%. Whatever you did made the situation clearly worse.
+>   You did not check that your _'optimization'_ actually works on the hardware running the job."
 
 At this point, a senior MLOps engineer intervenes.
 The dude is a totally legit contractor, probably better than I am in many areas, with really strong software engineering skills.
@@ -120,6 +118,7 @@ What are the odds? (Dear concurrency experts reading, if you know exactly where 
 Who would have thought that sweeping garbage under the carpet does not make your room smell like orange perfume?
 
 I sense some exasperation pearling through the words of my colleague:
+
 > "How many threads did you set-up for this job?"
 
 We take a closer look at the merge request. They put 16. My colleague quietly says:
@@ -131,8 +130,7 @@ He adds another line:
 
 > "As my colleague tried to tell you earlier, the behavior of sub-process or multi-threading is highly dependant on the hardware actually running the job."
 >
-> "The optimization you did locally, does
- not work on the kubernetes cluster running your job because the hardware is fundamentally different from your machine."
+> "The optimization you did locally, does not work on the kubernetes cluster running your job because the hardware is fundamentally different from the one on your machine."
 
 I'm stepping out from my cave, craving for blood and violence...
 
@@ -153,14 +151,9 @@ The consultants lay there, silent, brain-dead, skulls cracked open.
 ## The Aftermath
 
 We quickly end the meeting there because there is nothing more to discuss.
-The good thing was that one representative of the business side witness the whole exchange.
+The good thing is that one representative of the business side witness the whole exchange.
 The Senior Engineer and I repeat a few additional piece of information, in order for him to fully grasp the details of the situation.
 
-I ask him for a favor, because I saw the _leeching consultants_ recorded the teams meeting but we don't have access to it. He kindly accepts to ask them a copy of said recording.
+I ask him for a favor, because I saw the _leeching consultants_ record the teams meeting but we don't have access to it. He kindly accepts to petition them for a copy of said recording.
 
-We are still waiting for a reply to this email request.
-
-
-## A Case Defense Of Casey Muratori: Non-Pessimization Vs. Optimization
-
-Sorry, I am not sorry about the orthographic pun.
+To this day, we are still waiting for a reply to this email request.
