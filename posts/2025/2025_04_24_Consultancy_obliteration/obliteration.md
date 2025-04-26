@@ -5,7 +5,10 @@ date: "2025-04-24"
 categories: [data science, grifters, consultants, stupidity]
 draft: true
 draft-mode: unlinked
+image: consulting_problems.png
 ---
+
+![](./consulting_problems.png){fig-align="center" width="120%"}
 
 ## The Recap
 

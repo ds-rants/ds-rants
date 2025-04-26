@@ -5,7 +5,10 @@ date: "2025-04-19"
 categories: [data science, grifters, consultants]
 draft: true
 draft-mode: unlinked
+image: cover-vador-deal.png
+
 ---
+![](./cover-vador-deal.png){fig-align="center" width="120%"}
 
 There are some days when you feel like your work is pointless, void, and without meaning.
 But thankfully, there are also a very few days when you feel and know that you actually made a difference.
