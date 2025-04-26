@@ -2,7 +2,7 @@
 title: "Your Pandas Code Is Bad And You Should Feel Bad!"
 author: "DS Rants"
 date: "2025-04-13"
-categories: [pandas, code, performance, production]
+categories: [pandas code, performance, production]
 image: "bad_pandas_code.png"
 ---
 
