@@ -2,7 +2,7 @@
 title: "The Glorious One-Shot At Consultancy Obliteration"
 author: "DS Rants"
 date: "2025-04-24"
-categories: [data science, grifters, consultants]
+categories: [data science, grifters, consultants, stupidity]
 draft: true
 draft-mode: unlinked
 ---
@@ -35,8 +35,8 @@ I hate the smell of code garbage in the morning...
 
 ## The First Taste Of Blood
 
-The meeting starts, they are 2 of them, _"seniors"_, and there are 5 of us, including one product leader for the department.
-The atmosphere is tense. They don't like me one bit, good, neither do I...
+The meeting starts, there are 2 of them, _"seniors"_, and there are 5 of us, including one product leader for the department.
+The atmosphere is tense. They don't like me one bit. Good, neither do I...
 
 > Thank you for being here, we'd like to show you the last ameliorations we did on the project before we leave things to you guys. We used multi-threading to significantly improve the performance of our code, and it should now scale.
 
@@ -58,11 +58,11 @@ I open their project in the GCP console, navigate to the Machine Learning pipeli
 Their previous garbage pipeline ran in 4 hours, a new one has been running for **[REDACTED]**.
 
 I now feel the taste of blood between my teeth. I yearn for their demise.
-I will inflict permanent damage to them.
+I will inflict permanent damage on them.
 From this point, I am not a Data Scientist, I morph into the most dangerous and ungodly species on earth, not even human anymore... I am now a lawyer.
 Because the only thing I have for them are questions, but of the most dangerous kind, the kind for which you already know all the answers...
 
-The smell of blood goes up to my nose...
+The smell of blood rises to my nose...
 
 > Can you please give me the commit ID of your merge request? I asked innocently.
 
