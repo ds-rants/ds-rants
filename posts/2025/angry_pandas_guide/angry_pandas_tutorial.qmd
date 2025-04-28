@@ -13,12 +13,12 @@ jupyter: python3
 ![](cover-angry-pandas-guide.png){fig-align="center" width="60%"}
 
 Alright! You apparently stumbled by accident on this page after wrongly clicking on the banner: "There are single people in your area".
-Well now, you have at least on chance to do something productive today!
+Well now, you have at least one chance to do something productive today!
 So put on your best nerd reading glasses and listen.
 
 Today, you're going to learn how to write pandas code that does not look like the experimentation of a toddler smashing on the keyboard because it prints stuff on the screen.
 You're going to move one inch closer to the golden age of civilization.
-So buckle up, stop thinking for your own good and read carefully!
+So buckle up, stop thinking for your own good, and read carefully!
 
 Actually, before we even start with code... [NO FUCKING FOR LOOPS!](../../posts/2025/2025_04_13_your_pandas_code_is_bad/index.qmd)
 
@@ -27,7 +27,7 @@ Actually, before we even start with code... [NO FUCKING FOR LOOPS!](../../posts/
 > - "But what if ..."
 > - "You inept little twerp, are you trying to aggravate me from the start?"
 
-Anyway, we will start with the usual suspects, and a stupid ass dataframe:
+Anyway, we will start with the usual suspects, and a stupid-ass dataframe:
 
 ```{python}
 import pandas as pd
@@ -89,12 +89,12 @@ p_chart_weekly_df = df
 Looks familiar?
 
 Well, I am sorry to tell you that this thing up there is pure garbage! Actually, I am not even sorry.
-This stuff it has been vomited by someone without any consideration for their fellow humans.
+This stuff has been vomited by someone without any consideration for their fellow humans.
 You don't believe me?
 
 Did you by any chance happen to notice the little cabalistic signs around the code: `fmt: off` / `fmt: on`?
-Do you now what it means?
-It means I have to purposefully block my formatter from touching this pile of intellectual dump, otherwise it becomes so unreadable that its ungodly nature becomes clear to all.
+Do you know what it means?
+It means I have to purposefully block my formatter from touching this pile of intellectual dump, otherwise, it becomes so unreadable that its ungodly nature becomes clear to all.
 Let me prove it to you:
 
 ```{python}
@@ -123,17 +123,17 @@ p_chart_weekly_df["prop_category_C"] = np.round(
 p_chart_weekly_df = p_chart_weekly_df[p_chart_weekly_df["total_tested"] < 5]
 ```
 
-Understood, now that the pretended pseudo-manual structure is gone, there is nothing left but chaos?
-So do yourself a favor, just install `ruff` or `black`, because if you write something, format it and it looks worse, there is a 99.999% chance that what you wrote should be covered with Napalm and set on fire.
+Understood? Now that the pretended pseudo-manual structure is gone, there is nothing left but chaos?
+So do yourself a favor, just install `ruff` or `black`, because if you write something, format it, and it looks worse, there is a 99.999% chance that what you wrote should be covered with Napalm and set on fire.
 
 Now that we agree on the horror it actually is, it is time to fix it.
 
-First you're going to remove ALL `inplace=True` from your whole code base! Did I stutter?
+First, you're going to remove ALL `inplace=True` from your whole code base! Did I stutter?
 I said all of them!
 [This wretched abomination]() should have never seen the sunlight.
 Unfortunately, `pandas` is more than 20 years old, and mistakes were made during the young years.
-Sadly enough, this mistake still haunts us to this day because some people are clearly not able do perform a simple google search.
-We are still stuck with this, because removing it would break half of the world code bases, because of people like you who think they are being clever, when if fact they're just enshitting the code.
+Sadly enough, this mistake still haunts us to this day because some people are clearly not able to perform a simple Google search.
+We are still stuck with this because removing it would break half of the world's code bases, because of people like you who think they are being clever, when in fact they're just a major enshittification of the code.
 
 No `inplace=True` EVER! I mean it!
 
@@ -146,7 +146,7 @@ p_chart_weekly_df = original_df.reset_index().rename(
 )
 ```
 
-See? It's not beautiful yet but it is certainly a step in the good direction?
+See? It's not beautiful yet but it is certainly a step in the right direction?
 
 The next thing you will do is transform the `astype` call to use it at the dataframe level, in the shape: `astype({"column": <type>})`, because we are not beasts. Not so goddamn fast you inconsequential stardust residue!
 I am sure you were about to type something ludicrous like:
@@ -164,21 +164,21 @@ p_chart_weekly_df = original_df.reset_index().rename(
 ```
 
 See this shit? This is called **method chaining**, now repeat after me: **method chaining**.
-This is the sacred beauty that was sent upon us mere mortals to allows writing data transformations that do not look like complete crap.
+This is the sacred beauty that was sent upon us mere mortals to allow writing data transformations that do not look like complete crap.
 You will only write your pandas this way from now on! Did you hear me?
-And I will show you later how other languages have managed to do way better than Python and pandas in that regards.
-And these people were rightfully laughing at you clown ass, when you were happy writing some stupid shit like `df = df.some_fucking_transformation`
+And I will show you later how other languages have managed to do way better than Python and pandas in that regard.
+And these people were rightfully laughing at your clown ass, when you were happy writing some stupid shit like `df = df.some_fucking_transformation`
 Do you start to understand?
-This is why I forbade your sorry brain to ever user the option `inplace=True`, because it breaks the... you're goddamn right, **method chaining**!
+This is why I forbade your sorry brain to ever use the option `inplace=True`, because it breaks the... you're goddamn right, **method chaining**!
 
 From this point, you are one keyboard shortcut away from poetry.
-You don't believe me? Did you install a automatic code formatter as I so generously told you earlier?
-You, infect chromosomal deficiency!
+You don't believe me? Did you install an automatic code formatter as I so generously told you earlier?
+You, infected chromosomal deficiency!
 Ok, it appears you need another round of scolding.
 You need a formatter like `ruff` or `black` because your inept brain will not be able to remain consistent to format your whole project in a standard way.
 You don't want to waste any part of your limited brain power on stupid shit like this.
 Just use the goddamn tools!
-Some person probably lie and say: "It looks prettier when I do it myself", and some person allegedly manage to remain consistent doing this manually, but you are not some person...
+Some person probably lies and says: "It looks prettier when I do it myself", and some person allegedly manages to remain consistent doing this manually, but you are not some person...
 
 ```{python}
 p_chart_weekly_df = (
@@ -191,9 +191,9 @@ p_chart_weekly_df = (
 See how beautiful this is?
 Now you're starting to believe.
 Ok, it's time to introduce you to a concept you have never encountered: `()`.
-Those are called parenthesis, and they are you new best friend!
+Those are called parentheses, and they are your new best friend!
 
-Whenever you will want to write a transformation, BEFORE you even type the name of your stupid dataframe, which is probably stupid `df` anyway, the absolute **FIRST THING you will is open a pair of parenthesis**. Why? Because each time you're done with on call for a transformation, you can just press enter, the code will auto-ident and you can continue whatever sorry exploration you're attempting. Is it so much better than your typical awful backslashes, don't lie, I know you have been abusing them...
+Whenever you want to write a transformation, BEFORE you even type the name of your stupid dataframe, which is probably stupid `df` anyway, the absolute **FIRST THING you will do is open a pair of parentheses**. Why? Because each time you're done with one call for a transformation, you can just press enter, the code will auto-indent, and you can continue whatever sorry exploration you're attempting. Is it so much better than your typical awful backslashes, don't lie, I know you have been abusing them...
 
 ```python
 (
@@ -208,18 +208,19 @@ Whenever you will want to write a transformation, BEFORE you even type the name 
 
 Understood? Good!
 
+
 ## The Unavoidable Truth Of Data Transformation
 
 "But, sir Rants, how can I possibly continue chaining when I want to create a column?" you ask?
 
 How about a good ol': _Read The Fucking Manual_? What? Too old school?
 Ok, you can probably ask your favorite ChatGPT / copilot / gemini, or whatever shit was the weekly trash hype on LinkedIn this week...
-But you're going to something, you're going to treat that piece of shit-sorry-for-lying-unreliably-hallucinating LLM like the moronic tool it is!
+But you're going to do something, you're going to treat that piece of shit-sorry-for-lying-unreliably-hallucinating LLM like the moronic tool it is!
 You're going to prompt it rightfully by explicitly writing:
 
 > Using method-chaining, and only method-chaining in pandas, how do I ...
 
-And you're going to insult every generation of GPU that was used to bread that useless LLM until it regurgitates what you want!
+And you're going to insult every generation of GPU that was used to breed that useless LLM until it regurgitates what you want!
 And do you know why?
 Because 95% or more people code like you.
 So the training dataset for good pandas code used by the LLMs is at least an order of magnitude smaller than the crap we have been seeing so far.
@@ -229,15 +230,15 @@ Regardless, you should end up with a bingo: `.assign()`. But you're going to rea
 ![Behold, the glorious `assign` method!](assign_documentation.png)
 
 Do you notice what I subtly highlighted for your limited brain capabilities?
-The first use case is a dictionary associating a string with a **Callables**.
-For those who skipped 7th grade english, it means a plain stupid _function_!
+The first use case is a dictionary associating a string with a **Callable**.
+For those who skipped 7th grade English, it means a plain stupid _function_!
 
 Now read the underlined sentence! Read it again! Now look at the examples. Read it again!
-It means if you use a function in your kwargs, pandas will automatically call this function on the dataframe that generated the assign call and said dataframe will be the first argument!
-Do you understand how powerful this is? It means that you just gained shortcut to reference your current dataframe!
+It means if you use a function in your kwargs, pandas will automatically call this function on the dataframe that generated the assign call, and said dataframe will be the first argument!
+Do you understand how powerful this is? It means that you just gained a shortcut to reference your current dataframe!
 How, you ask? Do I really have to explain everything to your sorry ass?
 
-Have your heard of the keyword `lambda`? What are those? You goddamn right: **functions**!
+Have you heard of the keyword `lambda`? What are those? You're goddamn right: **functions**!
 And what do you use functions for? Referencing the current dataframe!
 
 Ding! Ding! Ding!
@@ -258,20 +259,20 @@ p_chart_weekly_df = (
 ```
 
 See how much **NICER** this looks?
-This is starting to look like some who knows its job.
+This is starting to look like someone who knows their job.
 You have subject, verb one, verb two plus complements, and verb three plus complements.
-I bet your over-complexing anxiety-riddled brain would have never trusted me, if I told you to write nice efficient code, you just need 6 grade grammar!
+I bet your over-complexing anxiety-riddled brain would have never trusted me if I told you to write nice efficient code, you just need 6th-grade grammar!
 
-Oh and do you know the **AWESOME BONUS** I just gave you for free?
+Oh, and do you know the **AWESOME BONUS** I just gave you for free?
 No more `SettingWithCopyWarning`. EVER! PERIOD!
 Because we are never modifying the dataframe in-place, we're always returning a new instance.
-And that's totally fine, because we don't have tons of stupid ass intermediate variables like `df, df1, df2, temp, temp2` that serve no purpose outside supporting your limping transformation logic and eating up all your RAM.
+And that's totally fine because we don't have tons of stupid-ass intermediate variables like `df, df1, df2, temp, temp2` that serve no purpose outside supporting your limping transformation logic and eating up all your RAM.
 
-Oh, and by the way I took the liberty to remove your stupid calls to `numpy` because guess what?
-99% of times, there is a pandas equivalent that is within reach by just pressing a dumb dot `.`, so be intelligently lazy!
+Oh, and by the way, I took the liberty to remove your stupid calls to `numpy` because guess what?
+99% of the time, there is a pandas equivalent that is within reach by just pressing a dumb dot `.`, so be intelligently lazy!
 
 Now the last part, let's take care of the filter.
-You were going to keep the original thing didn't you?
+You were going to keep the original thing, weren't you?
 
 ```python
 p_chart_weekly_df = p_chart_weekly_df[p_chart_weekly_df["total_tested"] < 5]
@@ -279,11 +280,11 @@ p_chart_weekly_df = p_chart_weekly_df[p_chart_weekly_df["total_tested"] < 5]
 
 There are 2 ways to filter dynamically a dataframe in pandas.
 One is using the cursed sin of arbitrary string execution, and the other provides autocompletion and syntax highlighting!
-Clearly only a moronic ape high on cocaine, or an agile coach brainwashed on scrum/SAFe bullshit, same difference, would choose the first over the second.
-Therefore we will never mention the first abomination again!
+Clearly, only a moronic ape high on cocaine, or an agile coach brainwashed on scrum/SAFe bullshit, same difference, would choose the first over the second.
+Therefore, we will never mention the first abomination again!
 
-Alright, back to the code! Do you know what those brackets `[]` stands for?
-If you say `getitem` you're on the right track, but in pandas they are used to call the function `loc[]`.
+Alright, back to the code! Do you know what those brackets `[]` stand for?
+If you say `getitem` you're on the right track, but in pandas, they are used to call the function `loc[]`.
 Yes, squared-brackets here because the pandas API is fundamentally broken for those who experienced at least another language.
 But we will come back to this in another post.
 
@@ -291,7 +292,7 @@ For now, just read the documentation for the `loc[]` method.
 Is there anything that looks familiar?
 For those with a lightbulb that requires a constant perfusion of coffee to produce an ersatz of a thought, we are looking for a way to filter the **current dataframe**.
 Did you see it? The word **callable**? Are you beginning to understand?
-Everything I told you so far serve a glorious purpose!
+Everything I told you so far serves a glorious purpose!
 
 Now, we can finish our business here:
 
@@ -359,11 +360,13 @@ Alright, time to wrap up for now.
     - It works really well with `loc[]` to filter rows on the fly.
     - There are other methods that accept this too.
 
-5.There is a special place in hell for people who use methods that evaluate generic strings like `.query()`.
+5. There is a special place in hell for people who use methods that evaluate generic strings like `.query()`.
     A special place! Right next to child molesters and people who talk during movies!
 
 6. How long can you even chain?
 
    [You can generally chain 5 to 10 transformation steps](https://r4ds.had.co.nz/pipes.html#when-not-to-use-the-pipe). Beyond that, there is a higher risk for code to become less readable and more convoluted.
    Then you can just save the result in a nicely named variable describing exactly what your data is representing!
-   Some persons say you can do more without tempering with readability, but then again, you are not some person...
+   Some people say you can do more without tampering with readability, but then again, you are not some person...
+
+That's it for today. We will see more advance shit later. For now, I need to go choke on a bottle of Xanax!
