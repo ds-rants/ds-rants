@@ -23,4 +23,4 @@ format:
     highlight-style: breezedark
 
 execute:
-  freeze: auto
+  freeze: true

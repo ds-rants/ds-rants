@@ -1,7 +1,7 @@
 ---
 title: The Angry Guide To Pandas Code (Dummy Edition, Part 1)
 author: DS Rants
-date: '2025-04-26'
+date: '2025-04-28'
 categories:
   - data science
   - pandas code
@@ -57,15 +57,15 @@ What you're probably seeing in your average notebook probably looks a lot like t
 
 ```{python}
 # fmt: off
-p_chart_weekly_df = original_df.reset_index()
-p_chart_weekly_df.rename(columns={0 : 'category_A', 1 : 'category_B', 3 : 'category_C'}, inplace=True)
-p_chart_weekly_df.year_week = p_chart_weekly_df.year_week.astype(str)
-p_chart_weekly_df['total_produced'] = p_chart_weekly_df.category_A + p_chart_weekly_df.category_B + p_chart_weekly_df.category_C # total number of produced goods
-p_chart_weekly_df['total_tested'] = p_chart_weekly_df.category_B + p_chart_weekly_df.category_C # total number of tested goods
-p_chart_weekly_df['prop_tested'] = np.round(p_chart_weekly_df.total_tested / p_chart_weekly_df.total_produced *100,2) # proportion of goods tested
-p_chart_weekly_df['prop_category_B'] = np.round(p_chart_weekly_df.category_B / p_chart_weekly_df.total_produced *100,2) # proportion of category_B
-p_chart_weekly_df['prop_category_C'] = np.round(p_chart_weekly_df.category_C / p_chart_weekly_df.total_produced *100,2) # proportion of category_C
-p_chart_weekly_df = p_chart_weekly_df[p_chart_weekly_df["total_tested"] < 5]
+weekly_chart_df = original_df.reset_index()
+weekly_chart_df.rename(columns={0 : 'category_A', 1 : 'category_B', 3 : 'category_C'}, inplace=True)
+weekly_chart_df.year_week = weekly_chart_df.year_week.astype(str)
+weekly_chart_df['total_produced'] = weekly_chart_df.category_A + weekly_chart_df.category_B + weekly_chart_df.category_C # total number of produced goods
+weekly_chart_df['total_tested'] = weekly_chart_df.category_B + weekly_chart_df.category_C # total number of tested goods
+weekly_chart_df['prop_tested'] = np.round(weekly_chart_df.total_tested / weekly_chart_df.total_produced *100,2) # proportion of goods tested
+weekly_chart_df['prop_category_B'] = np.round(weekly_chart_df.category_B / weekly_chart_df.total_produced *100,2) # proportion of category_B
+weekly_chart_df['prop_category_C'] = np.round(weekly_chart_df.category_C / weekly_chart_df.total_produced *100,2) # proportion of category_C
+weekly_chart_df = weekly_chart_df[weekly_chart_df["total_tested"] < 5]
 # fmt: on
 ```
 
@@ -82,7 +82,7 @@ df['prop_tested'] = np.round(df.total_tested / df.total_produced *100,2) # propo
 df['prop_category_B'] = np.round(df.category_B / df.total_produced *100,2) # proportion of category_B
 df['prop_category_C'] = np.round(df.category_C / df.total_produced *100,2) # proportion of category_C
 df = df[df["total_tested"] < 5]
-p_chart_weekly_df = df
+weekly_chart_df = df
 # fmt: on
 ```
 
@@ -100,29 +100,29 @@ It means I have to purposefully block my formatter from touching this pile of in
 Let me prove it to you:
 
 ```{python}
-p_chart_weekly_df = original_df.reset_index()
-p_chart_weekly_df.rename(
+weekly_chart_df = original_df.reset_index()
+weekly_chart_df.rename(
     columns={0: "category_A", 1: "category_B", 3: "category_C"}, inplace=True
 )
-p_chart_weekly_df.year_week = p_chart_weekly_df.year_week.astype(str)
-p_chart_weekly_df["total_produced"] = (
-    p_chart_weekly_df.category_A
-    + p_chart_weekly_df.category_B
-    + p_chart_weekly_df.category_C
+weekly_chart_df.year_week = weekly_chart_df.year_week.astype(str)
+weekly_chart_df["total_produced"] = (
+    weekly_chart_df.category_A
+    + weekly_chart_df.category_B
+    + weekly_chart_df.category_C
 )  # total number of produced goods is the lot
-p_chart_weekly_df["total_tested"] = (
-    p_chart_weekly_df.category_B + p_chart_weekly_df.category_C
+weekly_chart_df["total_tested"] = (
+    weekly_chart_df.category_B + weekly_chart_df.category_C
 )  # total number of tested goods is the lot
-p_chart_weekly_df["prop_tested"] = np.round(
-    p_chart_weekly_df.total_tested / p_chart_weekly_df.total_produced * 100, 2
+weekly_chart_df["prop_tested"] = np.round(
+    weekly_chart_df.total_tested / weekly_chart_df.total_produced * 100, 2
 )  # proportion of goods tested on the lot
-p_chart_weekly_df["prop_category_B"] = np.round(
-    p_chart_weekly_df.category_B / p_chart_weekly_df.total_produced * 100, 2
+weekly_chart_df["prop_category_B"] = np.round(
+    weekly_chart_df.category_B / weekly_chart_df.total_produced * 100, 2
 )  # proportion of category_B in the lot
-p_chart_weekly_df["prop_category_C"] = np.round(
-    p_chart_weekly_df.category_C / p_chart_weekly_df.total_produced * 100, 2
+weekly_chart_df["prop_category_C"] = np.round(
+    weekly_chart_df.category_C / weekly_chart_df.total_produced * 100, 2
 )  # proportion of category_C in the lot
-p_chart_weekly_df = p_chart_weekly_df[p_chart_weekly_df["total_tested"] < 5]
+weekly_chart_df = weekly_chart_df[weekly_chart_df["total_tested"] < 5]
 ```
 
 Understood? Now that the pretended pseudo-manual structure is gone, there is nothing left but chaos?
@@ -145,7 +145,7 @@ So, the first line becomes:
 
 ```{python}
 #| vscode: {languageId: javascript}
-p_chart_weekly_df = original_df.reset_index().rename(
+weekly_chart_df = original_df.reset_index().rename(
     columns={0: "category_A", 1: "category_B", 3: "category_C"}
 )
 ```
@@ -162,7 +162,7 @@ p_chart_weekly = p_chart_weekly.astype({"year_week": str})
 You, you're trying to make me mad, aren't you? Put that shit with the previous calls, and lose the name of the dataframe you don't need it.
 
 ```python
-p_chart_weekly_df = original_df.reset_index().rename(
+weekly_chart_df = original_df.reset_index().rename(
     columns={0: "category_A", 1: "category_B", 3: "category_C"}
 ).astype({"year_week": str})
 ```
@@ -185,7 +185,7 @@ Just use the goddamn tools!
 Some person probably lies and says: "It looks prettier when I do it myself", and some person allegedly manages to remain consistent doing this manually, but you are not some person...
 
 ```{python}
-p_chart_weekly_df = (
+weekly_chart_df = (
     original_df.reset_index()
     .rename(columns={0: "category_A", 1: "category_B", 3: "category_C"})
     .astype({"year_week": str})
@@ -248,7 +248,7 @@ And what do you use functions for? Referencing the current dataframe!
 Ding! Ding! Ding!
 
 ```{python}
-p_chart_weekly_df = (
+weekly_chart_with_proportions = (
     original_df.reset_index()
     .rename(columns={0: "category_A", 1: "category_B", 3: "category_C"})
     .astype({"year_week": str})
@@ -279,7 +279,7 @@ Now the last part, let's take care of the filter.
 You were going to keep the original thing, weren't you?
 
 ```python
-p_chart_weekly_df = p_chart_weekly_df[p_chart_weekly_df["total_tested"] < 5]
+weekly_chart_df = weekly_chart_df[weekly_chart_df["total_tested"] < 5]
 ```
 
 There are 2 ways to filter dynamically a dataframe in pandas.
@@ -301,7 +301,7 @@ Everything I told you so far serves a glorious purpose!
 Now, we can finish our business here:
 
 ```{python}
-p_chart_weekly_df = (
+weekly_chart_with_proportions = (
     original_df.reset_index()
     .rename(columns={0: "category_A", 1: "category_B", 3: "category_C"})
     .astype({"year_week": str})
@@ -322,7 +322,7 @@ Not so damn fast! Time to see what other people in the R-world have been doing:
 ```r
 #| echo: false
 
-p_chart_weekly_df <- original_df %>%
+weekly_chart_with_proportions <- original_df %>%
   rename(
     category_A = `0`,
     category_B = `1`,
