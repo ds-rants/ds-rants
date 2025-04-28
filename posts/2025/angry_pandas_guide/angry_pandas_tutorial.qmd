@@ -8,6 +8,9 @@ categories:
   - non-pessimization
 image: cover-angry-pandas-guide.png
 jupyter: python3
+
+draft: true
+draft-mode: unlinked
 ---
 
 ![](cover-angry-pandas-guide.png){fig-align="center" width="60%"}
