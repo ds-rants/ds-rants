@@ -7,7 +7,7 @@ categories:
   - pandas code
   - non-pessimization
 image: cover-angry-pandas-guide.png
-code:
+execute:
   eval: false
 
 ---
