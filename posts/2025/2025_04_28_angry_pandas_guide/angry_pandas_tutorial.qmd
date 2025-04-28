@@ -15,6 +15,7 @@ execute:
 ![](cover-angry-pandas-guide.png){fig-align="center" width="60%"}
 
 Alright! You apparently stumbled by accident on this page after wrongly clicking on the banner: "There are single people in your area".
+
 Well now, you have at least one chance to do something productive today!
 So put on your best nerd reading glasses and listen.
 
@@ -31,7 +32,7 @@ Actually, before we even start with code... [NO FUCKING FOR LOOPS!](../../2025/2
 
 Anyway, we will start with the usual suspects, and a stupid-ass dataframe:
 
-```{python}
+```python
 import pandas as pd
 import numpy as np
 
@@ -47,7 +48,8 @@ original_df = pd.DataFrame(
 
 Looks stupid enough? Good, I don't want you distracted one bit by any type of complexity.
 Imagine you have been working on it.
-What you're probably seeing in your average notebook probably looks a lot like that:
+What you're probably seeing in your average notebook probably looks a lot like the following.
+I am sure of it because I captured this in the wild:
 
 ## The Original Sin Of Pandas
 
@@ -55,7 +57,7 @@ What you're probably seeing in your average notebook probably looks a lot like t
 
 ### Typical Bullshit One
 
-```{python}
+```python
 # fmt: off
 weekly_chart_df = original_df.reset_index()
 weekly_chart_df.rename(columns={0 : 'category_A', 1 : 'category_B', 3 : 'category_C'}, inplace=True)
@@ -71,7 +73,7 @@ weekly_chart_df = weekly_chart_df[weekly_chart_df["total_tested"] < 5]
 
 ### Typical Bullshit Two
 
-```{python}
+```python
 # fmt: off
 df = original_df.reset_index()
 df.rename(columns={0 : 'category_A', 1 : 'category_B', 3 : 'category_C'}, inplace=True)
@@ -89,8 +91,10 @@ weekly_chart_df = df
 :::
 
 Looks familiar?
+Do you feel this conundrum where either your names are long and things are a pain to write?
+Or you abuse the ignominious `df` name all over the place and everything is called the same?
 
-Well, I am sorry to tell you that this thing up there is pure garbage! Actually, I am not even sorry.
+Well, I am sorry to tell you that both examples up there are pure garbage! Actually, I am not even sorry.
 This stuff has been vomited by someone without any consideration for their fellow humans.
 You don't believe me?
 
@@ -99,7 +103,7 @@ Do you know what it means?
 It means I have to purposefully block my formatter from touching this pile of intellectual dump, otherwise, it becomes so unreadable that its ungodly nature becomes clear to all.
 Let me prove it to you:
 
-```{python}
+```python
 weekly_chart_df = original_df.reset_index()
 weekly_chart_df.rename(
     columns={0: "category_A", 1: "category_B", 3: "category_C"}, inplace=True
@@ -143,8 +147,7 @@ No `inplace=True` EVER! I mean it!
 
 So, the first line becomes:
 
-```{python}
-#| vscode: {languageId: javascript}
+```python
 weekly_chart_df = original_df.reset_index().rename(
     columns={0: "category_A", 1: "category_B", 3: "category_C"}
 )
@@ -182,9 +185,9 @@ Ok, it appears you need another round of scolding.
 You need a formatter like `ruff` or `black` because your inept brain will not be able to remain consistent to format your whole project in a standard way.
 You don't want to waste any part of your limited brain power on stupid shit like this.
 Just use the goddamn tools!
-Some person probably lies and says: "It looks prettier when I do it myself", and some person allegedly manages to remain consistent doing this manually, but you are not some person...
+Some talented person might pretend: "It looks prettier when I do it myself, and I manage to remain completely consistent across my whole project", but you are not some person...
 
-```{python}
+```python
 weekly_chart_df = (
     original_df.reset_index()
     .rename(columns={0: "category_A", 1: "category_B", 3: "category_C"})
@@ -247,7 +250,7 @@ And what do you use functions for? Referencing the current dataframe!
 
 Ding! Ding! Ding!
 
-```{python}
+```python
 weekly_chart_with_proportions = (
     original_df.reset_index()
     .rename(columns={0: "category_A", 1: "category_B", 3: "category_C"})
@@ -300,7 +303,7 @@ Everything I told you so far serves a glorious purpose!
 
 Now, we can finish our business here:
 
-```{python}
+```python
 weekly_chart_with_proportions = (
     original_df.reset_index()
     .rename(columns={0: "category_A", 1: "category_B", 3: "category_C"})
@@ -320,8 +323,6 @@ Now we have finally entered the age of civilization! Are you feeling proud of yo
 Not so damn fast! Time to see what other people in the R-world have been doing:
 
 ```r
-#| echo: false
-
 weekly_chart_with_proportions <- original_df %>%
   rename(
     category_A = `0`,
@@ -339,14 +340,19 @@ weekly_chart_with_proportions <- original_df %>%
   filter(total_tested < 5)
 ```
 
-Do you see how beautiful this is? Do you feel the absolute glory of free pipelining with `%>%`?
+Do you feel the fantastic power of free pipelining with `%>%` granted by excellent package `magrittr`?
+(Python packages really need to get their shit together, their names suck in comparison to R!)
+Can you understand absolute beauty that was bestowed upon us mere mortals, by Hadley Wickham the great creator of the [dplyr **and** ggplot2 packages](https://www.reddit.com/r/dataisbeautiful/comments/3mp9r7/im_hadley_wickham_chief_scientist_at_rstudio_and/)?
 Do you notice the absence of quotation marks around column names thanks to the holiness of **_lazy evaluation_**?
 The R people have been doing this routinely [for more than 10 years now](https://en.wikipedia.org/wiki/Dplyr)!
+
 Do you feel your absolute insignificance with your idiotic transformations riddled with the ubiquitous use of `df = df[...]`?
 Are you understanding why, in their eyes, you looked like a babbling, screaming monkey?
 Good! Time to blow your mind one last time. Have you heard of the method `.pipe()` in pandas?
 It's limited, but it allows you to do some things [like the pros](https://r4ds.had.co.nz/pipes.html)!
 But do not abuse its power!
+
+Besides, look! Look how **easy** it is to wrap your head around a language you never learned when there is little to no syntactic crap.
 
 Alright, time to wrap up for now.
 
@@ -371,8 +377,15 @@ Alright, time to wrap up for now.
 
 6. How long can you even chain?
 
-   [You can generally chain 5 to 10 transformation steps](https://r4ds.had.co.nz/pipes.html#when-not-to-use-the-pipe). Beyond that, there is a higher risk for code to become less readable and more convoluted.
+   The R wizards tell us: ["You can generally chain 5 to 10 transformation steps"](https://r4ds.had.co.nz/pipes.html#when-not-to-use-the-pipe). Beyond that, there is a higher risk for code to become less readable and more convoluted.
    Then you can just save the result in a nicely named variable describing exactly what your data is representing!
-   Some people say you can do more without tampering with readability, but then again, you are not some person...
+   Some person says you can do more without tampering with readability, I disagree, and then again, you are not some person...
 
 That's it for today. We will see more advance shit later. For now, I need to go choke on a bottle of Xanax!
+
+
+#### Disclaimer
+
+This rant was largely inspired by an awesome guide for [Metal Gear Rising: Revengeance by Vesperas](https://gamefaqs.gamespot.com/ps3/960699-metal-gear-rising-revengeance/faqs/66773).
+Its reading was a great source of banter and chuckles.
+My dear swearing fellow, you have my most sincere gratitude for helping a sucker like me progress at such a great game!
