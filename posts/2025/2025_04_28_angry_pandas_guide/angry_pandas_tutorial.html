@@ -203,7 +203,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="cover-angry-pandas-guide.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
 </figure>
 </div>
-<p>Alright! You apparently stumbled by accident on this page after wrongly clicking on the banner: “There are single people in your area”. Well now, you have at least one chance to do something productive today! So put on your best nerd reading glasses and listen.</p>
+<p>Alright! You apparently stumbled by accident on this page after wrongly clicking on the banner: “There are single people in your area”.</p>
+<p>Well now, you have at least one chance to do something productive today! So put on your best nerd reading glasses and listen.</p>
 <p>Today, you’re going to learn how to write pandas code that does not look like the experimentation of a toddler smashing on the keyboard because it prints stuff on the screen. You’re going to move one inch closer to the golden age of civilization. So buckle up, stop thinking for your own good, and read carefully!</p>
 <p>Actually, before we even start with code… <a href="../../../posts/2025/2025_04_13_your_pandas_code_is_bad/index.html">NO FUCKING FOR LOOPS!</a></p>
 <blockquote class="blockquote">
@@ -215,8 +216,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </blockquote>
 <p>Anyway, we will start with the usual suspects, and a stupid-ass dataframe:</p>
-<div id="cd503832" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>original_df <span class="op">=</span> pd.DataFrame(</span>
@@ -227,16 +227,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    ],</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="st">"year_week"</span>],</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Looks stupid enough? Good, I don’t want you distracted one bit by any type of complexity. Imagine you have been working on it. What you’re probably seeing in your average notebook probably looks a lot like that:</p>
+<p>Looks stupid enough? Good, I don’t want you distracted one bit by any type of complexity. Imagine you have been working on it. What you’re probably seeing in your average notebook probably looks a lot like the following. I am sure of it because I captured this in the wild:</p>
 <section id="the-original-sin-of-pandas" class="level2">
 <h2 class="anchored" data-anchor-id="the-original-sin-of-pandas">The Original Sin Of Pandas</h2>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Typical Bullshit One</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Typical Bullshit Two</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<div id="6ab31fe5" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fmt: off</span></span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fmt: off</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>weekly_chart_df <span class="op">=</span> original_df.reset_index()</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>weekly_chart_df.rename(columns<span class="op">=</span>{<span class="dv">0</span> : <span class="st">'category_A'</span>, <span class="dv">1</span> : <span class="st">'category_B'</span>, <span class="dv">3</span> : <span class="st">'category_C'</span>}, inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>weekly_chart_df.year_week <span class="op">=</span> weekly_chart_df.year_week.astype(<span class="bu">str</span>)</span>
@@ -248,10 +246,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>weekly_chart_df <span class="op">=</span> weekly_chart_df[weekly_chart_df[<span class="st">"total_tested"</span>] <span class="op">&lt;</span> <span class="dv">5</span>]</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># fmt: on</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div id="98cda1a2" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fmt: off</span></span>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fmt: off</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> original_df.reset_index()</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df.rename(columns<span class="op">=</span>{<span class="dv">0</span> : <span class="st">'category_A'</span>, <span class="dv">1</span> : <span class="st">'category_B'</span>, <span class="dv">3</span> : <span class="st">'category_C'</span>}, inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>df.year_week <span class="op">=</span> df.year_week.astype(<span class="bu">str</span>)</span>
@@ -266,12 +262,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-</div>
-<p>Looks familiar?</p>
-<p>Well, I am sorry to tell you that this thing up there is pure garbage! Actually, I am not even sorry. This stuff has been vomited by someone without any consideration for their fellow humans. You don’t believe me?</p>
+<p>Looks familiar? Do you feel this conundrum where either your names are long and things are a pain to write? Or you abuse the ignominious <code>df</code> name all over the place and everything is called the same?</p>
+<p>Well, I am sorry to tell you that both examples up there are pure garbage! Actually, I am not even sorry. This stuff has been vomited by someone without any consideration for their fellow humans. You don’t believe me?</p>
 <p>Did you by any chance happen to notice the little cabalistic signs around the code: <code>fmt: off</code> / <code>fmt: on</code>? Do you know what it means? It means I have to purposefully block my formatter from touching this pile of intellectual dump, otherwise, it becomes so unreadable that its ungodly nature becomes clear to all. Let me prove it to you:</p>
-<div id="30373c18" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>weekly_chart_df <span class="op">=</span> original_df.reset_index()</span>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>weekly_chart_df <span class="op">=</span> original_df.reset_index()</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>weekly_chart_df.rename(</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>{<span class="dv">0</span>: <span class="st">"category_A"</span>, <span class="dv">1</span>: <span class="st">"category_B"</span>, <span class="dv">3</span>: <span class="st">"category_C"</span>}, inplace<span class="op">=</span><span class="va">True</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -294,7 +288,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    weekly_chart_df.category_C <span class="op">/</span> weekly_chart_df.total_produced <span class="op">*</span> <span class="dv">100</span>, <span class="dv">2</span></span>
 <span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>)  <span class="co"># proportion of category_C in the lot</span></span>
 <span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>weekly_chart_df <span class="op">=</span> weekly_chart_df[weekly_chart_df[<span class="st">"total_tested"</span>] <span class="op">&lt;</span> <span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <p>Understood? Now that the pretended pseudo-manual structure is gone, there is nothing left but chaos? So do yourself a favor, just install <code>ruff</code> or <code>black</code>, because if you write something, format it, and it looks worse, there is a 99.999% chance that what you wrote should be covered with Napalm and set on fire.</p>
 <p>Now that we agree on the horror it actually is, it is time to fix it.</p>
 </section>
@@ -303,11 +296,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>First, you’re going to remove ALL <code>inplace=True</code> from your whole code base! Did I stutter? I said all of them! <a href="">This wretched abomination</a> should have never seen the sunlight. Unfortunately, <code>pandas</code> is more than 20 years old, and mistakes were made during the young years. Sadly enough, this mistake still haunts us to this day because some people are clearly not able to perform a simple Google search. We are still stuck with this because removing it would break half of the world’s code bases, because of people like you who think they are being clever, when in fact they’re just a major enshittification of the code.</p>
 <p>No <code>inplace=True</code> EVER! I mean it!</p>
 <p>So, the first line becomes:</p>
-<div id="9477c22b" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;javascript&quot;}}" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>weekly_chart_df <span class="op">=</span> original_df.reset_index().rename(</span>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>weekly_chart_df <span class="op">=</span> original_df.reset_index().rename(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>{<span class="dv">0</span>: <span class="st">"category_A"</span>, <span class="dv">1</span>: <span class="st">"category_B"</span>, <span class="dv">3</span>: <span class="st">"category_C"</span>}</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <p>See? It’s not beautiful yet but it is certainly a step in the right direction?</p>
 <p>The next thing you will do is transform the <code>astype</code> call to use it at the dataframe level, in the shape: <code>astype({"column": &lt;type&gt;})</code>, because we are not beasts. Not so goddamn fast you inconsequential stardust residue! I am sure you were about to type something ludicrous like:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>p_chart_weekly <span class="op">=</span> p_chart_weekly.astype({<span class="st">"year_week"</span>: <span class="bu">str</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -316,14 +307,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>{<span class="dv">0</span>: <span class="st">"category_A"</span>, <span class="dv">1</span>: <span class="st">"category_B"</span>, <span class="dv">3</span>: <span class="st">"category_C"</span>}</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>).astype({<span class="st">"year_week"</span>: <span class="bu">str</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>See this shit? This is called <strong>method chaining</strong>, now repeat after me: <strong>method chaining</strong>. This is the sacred beauty that was sent upon us mere mortals to allow writing data transformations that do not look like complete crap. You will only write your pandas this way from now on! Did you hear me? And I will show you later how other languages have managed to do way better than Python and pandas in that regard. And these people were rightfully laughing at your clown ass, when you were happy writing some stupid shit like <code>df = df.some_fucking_transformation</code> Do you start to understand? This is why I forbade your sorry brain to ever use the option <code>inplace=True</code>, because it breaks the… you’re goddamn right, <strong>method chaining</strong>!</p>
-<p>From this point, you are one keyboard shortcut away from poetry. You don’t believe me? Did you install an automatic code formatter as I so generously told you earlier? You, infected chromosomal deficiency! Ok, it appears you need another round of scolding. You need a formatter like <code>ruff</code> or <code>black</code> because your inept brain will not be able to remain consistent to format your whole project in a standard way. You don’t want to waste any part of your limited brain power on stupid shit like this. Just use the goddamn tools! Some person probably lies and says: “It looks prettier when I do it myself”, and some person allegedly manages to remain consistent doing this manually, but you are not some person…</p>
-<div id="bfafd5ba" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>weekly_chart_df <span class="op">=</span> (</span>
+<p>From this point, you are one keyboard shortcut away from poetry. You don’t believe me? Did you install an automatic code formatter as I so generously told you earlier? You, infected chromosomal deficiency! Ok, it appears you need another round of scolding. You need a formatter like <code>ruff</code> or <code>black</code> because your inept brain will not be able to remain consistent to format your whole project in a standard way. You don’t want to waste any part of your limited brain power on stupid shit like this. Just use the goddamn tools! Some talented person might pretend: “It looks prettier when I do it myself, and I manage to remain completely consistent across my whole project”, but you are not some person…</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>weekly_chart_df <span class="op">=</span> (</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    original_df.reset_index()</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    .rename(columns<span class="op">=</span>{<span class="dv">0</span>: <span class="st">"category_A"</span>, <span class="dv">1</span>: <span class="st">"category_B"</span>, <span class="dv">3</span>: <span class="st">"category_C"</span>})</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    .astype({<span class="st">"year_week"</span>: <span class="bu">str</span>})</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <p>See how beautiful this is? Now you’re starting to believe. Ok, it’s time to introduce you to a concept you have never encountered: <code>()</code>. Those are called parentheses, and they are your new best friend!</p>
 <p>Whenever you want to write a transformation, BEFORE you even type the name of your stupid dataframe, which is probably stupid <code>df</code> anyway, the absolute <strong>FIRST THING you will do is open a pair of parentheses</strong>. Why? Because each time you’re done with one call for a transformation, you can just press enter, the code will auto-indent, and you can continue whatever sorry exploration you’re attempting. Is it so much better than your typical awful backslashes, don’t lie, I know you have been abusing them…</p>
 <pre><code>(
@@ -355,8 +344,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Now read the underlined sentence! Read it again! Now look at the examples. Read it again! It means if you use a function in your kwargs, pandas will automatically call this function on the dataframe that generated the assign call, and said dataframe will be the first argument! Do you understand how powerful this is? It means that you just gained a shortcut to reference your current dataframe! How, you ask? Do I really have to explain everything to your sorry ass?</p>
 <p>Have you heard of the keyword <code>lambda</code>? What are those? You’re goddamn right: <strong>functions</strong>! And what do you use functions for? Referencing the current dataframe!</p>
 <p>Ding! Ding! Ding!</p>
-<div id="19713430" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>weekly_chart_with_proportions <span class="op">=</span> (</span>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>weekly_chart_with_proportions <span class="op">=</span> (</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    original_df.reset_index()</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    .rename(columns<span class="op">=</span>{<span class="dv">0</span>: <span class="st">"category_A"</span>, <span class="dv">1</span>: <span class="st">"category_B"</span>, <span class="dv">3</span>: <span class="st">"category_C"</span>})</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    .astype({<span class="st">"year_week"</span>: <span class="bu">str</span>})</span>
@@ -368,7 +356,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        prop_category_C<span class="op">=</span><span class="kw">lambda</span> df: (df.category_C <span class="op">/</span> df.total_produced <span class="op">*</span> <span class="dv">100</span>).<span class="bu">round</span>(<span class="dv">2</span>),</span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <p>See how much <strong>NICER</strong> this looks? This is starting to look like someone who knows their job. You have subject, verb one, verb two plus complements, and verb three plus complements. I bet your over-complexing anxiety-riddled brain would have never trusted me if I told you to write nice efficient code, you just need 6th-grade grammar!</p>
 <p>Oh, and do you know the <strong>AWESOME BONUS</strong> I just gave you for free? No more <code>SettingWithCopyWarning</code>. EVER! PERIOD! Because we are never modifying the dataframe in-place, we’re always returning a new instance. And that’s totally fine because we don’t have tons of stupid-ass intermediate variables like <code>df, df1, df2, temp, temp2</code> that serve no purpose outside supporting your limping transformation logic and eating up all your RAM.</p>
 <p>Oh, and by the way, I took the liberty to remove your stupid calls to <code>numpy</code> because guess what? 99% of the time, there is a pandas equivalent that is within reach by just pressing a dumb dot <code>.</code>, so be intelligently lazy!</p>
@@ -378,8 +365,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Alright, back to the code! Do you know what those brackets <code>[]</code> stand for? If you say <code>getitem</code> you’re on the right track, but in pandas, they are used to call the function <code>loc[]</code>. Yes, squared-brackets here because the pandas API is fundamentally broken for those who experienced at least another language. But we will come back to this in another post.</p>
 <p>For now, just read the documentation for the <code>loc[]</code> method. Is there anything that looks familiar? For those with a lightbulb that requires a constant perfusion of coffee to produce an ersatz of a thought, we are looking for a way to filter the <strong>current dataframe</strong>. Did you see it? The word <strong>callable</strong>? Are you beginning to understand? Everything I told you so far serves a glorious purpose!</p>
 <p>Now, we can finish our business here:</p>
-<div id="8d7334b3" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>weekly_chart_with_proportions <span class="op">=</span> (</span>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>weekly_chart_with_proportions <span class="op">=</span> (</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    original_df.reset_index()</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    .rename(columns<span class="op">=</span>{<span class="dv">0</span>: <span class="st">"category_A"</span>, <span class="dv">1</span>: <span class="st">"category_B"</span>, <span class="dv">3</span>: <span class="st">"category_C"</span>})</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    .astype({<span class="st">"year_week"</span>: <span class="bu">str</span>})</span>
@@ -392,26 +378,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    .loc[<span class="kw">lambda</span> df: df.total_tested <span class="op">&lt;</span> <span class="dv">6</span>]</span>
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <p>Now we have finally entered the age of civilization! Are you feeling proud of yourself? Not so damn fast! Time to see what other people in the R-world have been doing:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>weekly_chart_with_proportions <span class="ot">&lt;-</span> original_df <span class="sc">%&gt;%</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">category_A =</span> <span class="st">`</span><span class="at">0</span><span class="st">`</span>,</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">category_B =</span> <span class="st">`</span><span class="at">1</span><span class="st">`</span>,</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">category_C =</span> <span class="st">`</span><span class="at">3</span><span class="st">`</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">year_week =</span> <span class="fu">as.character</span>(year_week),</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_produced =</span> category_A <span class="sc">+</span> category_B <span class="sc">+</span> category_C,</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_tested =</span> category_B <span class="sc">+</span> category_C,</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">prop_tested =</span> <span class="fu">round</span>(total_tested <span class="sc">/</span> total_produced <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>),</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">prop_category_B =</span> <span class="fu">round</span>(category_B <span class="sc">/</span> total_produced <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>),</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">prop_category_C =</span> <span class="fu">round</span>(category_C <span class="sc">/</span> total_produced <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>)</span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(total_tested <span class="sc">&lt;</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Do you see how beautiful this is? Do you feel the absolute glory of free pipelining with <code>%&gt;%</code>? Do you notice the absence of quotation marks around column names thanks to the holiness of <strong><em>lazy evaluation</em></strong>? The R people have been doing this routinely <a href="https://en.wikipedia.org/wiki/Dplyr">for more than 10 years now</a>! Do you feel your absolute insignificance with your idiotic transformations riddled with the ubiquitous use of <code>df = df[...]</code>? Are you understanding why, in their eyes, you looked like a babbling, screaming monkey? Good! Time to blow your mind one last time. Have you heard of the method <code>.pipe()</code> in pandas? It’s limited, but it allows you to do some things <a href="https://r4ds.had.co.nz/pipes.html">like the pros</a>! But do not abuse its power!</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>weekly_chart_with_proportions <span class="ot">&lt;-</span> original_df <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">category_A =</span> <span class="st">`</span><span class="at">0</span><span class="st">`</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">category_B =</span> <span class="st">`</span><span class="at">1</span><span class="st">`</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">category_C =</span> <span class="st">`</span><span class="at">3</span><span class="st">`</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">year_week =</span> <span class="fu">as.character</span>(year_week),</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_produced =</span> category_A <span class="sc">+</span> category_B <span class="sc">+</span> category_C,</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_tested =</span> category_B <span class="sc">+</span> category_C,</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">prop_tested =</span> <span class="fu">round</span>(total_tested <span class="sc">/</span> total_produced <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>),</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">prop_category_B =</span> <span class="fu">round</span>(category_B <span class="sc">/</span> total_produced <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>),</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">prop_category_C =</span> <span class="fu">round</span>(category_C <span class="sc">/</span> total_produced <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(total_tested <span class="sc">&lt;</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Do you feel the fantastic power of free pipelining with <code>%&gt;%</code> granted by excellent package <code>magrittr</code>? (Python packages really need to get their shit together, their names suck in comparison to R!) Can you understand absolute beauty that was bestowed upon us mere mortals, by Hadley Wickham the great creator of the <a href="https://www.reddit.com/r/dataisbeautiful/comments/3mp9r7/im_hadley_wickham_chief_scientist_at_rstudio_and/">dplyr <strong>and</strong> ggplot2 packages</a>? Do you notice the absence of quotation marks around column names thanks to the holiness of <strong><em>lazy evaluation</em></strong>? The R people have been doing this routinely <a href="https://en.wikipedia.org/wiki/Dplyr">for more than 10 years now</a>!</p>
+<p>Do you feel your absolute insignificance with your idiotic transformations riddled with the ubiquitous use of <code>df = df[...]</code>? Are you understanding why, in their eyes, you looked like a babbling, screaming monkey? Good! Time to blow your mind one last time. Have you heard of the method <code>.pipe()</code> in pandas? It’s limited, but it allows you to do some things <a href="https://r4ds.had.co.nz/pipes.html">like the pros</a>! But do not abuse its power!</p>
+<p>Besides, look! Look how <strong>easy</strong> it is to wrap your head around a language you never learned when there is little to no syntactic crap.</p>
 <p>Alright, time to wrap up for now.</p>
 </section>
 <section id="take-home-messages-for-dummies" class="level2">
@@ -433,11 +418,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li><p>There is a special place in hell for people who use methods that evaluate generic strings like <code>.query()</code>. A special place! Right next to child molesters and people who talk during movies!</p></li>
 <li><p>How long can you even chain?</p>
-<p><a href="https://r4ds.had.co.nz/pipes.html#when-not-to-use-the-pipe">You can generally chain 5 to 10 transformation steps</a>. Beyond that, there is a higher risk for code to become less readable and more convoluted. Then you can just save the result in a nicely named variable describing exactly what your data is representing! Some people say you can do more without tampering with readability, but then again, you are not some person…</p></li>
+<p>The R wizards tell us: <a href="https://r4ds.had.co.nz/pipes.html#when-not-to-use-the-pipe">“You can generally chain 5 to 10 transformation steps”</a>. Beyond that, there is a higher risk for code to become less readable and more convoluted. Then you can just save the result in a nicely named variable describing exactly what your data is representing! Some person says you can do more without tampering with readability, I disagree, and then again, you are not some person…</p></li>
 </ol>
 <p>That’s it for today. We will see more advance shit later. For now, I need to go choke on a bottle of Xanax!</p>
+<section id="disclaimer" class="level4">
+<h4 class="anchored" data-anchor-id="disclaimer">Disclaimer</h4>
+<p>This rant was largely inspired by an awesome guide for <a href="https://gamefaqs.gamespot.com/ps3/960699-metal-gear-rising-revengeance/faqs/66773">Metal Gear Rising: Revengeance by Vesperas</a>. Its reading was a great source of banter and chuckles. My dear swearing fellow, you have my most sincere gratitude for helping a sucker like me progress at such a great game!</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
