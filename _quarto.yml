@@ -22,3 +22,5 @@ format:
     code-block-border-left: true
     highlight-style: breezedark
 
+execute:
+  freeze: auto
