@@ -128,6 +128,8 @@ So do yourself a favor, just install `ruff` or `black`, because if you write som
 
 Now that we agree on the horror it actually is, it is time to fix it.
 
+## How To See The Light In Darkness
+
 First, you're going to remove ALL `inplace=True` from your whole code base! Did I stutter?
 I said all of them!
 [This wretched abomination]() should have never seen the sunlight.
