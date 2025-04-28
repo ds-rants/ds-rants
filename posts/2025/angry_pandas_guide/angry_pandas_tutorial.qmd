@@ -321,6 +321,8 @@ Now we have finally entered the age of civilization! Are you feeling proud of yo
 Not so damn fast! Time to see what other people in the R-world have been doing:
 
 ```r
+#| echo: false
+
 p_chart_weekly_df <- original_df %>%
   rename(
     category_A = `0`,
