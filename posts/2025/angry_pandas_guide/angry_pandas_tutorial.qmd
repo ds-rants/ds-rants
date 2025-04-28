@@ -25,7 +25,7 @@ Actually, before we even start with code... [NO FUCKING FOR LOOPS!](../../posts/
 > - "But..."
 > - "Did I stutter? NO FUCKING FOR LOOPS"
 > - "But what if ..."
-> - "You inept little twerp
+> - "You inept little twerp, are you trying to aggravate me from the start?"
 
 Anyway, we will start with the usual suspects, and a stupid ass dataframe:
 
@@ -333,34 +333,34 @@ p_chart_weekly_df <- original_df %>%
 ```
 
 Do you see how beautiful this is? Do you feel the absolute glory of free pipelining with `%>%`?
-Do you notice absence of quotation marks around column names thanks to the holiness of **_lazy evaluation_**?
+Do you notice the absence of quotation marks around column names thanks to the holiness of **_lazy evaluation_**?
 The R people have been doing this routinely [for more than 10 years now](https://en.wikipedia.org/wiki/Dplyr)!
 Do you feel your absolute insignificance with your idiotic transformations riddled with the ubiquitous use of `df = df[...]`?
-Are you understanding why, in their eyes, you looked like a babbling screaming monkey?
-Good! Time to blow your mind one last time, have you heard of the method `.pipe()` in pandas?
-It's limited but it allows you to do some things [like the pros](https://r4ds.had.co.nz/pipes.html)!
+Are you understanding why, in their eyes, you looked like a babbling, screaming monkey?
+Good! Time to blow your mind one last time. Have you heard of the method `.pipe()` in pandas?
+It's limited, but it allows you to do some things [like the pros](https://r4ds.had.co.nz/pipes.html)!
 But do not abuse its power!
 
 Alright, time to wrap up for now.
 
-## Take Home Messages For Dummies
+## Take-Home Messages For Dummies
 
 1. [NO FUCKING FOR LOOPS!](../../posts/2025/2025_04_13_your_pandas_code_is_bad/index.qmd)
-2. Never use `inplace=True`, only morons do so!
-3. Do not use backslashes `\` like a caveman, just use a pair of brackets `()`, type the name of your dataframe and press `Enter`
+2. Never use `inplace=True`. Only morons do so!
+3. Do not use backslashes `\` like a caveman. Just use a pair of brackets `()`, type the name of your dataframe, and press `Enter`.
 
-> If you do not follow these simple rules, I will find you and I will unscrew your head. I will go out of my way to attack you.
+> If you do not follow these simple rules, I will find you, and I will unscrew your head. I will go out of my way to attack you.
 > Even if your dead ass is sitting in the middle of the ocean, I will swim out into the middle of the ocean and friggin eat you!
 > And then, I will bang your tuna boyfriend/girlfriend.
 
-4. Inside of a chain you can often reference your current dataframe inside a `lambda` expression.
+4. Inside of a chain, you can often reference your current dataframe inside a `lambda` expression.
 
-   - Perfect for creating new columns with `assign()`
-   - It works really well with `loc[]` to filter rows on the fly.
-   - There are other methods that accepts
+    - Perfect for creating new columns with `assign()`.
+    - It works really well with `loc[]` to filter rows on the fly.
+    - There are other methods that accept this too.
 
-5. There is a special place in hell for people that uses methods that do evaluation of generic strings like `.query()`.
-   A special place! Right next to child molesters and people that talk at the movie!
+5.There is a special place in hell for people who use methods that evaluate generic strings like `.query()`.
+    A special place! Right next to child molesters and people who talk during movies!
 
 6. How long can you even chain?
 
