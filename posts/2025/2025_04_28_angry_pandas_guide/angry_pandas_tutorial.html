@@ -293,7 +293,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="how-to-see-the-light-in-darkness" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-see-the-light-in-darkness">How To See The Light In Darkness</h2>
-<p>First, you’re going to remove ALL <code>inplace=True</code> from your whole code base! Did I stutter? I said all of them! <a href="">This wretched abomination</a> should have never seen the sunlight. Unfortunately, <code>pandas</code> is more than 20 years old, and mistakes were made during the young years. Sadly enough, this mistake still haunts us to this day because some people are clearly not able to perform a simple Google search. We are still stuck with this because removing it would break half of the world’s code bases, because of people like you who think they are being clever, when in fact they’re just a major enshittification of the code.</p>
+<p>First, you’re going to remove ALL <code>inplace=True</code> from your whole code base! Did I stutter? I said all of them! <a href="https://stackoverflow.com/questions/45570984/in-pandas-is-inplace-true-considered-harmful-or-not">This wretched abomination</a> should have never seen the sunlight:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="bad-inplace.png" class="img-fluid figure-img"></p>
+<figcaption>For those who are to lazy to click</figcaption>
+</figure>
+</div>
+<p>Unfortunately, <code>pandas</code> is almost 20 years old, and mistakes were made during the young years. Sadly enough, this mistake still haunts us to this day because some people are clearly not able to perform a simple Google search. We are still stuck with this because removing it would break half of the world’s code bases, because of people like you. People who think they are being clever, when in fact they’re just performing a major enshittification of the code at a large scale.</p>
 <p>No <code>inplace=True</code> EVER! I mean it!</p>
 <p>So, the first line becomes:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>weekly_chart_df <span class="op">=</span> original_df.reset_index().rename(</span>
