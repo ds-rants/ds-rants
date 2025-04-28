@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="DS Rants">
-<meta name="dcterms.date" content="2025-04-26">
+<meta name="dcterms.date" content="2025-04-28">
 
 <title>The Angry Guide To Pandas Code (Dummy Edition, Part 1) – Data Science Rants</title>
 <style>
@@ -168,7 +168,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">April 26, 2025</p>
+        <p class="date">April 28, 2025</p>
       </div>
     </div>
     
@@ -215,7 +215,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </blockquote>
 <p>Anyway, we will start with the usual suspects, and a stupid-ass dataframe:</p>
-<div id="bfc912f9" class="cell" data-execution_count="1">
+<div id="cd503832" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -235,22 +235,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Typical Bullshit One</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Typical Bullshit Two</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<div id="6b66d47d" class="cell" data-execution_count="2">
+<div id="6ab31fe5" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fmt: off</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df <span class="op">=</span> original_df.reset_index()</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df.rename(columns<span class="op">=</span>{<span class="dv">0</span> : <span class="st">'category_A'</span>, <span class="dv">1</span> : <span class="st">'category_B'</span>, <span class="dv">3</span> : <span class="st">'category_C'</span>}, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df.year_week <span class="op">=</span> p_chart_weekly_df.year_week.astype(<span class="bu">str</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df[<span class="st">'total_produced'</span>] <span class="op">=</span> p_chart_weekly_df.category_A <span class="op">+</span> p_chart_weekly_df.category_B <span class="op">+</span> p_chart_weekly_df.category_C <span class="co"># total number of produced goods</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df[<span class="st">'total_tested'</span>] <span class="op">=</span> p_chart_weekly_df.category_B <span class="op">+</span> p_chart_weekly_df.category_C <span class="co"># total number of tested goods</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df[<span class="st">'prop_tested'</span>] <span class="op">=</span> np.<span class="bu">round</span>(p_chart_weekly_df.total_tested <span class="op">/</span> p_chart_weekly_df.total_produced <span class="op">*</span><span class="dv">100</span>,<span class="dv">2</span>) <span class="co"># proportion of goods tested</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df[<span class="st">'prop_category_B'</span>] <span class="op">=</span> np.<span class="bu">round</span>(p_chart_weekly_df.category_B <span class="op">/</span> p_chart_weekly_df.total_produced <span class="op">*</span><span class="dv">100</span>,<span class="dv">2</span>) <span class="co"># proportion of category_B</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df[<span class="st">'prop_category_C'</span>] <span class="op">=</span> np.<span class="bu">round</span>(p_chart_weekly_df.category_C <span class="op">/</span> p_chart_weekly_df.total_produced <span class="op">*</span><span class="dv">100</span>,<span class="dv">2</span>) <span class="co"># proportion of category_C</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df <span class="op">=</span> p_chart_weekly_df[p_chart_weekly_df[<span class="st">"total_tested"</span>] <span class="op">&lt;</span> <span class="dv">5</span>]</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>weekly_chart_df <span class="op">=</span> original_df.reset_index()</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>weekly_chart_df.rename(columns<span class="op">=</span>{<span class="dv">0</span> : <span class="st">'category_A'</span>, <span class="dv">1</span> : <span class="st">'category_B'</span>, <span class="dv">3</span> : <span class="st">'category_C'</span>}, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>weekly_chart_df.year_week <span class="op">=</span> weekly_chart_df.year_week.astype(<span class="bu">str</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>weekly_chart_df[<span class="st">'total_produced'</span>] <span class="op">=</span> weekly_chart_df.category_A <span class="op">+</span> weekly_chart_df.category_B <span class="op">+</span> weekly_chart_df.category_C <span class="co"># total number of produced goods</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>weekly_chart_df[<span class="st">'total_tested'</span>] <span class="op">=</span> weekly_chart_df.category_B <span class="op">+</span> weekly_chart_df.category_C <span class="co"># total number of tested goods</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>weekly_chart_df[<span class="st">'prop_tested'</span>] <span class="op">=</span> np.<span class="bu">round</span>(weekly_chart_df.total_tested <span class="op">/</span> weekly_chart_df.total_produced <span class="op">*</span><span class="dv">100</span>,<span class="dv">2</span>) <span class="co"># proportion of goods tested</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>weekly_chart_df[<span class="st">'prop_category_B'</span>] <span class="op">=</span> np.<span class="bu">round</span>(weekly_chart_df.category_B <span class="op">/</span> weekly_chart_df.total_produced <span class="op">*</span><span class="dv">100</span>,<span class="dv">2</span>) <span class="co"># proportion of category_B</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>weekly_chart_df[<span class="st">'prop_category_C'</span>] <span class="op">=</span> np.<span class="bu">round</span>(weekly_chart_df.category_C <span class="op">/</span> weekly_chart_df.total_produced <span class="op">*</span><span class="dv">100</span>,<span class="dv">2</span>) <span class="co"># proportion of category_C</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>weekly_chart_df <span class="op">=</span> weekly_chart_df[weekly_chart_df[<span class="st">"total_tested"</span>] <span class="op">&lt;</span> <span class="dv">5</span>]</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># fmt: on</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div id="703d77ec" class="cell" data-execution_count="3">
+<div id="98cda1a2" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fmt: off</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> original_df.reset_index()</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df.rename(columns<span class="op">=</span>{<span class="dv">0</span> : <span class="st">'category_A'</span>, <span class="dv">1</span> : <span class="st">'category_B'</span>, <span class="dv">3</span> : <span class="st">'category_C'</span>}, inplace<span class="op">=</span><span class="va">True</span>)</span>
@@ -261,7 +261,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'prop_category_B'</span>] <span class="op">=</span> np.<span class="bu">round</span>(df.category_B <span class="op">/</span> df.total_produced <span class="op">*</span><span class="dv">100</span>,<span class="dv">2</span>) <span class="co"># proportion of category_B</span></span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'prop_category_C'</span>] <span class="op">=</span> np.<span class="bu">round</span>(df.category_C <span class="op">/</span> df.total_produced <span class="op">*</span><span class="dv">100</span>,<span class="dv">2</span>) <span class="co"># proportion of category_C</span></span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="st">"total_tested"</span>] <span class="op">&lt;</span> <span class="dv">5</span>]</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df <span class="op">=</span> df</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>weekly_chart_df <span class="op">=</span> df</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># fmt: on</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
@@ -270,30 +270,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Looks familiar?</p>
 <p>Well, I am sorry to tell you that this thing up there is pure garbage! Actually, I am not even sorry. This stuff has been vomited by someone without any consideration for their fellow humans. You don’t believe me?</p>
 <p>Did you by any chance happen to notice the little cabalistic signs around the code: <code>fmt: off</code> / <code>fmt: on</code>? Do you know what it means? It means I have to purposefully block my formatter from touching this pile of intellectual dump, otherwise, it becomes so unreadable that its ungodly nature becomes clear to all. Let me prove it to you:</p>
-<div id="746dc2b7" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df <span class="op">=</span> original_df.reset_index()</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df.rename(</span>
+<div id="30373c18" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>weekly_chart_df <span class="op">=</span> original_df.reset_index()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>weekly_chart_df.rename(</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>{<span class="dv">0</span>: <span class="st">"category_A"</span>, <span class="dv">1</span>: <span class="st">"category_B"</span>, <span class="dv">3</span>: <span class="st">"category_C"</span>}, inplace<span class="op">=</span><span class="va">True</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df.year_week <span class="op">=</span> p_chart_weekly_df.year_week.astype(<span class="bu">str</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df[<span class="st">"total_produced"</span>] <span class="op">=</span> (</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    p_chart_weekly_df.category_A</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p_chart_weekly_df.category_B</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p_chart_weekly_df.category_C</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>weekly_chart_df.year_week <span class="op">=</span> weekly_chart_df.year_week.astype(<span class="bu">str</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>weekly_chart_df[<span class="st">"total_produced"</span>] <span class="op">=</span> (</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    weekly_chart_df.category_A</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> weekly_chart_df.category_B</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> weekly_chart_df.category_C</span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>)  <span class="co"># total number of produced goods is the lot</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df[<span class="st">"total_tested"</span>] <span class="op">=</span> (</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    p_chart_weekly_df.category_B <span class="op">+</span> p_chart_weekly_df.category_C</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>weekly_chart_df[<span class="st">"total_tested"</span>] <span class="op">=</span> (</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    weekly_chart_df.category_B <span class="op">+</span> weekly_chart_df.category_C</span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>)  <span class="co"># total number of tested goods is the lot</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df[<span class="st">"prop_tested"</span>] <span class="op">=</span> np.<span class="bu">round</span>(</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    p_chart_weekly_df.total_tested <span class="op">/</span> p_chart_weekly_df.total_produced <span class="op">*</span> <span class="dv">100</span>, <span class="dv">2</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>weekly_chart_df[<span class="st">"prop_tested"</span>] <span class="op">=</span> np.<span class="bu">round</span>(</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    weekly_chart_df.total_tested <span class="op">/</span> weekly_chart_df.total_produced <span class="op">*</span> <span class="dv">100</span>, <span class="dv">2</span></span>
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>)  <span class="co"># proportion of goods tested on the lot</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df[<span class="st">"prop_category_B"</span>] <span class="op">=</span> np.<span class="bu">round</span>(</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    p_chart_weekly_df.category_B <span class="op">/</span> p_chart_weekly_df.total_produced <span class="op">*</span> <span class="dv">100</span>, <span class="dv">2</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>weekly_chart_df[<span class="st">"prop_category_B"</span>] <span class="op">=</span> np.<span class="bu">round</span>(</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    weekly_chart_df.category_B <span class="op">/</span> weekly_chart_df.total_produced <span class="op">*</span> <span class="dv">100</span>, <span class="dv">2</span></span>
 <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>)  <span class="co"># proportion of category_B in the lot</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df[<span class="st">"prop_category_C"</span>] <span class="op">=</span> np.<span class="bu">round</span>(</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    p_chart_weekly_df.category_C <span class="op">/</span> p_chart_weekly_df.total_produced <span class="op">*</span> <span class="dv">100</span>, <span class="dv">2</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>weekly_chart_df[<span class="st">"prop_category_C"</span>] <span class="op">=</span> np.<span class="bu">round</span>(</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    weekly_chart_df.category_C <span class="op">/</span> weekly_chart_df.total_produced <span class="op">*</span> <span class="dv">100</span>, <span class="dv">2</span></span>
 <span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>)  <span class="co"># proportion of category_C in the lot</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df <span class="op">=</span> p_chart_weekly_df[p_chart_weekly_df[<span class="st">"total_tested"</span>] <span class="op">&lt;</span> <span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>weekly_chart_df <span class="op">=</span> weekly_chart_df[weekly_chart_df[<span class="st">"total_tested"</span>] <span class="op">&lt;</span> <span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Understood? Now that the pretended pseudo-manual structure is gone, there is nothing left but chaos? So do yourself a favor, just install <code>ruff</code> or <code>black</code>, because if you write something, format it, and it looks worse, there is a 99.999% chance that what you wrote should be covered with Napalm and set on fire.</p>
 <p>Now that we agree on the horror it actually is, it is time to fix it.</p>
@@ -303,8 +303,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>First, you’re going to remove ALL <code>inplace=True</code> from your whole code base! Did I stutter? I said all of them! <a href="">This wretched abomination</a> should have never seen the sunlight. Unfortunately, <code>pandas</code> is more than 20 years old, and mistakes were made during the young years. Sadly enough, this mistake still haunts us to this day because some people are clearly not able to perform a simple Google search. We are still stuck with this because removing it would break half of the world’s code bases, because of people like you who think they are being clever, when in fact they’re just a major enshittification of the code.</p>
 <p>No <code>inplace=True</code> EVER! I mean it!</p>
 <p>So, the first line becomes:</p>
-<div id="576493ce" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;javascript&quot;}}" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df <span class="op">=</span> original_df.reset_index().rename(</span>
+<div id="9477c22b" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;javascript&quot;}}" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>weekly_chart_df <span class="op">=</span> original_df.reset_index().rename(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>{<span class="dv">0</span>: <span class="st">"category_A"</span>, <span class="dv">1</span>: <span class="st">"category_B"</span>, <span class="dv">3</span>: <span class="st">"category_C"</span>}</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -312,13 +312,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The next thing you will do is transform the <code>astype</code> call to use it at the dataframe level, in the shape: <code>astype({"column": &lt;type&gt;})</code>, because we are not beasts. Not so goddamn fast you inconsequential stardust residue! I am sure you were about to type something ludicrous like:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>p_chart_weekly <span class="op">=</span> p_chart_weekly.astype({<span class="st">"year_week"</span>: <span class="bu">str</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You, you’re trying to make me mad, aren’t you? Put that shit with the previous calls, and lose the name of the dataframe you don’t need it.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df <span class="op">=</span> original_df.reset_index().rename(</span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>weekly_chart_df <span class="op">=</span> original_df.reset_index().rename(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>{<span class="dv">0</span>: <span class="st">"category_A"</span>, <span class="dv">1</span>: <span class="st">"category_B"</span>, <span class="dv">3</span>: <span class="st">"category_C"</span>}</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>).astype({<span class="st">"year_week"</span>: <span class="bu">str</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>See this shit? This is called <strong>method chaining</strong>, now repeat after me: <strong>method chaining</strong>. This is the sacred beauty that was sent upon us mere mortals to allow writing data transformations that do not look like complete crap. You will only write your pandas this way from now on! Did you hear me? And I will show you later how other languages have managed to do way better than Python and pandas in that regard. And these people were rightfully laughing at your clown ass, when you were happy writing some stupid shit like <code>df = df.some_fucking_transformation</code> Do you start to understand? This is why I forbade your sorry brain to ever use the option <code>inplace=True</code>, because it breaks the… you’re goddamn right, <strong>method chaining</strong>!</p>
 <p>From this point, you are one keyboard shortcut away from poetry. You don’t believe me? Did you install an automatic code formatter as I so generously told you earlier? You, infected chromosomal deficiency! Ok, it appears you need another round of scolding. You need a formatter like <code>ruff</code> or <code>black</code> because your inept brain will not be able to remain consistent to format your whole project in a standard way. You don’t want to waste any part of your limited brain power on stupid shit like this. Just use the goddamn tools! Some person probably lies and says: “It looks prettier when I do it myself”, and some person allegedly manages to remain consistent doing this manually, but you are not some person…</p>
-<div id="65bfff84" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df <span class="op">=</span> (</span>
+<div id="bfafd5ba" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>weekly_chart_df <span class="op">=</span> (</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    original_df.reset_index()</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    .rename(columns<span class="op">=</span>{<span class="dv">0</span>: <span class="st">"category_A"</span>, <span class="dv">1</span>: <span class="st">"category_B"</span>, <span class="dv">3</span>: <span class="st">"category_C"</span>})</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    .astype({<span class="st">"year_week"</span>: <span class="bu">str</span>})</span>
@@ -355,8 +355,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Now read the underlined sentence! Read it again! Now look at the examples. Read it again! It means if you use a function in your kwargs, pandas will automatically call this function on the dataframe that generated the assign call, and said dataframe will be the first argument! Do you understand how powerful this is? It means that you just gained a shortcut to reference your current dataframe! How, you ask? Do I really have to explain everything to your sorry ass?</p>
 <p>Have you heard of the keyword <code>lambda</code>? What are those? You’re goddamn right: <strong>functions</strong>! And what do you use functions for? Referencing the current dataframe!</p>
 <p>Ding! Ding! Ding!</p>
-<div id="27d5665e" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df <span class="op">=</span> (</span>
+<div id="19713430" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>weekly_chart_with_proportions <span class="op">=</span> (</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    original_df.reset_index()</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    .rename(columns<span class="op">=</span>{<span class="dv">0</span>: <span class="st">"category_A"</span>, <span class="dv">1</span>: <span class="st">"category_B"</span>, <span class="dv">3</span>: <span class="st">"category_C"</span>})</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    .astype({<span class="st">"year_week"</span>: <span class="bu">str</span>})</span>
@@ -373,13 +373,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Oh, and do you know the <strong>AWESOME BONUS</strong> I just gave you for free? No more <code>SettingWithCopyWarning</code>. EVER! PERIOD! Because we are never modifying the dataframe in-place, we’re always returning a new instance. And that’s totally fine because we don’t have tons of stupid-ass intermediate variables like <code>df, df1, df2, temp, temp2</code> that serve no purpose outside supporting your limping transformation logic and eating up all your RAM.</p>
 <p>Oh, and by the way, I took the liberty to remove your stupid calls to <code>numpy</code> because guess what? 99% of the time, there is a pandas equivalent that is within reach by just pressing a dumb dot <code>.</code>, so be intelligently lazy!</p>
 <p>Now the last part, let’s take care of the filter. You were going to keep the original thing, weren’t you?</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df <span class="op">=</span> p_chart_weekly_df[p_chart_weekly_df[<span class="st">"total_tested"</span>] <span class="op">&lt;</span> <span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>weekly_chart_df <span class="op">=</span> weekly_chart_df[weekly_chart_df[<span class="st">"total_tested"</span>] <span class="op">&lt;</span> <span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>There are 2 ways to filter dynamically a dataframe in pandas. One is using the cursed sin of arbitrary string execution, and the other provides autocompletion and syntax highlighting! Clearly, only a moronic ape high on cocaine, or an agile coach brainwashed on scrum/SAFe bullshit, same difference, would choose the first over the second. Therefore, we will never mention the first abomination again!</p>
 <p>Alright, back to the code! Do you know what those brackets <code>[]</code> stand for? If you say <code>getitem</code> you’re on the right track, but in pandas, they are used to call the function <code>loc[]</code>. Yes, squared-brackets here because the pandas API is fundamentally broken for those who experienced at least another language. But we will come back to this in another post.</p>
 <p>For now, just read the documentation for the <code>loc[]</code> method. Is there anything that looks familiar? For those with a lightbulb that requires a constant perfusion of coffee to produce an ersatz of a thought, we are looking for a way to filter the <strong>current dataframe</strong>. Did you see it? The word <strong>callable</strong>? Are you beginning to understand? Everything I told you so far serves a glorious purpose!</p>
 <p>Now, we can finish our business here:</p>
-<div id="0ea4cf13" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df <span class="op">=</span> (</span>
+<div id="8d7334b3" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>weekly_chart_with_proportions <span class="op">=</span> (</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    original_df.reset_index()</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    .rename(columns<span class="op">=</span>{<span class="dv">0</span>: <span class="st">"category_A"</span>, <span class="dv">1</span>: <span class="st">"category_B"</span>, <span class="dv">3</span>: <span class="st">"category_C"</span>})</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    .astype({<span class="st">"year_week"</span>: <span class="bu">str</span>})</span>
@@ -396,7 +396,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Now we have finally entered the age of civilization! Are you feeling proud of yourself? Not so damn fast! Time to see what other people in the R-world have been doing:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df <span class="ot">&lt;-</span> original_df <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>weekly_chart_with_proportions <span class="ot">&lt;-</span> original_df <span class="sc">%&gt;%</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">category_A =</span> <span class="st">`</span><span class="at">0</span><span class="st">`</span>,</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">category_B =</span> <span class="st">`</span><span class="at">1</span><span class="st">`</span>,</span>
