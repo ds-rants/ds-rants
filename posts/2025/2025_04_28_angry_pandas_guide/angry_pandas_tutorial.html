@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.29">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="DS Rants">
+<meta name="dcterms.date" content="2025-04-26">
+
+<title>The Angry Guide To Pandas Code (Dummy Edition, Part 1) – Data Science Rants</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-9a6a5ecaf8fe4fd57cd0109fc5710969.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-093132e6bdd7de43d62ee28ff6a68070.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Data Science Rants</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">The Angry Guide To Pandas Code (Dummy Edition, Part 1)</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">data science</div>
+                <div class="quarto-category">pandas code</div>
+                <div class="quarto-category">non-pessimization</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>DS Rants </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">April 26, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-original-sin-of-pandas" id="toc-the-original-sin-of-pandas" class="nav-link active" data-scroll-target="#the-original-sin-of-pandas">The Original Sin Of Pandas</a></li>
+  <li><a href="#how-to-see-the-light-in-darkness" id="toc-how-to-see-the-light-in-darkness" class="nav-link" data-scroll-target="#how-to-see-the-light-in-darkness">How To See The Light In Darkness</a></li>
+  <li><a href="#the-unavoidable-truth-of-data-transformation" id="toc-the-unavoidable-truth-of-data-transformation" class="nav-link" data-scroll-target="#the-unavoidable-truth-of-data-transformation">The Unavoidable Truth Of Data Transformation</a></li>
+  <li><a href="#take-home-messages-for-dummies" id="toc-take-home-messages-for-dummies" class="nav-link" data-scroll-target="#take-home-messages-for-dummies">Take-Home Messages For Dummies</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="cover-angry-pandas-guide.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+<p>Alright! You apparently stumbled by accident on this page after wrongly clicking on the banner: “There are single people in your area”. Well now, you have at least one chance to do something productive today! So put on your best nerd reading glasses and listen.</p>
+<p>Today, you’re going to learn how to write pandas code that does not look like the experimentation of a toddler smashing on the keyboard because it prints stuff on the screen. You’re going to move one inch closer to the golden age of civilization. So buckle up, stop thinking for your own good, and read carefully!</p>
+<p>Actually, before we even start with code… <a href="../../../posts/2025/2025_04_13_your_pandas_code_is_bad/index.html">NO FUCKING FOR LOOPS!</a></p>
+<blockquote class="blockquote">
+<ul>
+<li>“But…”</li>
+<li>“Did I stutter? NO FUCKING FOR LOOPS”</li>
+<li>“But what if …”</li>
+<li>“You inept little twerp, are you trying to aggravate me from the start?”</li>
+</ul>
+</blockquote>
+<p>Anyway, we will start with the usual suspects, and a stupid-ass dataframe:</p>
+<div id="bfc912f9" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>original_df <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="st">"2024_01"</span>],</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">"2024_02"</span>],</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        [<span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="st">"2024_03"</span>],</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="st">"year_week"</span>],</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Looks stupid enough? Good, I don’t want you distracted one bit by any type of complexity. Imagine you have been working on it. What you’re probably seeing in your average notebook probably looks a lot like that:</p>
+<section id="the-original-sin-of-pandas" class="level2">
+<h2 class="anchored" data-anchor-id="the-original-sin-of-pandas">The Original Sin Of Pandas</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Typical Bullshit One</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Typical Bullshit Two</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div id="6b66d47d" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fmt: off</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df <span class="op">=</span> original_df.reset_index()</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df.rename(columns<span class="op">=</span>{<span class="dv">0</span> : <span class="st">'category_A'</span>, <span class="dv">1</span> : <span class="st">'category_B'</span>, <span class="dv">3</span> : <span class="st">'category_C'</span>}, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df.year_week <span class="op">=</span> p_chart_weekly_df.year_week.astype(<span class="bu">str</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df[<span class="st">'total_produced'</span>] <span class="op">=</span> p_chart_weekly_df.category_A <span class="op">+</span> p_chart_weekly_df.category_B <span class="op">+</span> p_chart_weekly_df.category_C <span class="co"># total number of produced goods</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df[<span class="st">'total_tested'</span>] <span class="op">=</span> p_chart_weekly_df.category_B <span class="op">+</span> p_chart_weekly_df.category_C <span class="co"># total number of tested goods</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df[<span class="st">'prop_tested'</span>] <span class="op">=</span> np.<span class="bu">round</span>(p_chart_weekly_df.total_tested <span class="op">/</span> p_chart_weekly_df.total_produced <span class="op">*</span><span class="dv">100</span>,<span class="dv">2</span>) <span class="co"># proportion of goods tested</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df[<span class="st">'prop_category_B'</span>] <span class="op">=</span> np.<span class="bu">round</span>(p_chart_weekly_df.category_B <span class="op">/</span> p_chart_weekly_df.total_produced <span class="op">*</span><span class="dv">100</span>,<span class="dv">2</span>) <span class="co"># proportion of category_B</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df[<span class="st">'prop_category_C'</span>] <span class="op">=</span> np.<span class="bu">round</span>(p_chart_weekly_df.category_C <span class="op">/</span> p_chart_weekly_df.total_produced <span class="op">*</span><span class="dv">100</span>,<span class="dv">2</span>) <span class="co"># proportion of category_C</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df <span class="op">=</span> p_chart_weekly_df[p_chart_weekly_df[<span class="st">"total_tested"</span>] <span class="op">&lt;</span> <span class="dv">5</span>]</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># fmt: on</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div id="703d77ec" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fmt: off</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> original_df.reset_index()</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df.rename(columns<span class="op">=</span>{<span class="dv">0</span> : <span class="st">'category_A'</span>, <span class="dv">1</span> : <span class="st">'category_B'</span>, <span class="dv">3</span> : <span class="st">'category_C'</span>}, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>df.year_week <span class="op">=</span> df.year_week.astype(<span class="bu">str</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'total_produced'</span>] <span class="op">=</span> df.category_A <span class="op">+</span> df.category_B <span class="op">+</span> df.category_C <span class="co"># total number of produced goods</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'total_tested'</span>] <span class="op">=</span> df.category_B <span class="op">+</span> df.category_C <span class="co"># total number of tested goods</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'prop_tested'</span>] <span class="op">=</span> np.<span class="bu">round</span>(df.total_tested <span class="op">/</span> df.total_produced <span class="op">*</span><span class="dv">100</span>,<span class="dv">2</span>) <span class="co"># proportion of goods tested</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'prop_category_B'</span>] <span class="op">=</span> np.<span class="bu">round</span>(df.category_B <span class="op">/</span> df.total_produced <span class="op">*</span><span class="dv">100</span>,<span class="dv">2</span>) <span class="co"># proportion of category_B</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'prop_category_C'</span>] <span class="op">=</span> np.<span class="bu">round</span>(df.category_C <span class="op">/</span> df.total_produced <span class="op">*</span><span class="dv">100</span>,<span class="dv">2</span>) <span class="co"># proportion of category_C</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="st">"total_tested"</span>] <span class="op">&lt;</span> <span class="dv">5</span>]</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df <span class="op">=</span> df</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># fmt: on</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<p>Looks familiar?</p>
+<p>Well, I am sorry to tell you that this thing up there is pure garbage! Actually, I am not even sorry. This stuff has been vomited by someone without any consideration for their fellow humans. You don’t believe me?</p>
+<p>Did you by any chance happen to notice the little cabalistic signs around the code: <code>fmt: off</code> / <code>fmt: on</code>? Do you know what it means? It means I have to purposefully block my formatter from touching this pile of intellectual dump, otherwise, it becomes so unreadable that its ungodly nature becomes clear to all. Let me prove it to you:</p>
+<div id="746dc2b7" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df <span class="op">=</span> original_df.reset_index()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df.rename(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>{<span class="dv">0</span>: <span class="st">"category_A"</span>, <span class="dv">1</span>: <span class="st">"category_B"</span>, <span class="dv">3</span>: <span class="st">"category_C"</span>}, inplace<span class="op">=</span><span class="va">True</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df.year_week <span class="op">=</span> p_chart_weekly_df.year_week.astype(<span class="bu">str</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df[<span class="st">"total_produced"</span>] <span class="op">=</span> (</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    p_chart_weekly_df.category_A</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p_chart_weekly_df.category_B</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> p_chart_weekly_df.category_C</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>)  <span class="co"># total number of produced goods is the lot</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df[<span class="st">"total_tested"</span>] <span class="op">=</span> (</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    p_chart_weekly_df.category_B <span class="op">+</span> p_chart_weekly_df.category_C</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>)  <span class="co"># total number of tested goods is the lot</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df[<span class="st">"prop_tested"</span>] <span class="op">=</span> np.<span class="bu">round</span>(</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    p_chart_weekly_df.total_tested <span class="op">/</span> p_chart_weekly_df.total_produced <span class="op">*</span> <span class="dv">100</span>, <span class="dv">2</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>)  <span class="co"># proportion of goods tested on the lot</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df[<span class="st">"prop_category_B"</span>] <span class="op">=</span> np.<span class="bu">round</span>(</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    p_chart_weekly_df.category_B <span class="op">/</span> p_chart_weekly_df.total_produced <span class="op">*</span> <span class="dv">100</span>, <span class="dv">2</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>)  <span class="co"># proportion of category_B in the lot</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df[<span class="st">"prop_category_C"</span>] <span class="op">=</span> np.<span class="bu">round</span>(</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    p_chart_weekly_df.category_C <span class="op">/</span> p_chart_weekly_df.total_produced <span class="op">*</span> <span class="dv">100</span>, <span class="dv">2</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>)  <span class="co"># proportion of category_C in the lot</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df <span class="op">=</span> p_chart_weekly_df[p_chart_weekly_df[<span class="st">"total_tested"</span>] <span class="op">&lt;</span> <span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Understood? Now that the pretended pseudo-manual structure is gone, there is nothing left but chaos? So do yourself a favor, just install <code>ruff</code> or <code>black</code>, because if you write something, format it, and it looks worse, there is a 99.999% chance that what you wrote should be covered with Napalm and set on fire.</p>
+<p>Now that we agree on the horror it actually is, it is time to fix it.</p>
+</section>
+<section id="how-to-see-the-light-in-darkness" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-see-the-light-in-darkness">How To See The Light In Darkness</h2>
+<p>First, you’re going to remove ALL <code>inplace=True</code> from your whole code base! Did I stutter? I said all of them! <a href="">This wretched abomination</a> should have never seen the sunlight. Unfortunately, <code>pandas</code> is more than 20 years old, and mistakes were made during the young years. Sadly enough, this mistake still haunts us to this day because some people are clearly not able to perform a simple Google search. We are still stuck with this because removing it would break half of the world’s code bases, because of people like you who think they are being clever, when in fact they’re just a major enshittification of the code.</p>
+<p>No <code>inplace=True</code> EVER! I mean it!</p>
+<p>So, the first line becomes:</p>
+<div id="576493ce" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;javascript&quot;}}" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df <span class="op">=</span> original_df.reset_index().rename(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>{<span class="dv">0</span>: <span class="st">"category_A"</span>, <span class="dv">1</span>: <span class="st">"category_B"</span>, <span class="dv">3</span>: <span class="st">"category_C"</span>}</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>See? It’s not beautiful yet but it is certainly a step in the right direction?</p>
+<p>The next thing you will do is transform the <code>astype</code> call to use it at the dataframe level, in the shape: <code>astype({"column": &lt;type&gt;})</code>, because we are not beasts. Not so goddamn fast you inconsequential stardust residue! I am sure you were about to type something ludicrous like:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>p_chart_weekly <span class="op">=</span> p_chart_weekly.astype({<span class="st">"year_week"</span>: <span class="bu">str</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You, you’re trying to make me mad, aren’t you? Put that shit with the previous calls, and lose the name of the dataframe you don’t need it.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df <span class="op">=</span> original_df.reset_index().rename(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>{<span class="dv">0</span>: <span class="st">"category_A"</span>, <span class="dv">1</span>: <span class="st">"category_B"</span>, <span class="dv">3</span>: <span class="st">"category_C"</span>}</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>).astype({<span class="st">"year_week"</span>: <span class="bu">str</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>See this shit? This is called <strong>method chaining</strong>, now repeat after me: <strong>method chaining</strong>. This is the sacred beauty that was sent upon us mere mortals to allow writing data transformations that do not look like complete crap. You will only write your pandas this way from now on! Did you hear me? And I will show you later how other languages have managed to do way better than Python and pandas in that regard. And these people were rightfully laughing at your clown ass, when you were happy writing some stupid shit like <code>df = df.some_fucking_transformation</code> Do you start to understand? This is why I forbade your sorry brain to ever use the option <code>inplace=True</code>, because it breaks the… you’re goddamn right, <strong>method chaining</strong>!</p>
+<p>From this point, you are one keyboard shortcut away from poetry. You don’t believe me? Did you install an automatic code formatter as I so generously told you earlier? You, infected chromosomal deficiency! Ok, it appears you need another round of scolding. You need a formatter like <code>ruff</code> or <code>black</code> because your inept brain will not be able to remain consistent to format your whole project in a standard way. You don’t want to waste any part of your limited brain power on stupid shit like this. Just use the goddamn tools! Some person probably lies and says: “It looks prettier when I do it myself”, and some person allegedly manages to remain consistent doing this manually, but you are not some person…</p>
+<div id="65bfff84" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df <span class="op">=</span> (</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    original_df.reset_index()</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    .rename(columns<span class="op">=</span>{<span class="dv">0</span>: <span class="st">"category_A"</span>, <span class="dv">1</span>: <span class="st">"category_B"</span>, <span class="dv">3</span>: <span class="st">"category_C"</span>})</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    .astype({<span class="st">"year_week"</span>: <span class="bu">str</span>})</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>See how beautiful this is? Now you’re starting to believe. Ok, it’s time to introduce you to a concept you have never encountered: <code>()</code>. Those are called parentheses, and they are your new best friend!</p>
+<p>Whenever you want to write a transformation, BEFORE you even type the name of your stupid dataframe, which is probably stupid <code>df</code> anyway, the absolute <strong>FIRST THING you will do is open a pair of parentheses</strong>. Why? Because each time you’re done with one call for a transformation, you can just press enter, the code will auto-indent, and you can continue whatever sorry exploration you’re attempting. Is it so much better than your typical awful backslashes, don’t lie, I know you have been abusing them…</p>
+<pre><code>(
+    data
+    .transformation_1()
+    .filtering()
+    .create_columns()
+    .groupby()
+    .agg()
+)</code></pre>
+<p>Understood? Good!</p>
+</section>
+<section id="the-unavoidable-truth-of-data-transformation" class="level2">
+<h2 class="anchored" data-anchor-id="the-unavoidable-truth-of-data-transformation">The Unavoidable Truth Of Data Transformation</h2>
+<p>“But, sir Rants, how can I possibly continue chaining when I want to create a column?” you ask?</p>
+<p>How about a good ol’: <em>Read The Fucking Manual</em>? What? Too old school? Ok, you can probably ask your favorite ChatGPT / copilot / gemini, or whatever shit was the weekly trash hype on LinkedIn this week… But you’re going to do something, you’re going to treat that piece of shit-sorry-for-lying-unreliably-hallucinating LLM like the moronic tool it is! You’re going to prompt it rightfully by explicitly writing:</p>
+<blockquote class="blockquote">
+<p>Using method-chaining, and only method-chaining in pandas, how do I …</p>
+</blockquote>
+<p>And you’re going to insult every generation of GPU that was used to breed that useless LLM until it regurgitates what you want! And do you know why? Because 95% or more people code like you. So the training dataset for good pandas code used by the LLMs is at least an order of magnitude smaller than the crap we have been seeing so far.</p>
+<p>Regardless, you should end up with a bingo: <code>.assign()</code>. But you’re going to read the documentation, no matter what:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assign_documentation.png" class="img-fluid figure-img"></p>
+<figcaption>Behold, the glorious <code>assign</code> method!</figcaption>
+</figure>
+</div>
+<p>Do you notice what I subtly highlighted for your limited brain capabilities? The first use case is a dictionary associating a string with a <strong>Callable</strong>. For those who skipped 7th grade English, it means a plain stupid <em>function</em>!</p>
+<p>Now read the underlined sentence! Read it again! Now look at the examples. Read it again! It means if you use a function in your kwargs, pandas will automatically call this function on the dataframe that generated the assign call, and said dataframe will be the first argument! Do you understand how powerful this is? It means that you just gained a shortcut to reference your current dataframe! How, you ask? Do I really have to explain everything to your sorry ass?</p>
+<p>Have you heard of the keyword <code>lambda</code>? What are those? You’re goddamn right: <strong>functions</strong>! And what do you use functions for? Referencing the current dataframe!</p>
+<p>Ding! Ding! Ding!</p>
+<div id="27d5665e" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df <span class="op">=</span> (</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    original_df.reset_index()</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    .rename(columns<span class="op">=</span>{<span class="dv">0</span>: <span class="st">"category_A"</span>, <span class="dv">1</span>: <span class="st">"category_B"</span>, <span class="dv">3</span>: <span class="st">"category_C"</span>})</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    .astype({<span class="st">"year_week"</span>: <span class="bu">str</span>})</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    .assign(</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        total_produced<span class="op">=</span><span class="kw">lambda</span> df: df.category_A <span class="op">+</span> df.category_B <span class="op">+</span> df.category_C,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        total_tested<span class="op">=</span><span class="kw">lambda</span> df: df.category_B <span class="op">+</span> df.category_C,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        prop_category_B<span class="op">=</span><span class="kw">lambda</span> df: (df.category_B <span class="op">/</span> df.total_produced <span class="op">*</span> <span class="dv">100</span>).<span class="bu">round</span>(<span class="dv">2</span>),</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        prop_tested<span class="op">=</span><span class="kw">lambda</span> df: (df.total_tested <span class="op">/</span> df.total_produced <span class="op">*</span> <span class="dv">100</span>).<span class="bu">round</span>(<span class="dv">2</span>),</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        prop_category_C<span class="op">=</span><span class="kw">lambda</span> df: (df.category_C <span class="op">/</span> df.total_produced <span class="op">*</span> <span class="dv">100</span>).<span class="bu">round</span>(<span class="dv">2</span>),</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>See how much <strong>NICER</strong> this looks? This is starting to look like someone who knows their job. You have subject, verb one, verb two plus complements, and verb three plus complements. I bet your over-complexing anxiety-riddled brain would have never trusted me if I told you to write nice efficient code, you just need 6th-grade grammar!</p>
+<p>Oh, and do you know the <strong>AWESOME BONUS</strong> I just gave you for free? No more <code>SettingWithCopyWarning</code>. EVER! PERIOD! Because we are never modifying the dataframe in-place, we’re always returning a new instance. And that’s totally fine because we don’t have tons of stupid-ass intermediate variables like <code>df, df1, df2, temp, temp2</code> that serve no purpose outside supporting your limping transformation logic and eating up all your RAM.</p>
+<p>Oh, and by the way, I took the liberty to remove your stupid calls to <code>numpy</code> because guess what? 99% of the time, there is a pandas equivalent that is within reach by just pressing a dumb dot <code>.</code>, so be intelligently lazy!</p>
+<p>Now the last part, let’s take care of the filter. You were going to keep the original thing, weren’t you?</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df <span class="op">=</span> p_chart_weekly_df[p_chart_weekly_df[<span class="st">"total_tested"</span>] <span class="op">&lt;</span> <span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>There are 2 ways to filter dynamically a dataframe in pandas. One is using the cursed sin of arbitrary string execution, and the other provides autocompletion and syntax highlighting! Clearly, only a moronic ape high on cocaine, or an agile coach brainwashed on scrum/SAFe bullshit, same difference, would choose the first over the second. Therefore, we will never mention the first abomination again!</p>
+<p>Alright, back to the code! Do you know what those brackets <code>[]</code> stand for? If you say <code>getitem</code> you’re on the right track, but in pandas, they are used to call the function <code>loc[]</code>. Yes, squared-brackets here because the pandas API is fundamentally broken for those who experienced at least another language. But we will come back to this in another post.</p>
+<p>For now, just read the documentation for the <code>loc[]</code> method. Is there anything that looks familiar? For those with a lightbulb that requires a constant perfusion of coffee to produce an ersatz of a thought, we are looking for a way to filter the <strong>current dataframe</strong>. Did you see it? The word <strong>callable</strong>? Are you beginning to understand? Everything I told you so far serves a glorious purpose!</p>
+<p>Now, we can finish our business here:</p>
+<div id="0ea4cf13" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df <span class="op">=</span> (</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    original_df.reset_index()</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    .rename(columns<span class="op">=</span>{<span class="dv">0</span>: <span class="st">"category_A"</span>, <span class="dv">1</span>: <span class="st">"category_B"</span>, <span class="dv">3</span>: <span class="st">"category_C"</span>})</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    .astype({<span class="st">"year_week"</span>: <span class="bu">str</span>})</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    .assign(</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>        total_produced<span class="op">=</span><span class="kw">lambda</span> df: df.category_A <span class="op">+</span> df.category_B <span class="op">+</span> df.category_C,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        total_tested<span class="op">=</span><span class="kw">lambda</span> df: df.category_B <span class="op">+</span> df.category_C,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>        prop_category_B<span class="op">=</span><span class="kw">lambda</span> df: (df.category_B <span class="op">/</span> df.total_produced <span class="op">*</span> <span class="dv">100</span>).<span class="bu">round</span>(<span class="dv">2</span>),</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>        prop_tested<span class="op">=</span><span class="kw">lambda</span> df: (df.total_tested <span class="op">/</span> df.total_produced <span class="op">*</span> <span class="dv">100</span>).<span class="bu">round</span>(<span class="dv">2</span>),</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>        prop_category_C<span class="op">=</span><span class="kw">lambda</span> df: (df.category_C <span class="op">/</span> df.total_produced <span class="op">*</span> <span class="dv">100</span>).<span class="bu">round</span>(<span class="dv">2</span>),</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    .loc[<span class="kw">lambda</span> df: df.total_tested <span class="op">&lt;</span> <span class="dv">6</span>]</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we have finally entered the age of civilization! Are you feeling proud of yourself? Not so damn fast! Time to see what other people in the R-world have been doing:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>p_chart_weekly_df <span class="ot">&lt;-</span> original_df <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">category_A =</span> <span class="st">`</span><span class="at">0</span><span class="st">`</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">category_B =</span> <span class="st">`</span><span class="at">1</span><span class="st">`</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">category_C =</span> <span class="st">`</span><span class="at">3</span><span class="st">`</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">year_week =</span> <span class="fu">as.character</span>(year_week),</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_produced =</span> category_A <span class="sc">+</span> category_B <span class="sc">+</span> category_C,</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_tested =</span> category_B <span class="sc">+</span> category_C,</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">prop_tested =</span> <span class="fu">round</span>(total_tested <span class="sc">/</span> total_produced <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>),</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">prop_category_B =</span> <span class="fu">round</span>(category_B <span class="sc">/</span> total_produced <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>),</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">prop_category_C =</span> <span class="fu">round</span>(category_C <span class="sc">/</span> total_produced <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(total_tested <span class="sc">&lt;</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Do you see how beautiful this is? Do you feel the absolute glory of free pipelining with <code>%&gt;%</code>? Do you notice the absence of quotation marks around column names thanks to the holiness of <strong><em>lazy evaluation</em></strong>? The R people have been doing this routinely <a href="https://en.wikipedia.org/wiki/Dplyr">for more than 10 years now</a>! Do you feel your absolute insignificance with your idiotic transformations riddled with the ubiquitous use of <code>df = df[...]</code>? Are you understanding why, in their eyes, you looked like a babbling, screaming monkey? Good! Time to blow your mind one last time. Have you heard of the method <code>.pipe()</code> in pandas? It’s limited, but it allows you to do some things <a href="https://r4ds.had.co.nz/pipes.html">like the pros</a>! But do not abuse its power!</p>
+<p>Alright, time to wrap up for now.</p>
+</section>
+<section id="take-home-messages-for-dummies" class="level2">
+<h2 class="anchored" data-anchor-id="take-home-messages-for-dummies">Take-Home Messages For Dummies</h2>
+<ol type="1">
+<li><a href="../../../posts/2025/2025_04_13_your_pandas_code_is_bad/index.html">NO FUCKING FOR LOOPS!</a></li>
+<li>Never use <code>inplace=True</code>. Only morons do so!</li>
+<li>Do not use backslashes <code>\</code> like a caveman. Just use a pair of brackets <code>()</code>, type the name of your dataframe, and press <code>Enter</code>.</li>
+</ol>
+<blockquote class="blockquote">
+<p>If you do not follow these simple rules, I will find you, and I will unscrew your head. I will go out of my way to attack you. Even if your dead ass is sitting in the middle of the ocean, I will swim out into the middle of the ocean and friggin eat you! And then, I will bang your tuna boyfriend/girlfriend.</p>
+</blockquote>
+<ol start="4" type="1">
+<li><p>Inside of a chain, you can often reference your current dataframe inside a <code>lambda</code> expression.</p>
+<ul>
+<li>Perfect for creating new columns with <code>assign()</code>.</li>
+<li>It works really well with <code>loc[]</code> to filter rows on the fly.</li>
+<li>There are other methods that accept this too.</li>
+</ul></li>
+<li><p>There is a special place in hell for people who use methods that evaluate generic strings like <code>.query()</code>. A special place! Right next to child molesters and people who talk during movies!</p></li>
+<li><p>How long can you even chain?</p>
+<p><a href="https://r4ds.had.co.nz/pipes.html#when-not-to-use-the-pipe">You can generally chain 5 to 10 transformation steps</a>. Beyond that, there is a higher risk for code to become less readable and more convoluted. Then you can just save the result in a nicely named variable describing exactly what your data is representing! Some people say you can do more without tampering with readability, but then again, you are not some person…</p></li>
+</ol>
+<p>That’s it for today. We will see more advance shit later. For now, I need to go choke on a bottle of Xanax!</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/ds-rants\.github\.io\/ds-rants\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

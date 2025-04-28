@@ -2,8 +2,9 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2025/2025_04_28_angry_pandas_guide/angry_pandas_tutorial.html",
       "/posts/2025/2025_04_20_pre-pre-sprint-planning/index.html",
-      "/posts/2025/2025_04_your_pandas_code_is_bad/index.html"
+      "/posts/2025/2025_04_13_your_pandas_code_is_bad/index.html"
     ]
   }
 ]

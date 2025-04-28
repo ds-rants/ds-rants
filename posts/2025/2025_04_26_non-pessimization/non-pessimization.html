@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="DS Rants">
-<meta name="dcterms.date" content="2025-04-20">
+<meta name="dcterms.date" content="2025-04-26">
 
-<title>I Will Not Attend Your Pre-Pre-Pre-Sprint-Planning Meeting – Data Science Rants</title>
+<title>A Case Defense Of Casey Muratori: Non-Pessimization Vs. Optimization – Data Science Rants</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -69,6 +69,7 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<meta name="quarto:status" content="draft">
 
 
 <link rel="stylesheet" href="../../../styles.css">
@@ -77,7 +78,7 @@ ul.task-list li input[type="checkbox"] {
 <body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>Draft</div>
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -111,12 +112,12 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">I Will Not Attend Your Pre-Pre-Pre-Sprint-Planning Meeting</h1>
+      <h1 class="title">A Case Defense Of Casey Muratori: Non-Pessimization Vs. Optimization</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">software engineering</div>
-                <div class="quarto-category">fake agile</div>
-                <div class="quarto-category">scrum clusterfuck</div>
-                <div class="quarto-category">meetings</div>
+                <div class="quarto-category">data science</div>
+                <div class="quarto-category">performance</div>
+                <div class="quarto-category">CPU</div>
+                <div class="quarto-category">optimization</div>
               </div>
                   </div>
   </div>
@@ -134,7 +135,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">April 20, 2025</p>
+        <p class="date">April 26, 2025</p>
       </div>
     </div>
     
@@ -145,8 +146,15 @@ ul.task-list li input[type="checkbox"] {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-staggering-difference-of-people-that-have-a-general-idea-of-how-their-code-run" id="toc-the-staggering-difference-of-people-that-have-a-general-idea-of-how-their-code-run" class="nav-link active" data-scroll-target="#the-staggering-difference-of-people-that-have-a-general-idea-of-how-their-code-run">The Staggering Difference Of People That Have A General Idea Of How Their Code Run</a></li>
+  <li><a href="#you-should-know-a-bit-of-assembly" id="toc-you-should-know-a-bit-of-assembly" class="nav-link" data-scroll-target="#you-should-know-a-bit-of-assembly">You Should Know A Bit Of Assembly</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -155,22 +163,19 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>Dear Product Owner / Manager / Team Leader,</p>
-<p>My heart was filled with pain and sorrow when I noticed you sent an invitation for a pre-sprint planning meeting to be held on the day before the actual event. I am deeply saddened to inform you that I will not attend any such events, on any occasion, ever.</p>
-<p>Here I must stand my ground because I know what lies ahead, even if you don’t know it yourself. You will speak about the 20-minute sprint planning meeting being too short to write and select the tickets, you will say that there is a need for larger synchronization and cooperation within the team, you will claim that the pre-sprint-planning event will only last 10 minutes. You are lying to us, to the world, and to yourself, but you don’t know it yet.</p>
-<p>You are suffering from a clear case of <code>chronic scrumitis</code> and sadly the only reasonable treatment is abstinence, whether it is of your own will or forced. You are trying to create more of the scourge that plagues software engineering, you have heard of it, but did not think much of it. It has crept through your own week, preventing you from doing anything useful, and now you’re attempting to cure this evil by creating more of it: <code>Meetings</code>!</p>
-<p>I did not say much previously because, all things considered, you were pretty reasonable. Our sprint planning meetings usually lasted for their originally planned 20 minutes, sometimes a bit more but not too much. You insisted on doing 30-minute retrospectives every two weeks, and I did not complain even though it was pretty much pointless. Very little value came out of it, but you looked so happy seeing the engineers getting together and doing the “team building” activities you so proudly crafted. You even had good things for you when you tried to keep daily meetings within their planned 10-minute bounds, I really commend you for that feat! Sadly, you’re going down a dreaded path and you don’t know it yet.</p>
-<p>I have seen what will happen, you will round up a few consenting engineers who quite like you and bring them to their doom (Fly! You fools!). They will fall for the dumb excuses you make, the nice jokes you tell, or just yield to peer pressure and fold into the line… You have already betrayed them, but you don’t know it yet.</p>
-<p>That original sin that was supposed to “last 10 minutes, yeah, I swear on my mother’s life… I also have things to do… you can trust me…”. Well now it has been 40 minutes and far from over. I see the despair on the faces of the same engineers I could not save from your grasp, who are now in the deepest pit of hell-scrum. I see their eyes drift away with a thousand-mile stare as you suck the energy out of them, and soon you will ask: “How many points should we give for this story?”. You’re dangerous but you don’t know it yet.</p>
-<p>You could have chosen many other paths. You could have selected carefully a few customers that you would have brought to the engineers for them to interact directly. You could have fought for these same engineers and cleared their calendar from the filth imposed by other fools, for them to start pair-programming and actually doing work. You could have let go of that little feature and its stupid story points to decide instead to write tests so that your software does not turn into a pile of crap in 6 months. You could have read a few books written by experts who faced the same issues before and found working solutions. You’re ignorant but you don’t know it yet.</p>
-<p>The work could have been managed very differently. Who said that you were not supposed to take up another task during the week if you’re done early with the first? Who said that it’s not possible to add a new task on the board if something comes up in the middle of the work? You never said such things, yet they probably came to your mind in a malformed way. You probably imagined deep down that your engineers were not “stream-aligned”, “business-oriented”, hard-working enough, and you imagined they needed actual supervision, thus you started patronizing your team but you don’t know it yet.</p>
-<p>And soon you will find that this pre-sprint-planning meeting does not produce the results you hoped for. Your team does not deliver enough features, you still think they need better synchronization, more teamwork, and stronger engagement. So you will think really hard about it because you’re not dumb, because you have faced issues before and things kinda worked out, we just need more of all those things. You will work, fight, overcome this hardship and you will do it:</p>
-<p>You will add another meeting to prepare for the pre-sprint-planning meeting.</p>
-<p>Now, you know.</p>
-<p>Sincerely</p>
-<p>Your Friendly Neighborhood Data Scientist</p>
+<p>Sorry, I am not sorry about the orthographic pun.</p>
+<p>Layout:</p>
+<p>The dude is absolutely right on non-pessimization worst code ever is infinitely more complex to debug, run fast or maintain The is an upper limit to the extent you can optimize your code but there is no limit to how slow you can make your code run</p>
+<p>A clear practical example with BigQuery: infinite scalability, and infinite parallelization And still it can run extremely slow</p>
+<section id="the-staggering-difference-of-people-that-have-a-general-idea-of-how-their-code-run" class="level2">
+<h2 class="anchored" data-anchor-id="the-staggering-difference-of-people-that-have-a-general-idea-of-how-their-code-run">The Staggering Difference Of People That Have A General Idea Of How Their Code Run</h2>
+</section>
+<section id="you-should-know-a-bit-of-assembly" class="level2">
+<h2 class="anchored" data-anchor-id="you-should-know-a-bit-of-assembly">You Should Know A Bit Of Assembly</h2>
+<p>Not too difficult, useful, and you really understand how things run.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
