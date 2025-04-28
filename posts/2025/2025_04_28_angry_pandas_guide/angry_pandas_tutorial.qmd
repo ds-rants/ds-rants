@@ -138,10 +138,14 @@ Now that we agree on the horror it actually is, it is time to fix it.
 
 First, you're going to remove ALL `inplace=True` from your whole code base! Did I stutter?
 I said all of them!
-[This wretched abomination]() should have never seen the sunlight.
-Unfortunately, `pandas` is more than 20 years old, and mistakes were made during the young years.
+[This wretched abomination](https://stackoverflow.com/questions/45570984/in-pandas-is-inplace-true-considered-harmful-or-not) should have never seen the sunlight:
+
+![For those who are to lazy to click](bad-inplace.png){fig-align="center"}
+
+Unfortunately, `pandas` is almost 20 years old, and mistakes were made during the young years.
 Sadly enough, this mistake still haunts us to this day because some people are clearly not able to perform a simple Google search.
-We are still stuck with this because removing it would break half of the world's code bases, because of people like you who think they are being clever, when in fact they're just a major enshittification of the code.
+We are still stuck with this because removing it would break half of the world's code bases, because of people like you.
+People who think they are being clever, when in fact they're just performing a major enshittification of the code at a large scale.
 
 No `inplace=True` EVER! I mean it!
 
@@ -162,7 +166,8 @@ I am sure you were about to type something ludicrous like:
 p_chart_weekly = p_chart_weekly.astype({"year_week": str})
 ```
 
-You, you're trying to make me mad, aren't you? Put that shit with the previous calls, and lose the name of the dataframe you don't need it.
+You, you're trying to make me mad, aren't you?
+Put that shit with the previous calls, and lose the name of the dataframe you don't need it.
 
 ```python
 weekly_chart_df = original_df.reset_index().rename(
