@@ -1,5 +1,5 @@
 ---
-title: The Angry Guide To Pandas Code, Dummy Edition
+title: The Angry Guide To Pandas Code (Dummy Edition, Part 1)
 author: DS Rants
 date: '2025-04-26'
 categories:
@@ -7,9 +7,8 @@ categories:
   - pandas code
   - non-pessimization
 image: cover-angry-pandas-guide.png
-
-draft: true
-draft-mode: unlinked
+code:
+  eval: false
 
 ---
 
@@ -23,7 +22,7 @@ Today, you're going to learn how to write pandas code that does not look like th
 You're going to move one inch closer to the golden age of civilization.
 So buckle up, stop thinking for your own good, and read carefully!
 
-Actually, before we even start with code... [NO FUCKING FOR LOOPS!](../../posts/2025/2025_04_13_your_pandas_code_is_bad/index.qmd)
+Actually, before we even start with code... [NO FUCKING FOR LOOPS!](../../2025/2025_04_13_your_pandas_code_is_bad/index.qmd)
 
 > - "But..."
 > - "Did I stutter? NO FUCKING FOR LOOPS"
@@ -200,7 +199,7 @@ Those are called parentheses, and they are your new best friend!
 
 Whenever you want to write a transformation, BEFORE you even type the name of your stupid dataframe, which is probably stupid `df` anyway, the absolute **FIRST THING you will do is open a pair of parentheses**. Why? Because each time you're done with one call for a transformation, you can just press enter, the code will auto-indent, and you can continue whatever sorry exploration you're attempting. Is it so much better than your typical awful backslashes, don't lie, I know you have been abusing them...
 
-```python
+```
 (
     data
     .transformation_1()
@@ -353,7 +352,7 @@ Alright, time to wrap up for now.
 
 ## Take-Home Messages For Dummies
 
-1. [NO FUCKING FOR LOOPS!](../../posts/2025/2025_04_13_your_pandas_code_is_bad/index.qmd)
+1. [NO FUCKING FOR LOOPS!](../../2025/2025_04_13_your_pandas_code_is_bad/index.qmd)
 2. Never use `inplace=True`. Only morons do so!
 3. Do not use backslashes `\` like a caveman. Just use a pair of brackets `()`, type the name of your dataframe, and press `Enter`.
 
