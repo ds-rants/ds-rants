@@ -8,12 +8,11 @@ about:
   image-shape: round
   links:
     - icon: twitter
-      text: Twitter
-      href: twitter.qmd
-
-    - icon: github
-      text: Github
-      href: https://github.com
+      text: Twitter sucks!
+    - icon: envelope
+      text: data.science.rants@proton.me
+    - icon: linkedin
+      text: Seriously?
 
 ---
 
@@ -26,3 +25,5 @@ Swearing will be abundant, people doing stupid things will be called stupid and 
 Thankfully, there is no amount of swearing that cannot be nicely illustrated by memes, so buckle up!
 
 And Enjoy!
+
+PS: Don't hesitate if you want to complain like I do (data.science.rants@proton.com).
