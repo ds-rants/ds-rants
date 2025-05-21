@@ -9,7 +9,13 @@ draft-mode: unlinked
 
 Sorry, I am not sorry about the orthographic pun.
 
-Layout:
+Regardless, my inferior brainstem feels like babbling about a few videos by Casey Muratori on the excellent Youtube channel `Molly Rocket`, namely:
+- [The Philosophy Of Optimization](https://www.youtube.com/watch?v=pgoetgxecw8), and I strongly encourage to watch the full "Rfterm" episodes.
+- [Where Does Bad Code Come From?](https://youtu.be/7YpFGkG-u1w?si=qVWfQ-WoOnT0sRmj)
+- [Many Videos From The Software Quality Playlist](https://www.youtube.com/watch?v=Ge3aKEmZcqY&list=PLEMXAbCVnmY4JbNByvpgEzWsLRKVaF_pk)
+
+
+While Casey has quite a few hot takes, we will speak only here about the "optimization" part and not some other topics like: "Code is running much slower nowadays that it should". Mainly because I'm not a developer, and my very limited with compiled languages makes my rotten brain unable to grasp enough information to form a judgment here.
 
 The main conundrum is this: There is a finite upper limit for the optimization of a given piece of code but there is no lower limit to how slow and crappy you can make it.
 
@@ -17,9 +23,9 @@ Not convinced? I'll give you a clear practical example to other moronic data sci
 Look at BigQuery: this stuff is pure magic for processing Petabyte-scale datasets, with almost infinite scalability, and infinite parallelization.
 Yet, with the right amount of criminal intellectual deviance, you can still make it as slow as a blind horse overdosing on Xanax that you shot in the leg to give it a good head start.
 
-Now that I have your ameboid brain on board, it's important to
+Now that I have your ameboid brain on board, let's go to the main topic:
 
-## Definition Of Non-Pessimization And Optimization
+## The Definition Of Non-Pessimization And Optimization
 
 1. Optimization:
 
@@ -44,7 +50,7 @@ Now that I have your ameboid brain on board, it's important to
 
    Think people that try to strap multiprocessing/multiprocessing on your average code dumpster fire because "time will _SURELY_ be divided by 4 if I run my program on 4 cores"...
 
-So
+So we have to focus on things that are reasonable.
 
 > - "But Dr. Rants, how can I possibly know when should I do N°1,2?"
 > - "WRONG! N°1 does not exist for you! For you, it's myth! Otherwise you would not need to ask the question".
@@ -91,5 +97,22 @@ This is where I am in complete agreement with Casey and where we can really witn
 
 ## The Staggering Difference When People Have A General Idea Of How Their Code Run
 
+I have witnessed first hand that in the DS world a huge discriminator for _not sniffing glue_, is simply having a vague mental model of how the code will run.
+Let take your favorite DS package: `pandas`.
+Let's not delve on its broken API, and focus on the pure execution of things.
+If I run a motherfucking `Cmd + Shift + F` to search on your whole code base, how many `.apply()` and `.iterrows()` will I find?
+Don't lie to me and don't lie to yourself!
+I'm not even talking about your horrible `inplace=True`, I am sure there are some guilty stains left.
+Continue with this kind of stunts, and your next encounter with me will make an episode of Happy Tree Friends look like a casual garden party.
 
-I see way too many people exhibiting a blatant dead-fish stare whenever you mention the word `vectorization` for operating on a dataframe.
+I see way too many people exhibiting a blatant dead-fish stare whenever you mention the word `vectorization` for operating on a dataframe, and blasting `.apply` calls to process text in every corner in the code because apparently typing `.str` is too complicated.
+
+In SQL and your average distributed database, if your are treating a few GBs and it takes minutes, you my friend are the source of your own sorrow.
+But at least, you have the excuse of being able to time your code properly.
+This strengthen even more the need for non-pessimization, precisely because N°1. optimization is even more difficult!
+
+Besides, you don't want to be the person that write SQL for 2 years before asking:  "Wait a minute, does it change anything if my database is row- or column-oriented?"
+You think I'm joking?
+Most juniors I have seen, including myself, only get a brief exposure to SQL, land a job and then you better pray all gods in creation that a randomly passing senior will explain to them what life is all about. Or else they will gutter the data pipeline inside-out before turning into agents of Chaos!
+
+Anyway, you can start by removing all the `ORDER BY` that basically rime with bottleneck, or your average `SELECT DISTINCT` which is only there to hide your shameful joins, and while you're at it, learning about window functions won't kill you.
