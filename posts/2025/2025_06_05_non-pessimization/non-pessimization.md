@@ -3,8 +3,9 @@ title: "A Case Defense Of Casey Muratori: Non-Pessimization Vs. Optimization"
 author: "DS Rants"
 date: "2025-06-05"
 categories: [data science, performance, CPU, optimization]
-draft-mode: unlinked
+image: young-c.jpg
 ---
+
 
 Sorry, I am not sorry about the orthographic pun.
 
@@ -15,6 +16,8 @@ Regardless, my inferior brainstem feels like babbling about a few videos by Case
 - [Many Videos From The Software Quality Playlist](https://www.youtube.com/watch?v=Ge3aKEmZcqY&list=PLEMXAbCVnmY4JbNByvpgEzWsLRKVaF_pk)
 
 While Casey has quite a few hot takes, we will speak only here about the "optimization" part and not some other topics like: "Code is running much slower nowadays than it should." Mainly because I'm not a developer, and my very limited experience with compiled languages makes my rotten brain unable to form a judgment here.
+
+![](young-c.jpg){fig-align="center" width="90%"}
 
 The main conundrum is this: There is a finite upper limit for the optimization of a given piece of code, but there is no lower limit to how slow and crappy you can make it.
 
@@ -65,6 +68,8 @@ So we have to focus on things that are reasonable.
 Then comes the **Real** question: How can I make my code not suck?
 
 Casey has a pretty simple answer:
+
+![](assembly.jpg){fig-align="center" width="80%"}
 
 ## You Should Know A Bit Of Assembly
 
