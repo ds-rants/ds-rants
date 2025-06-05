@@ -10,14 +10,16 @@ draft-mode: unlinked
 Sorry, I am not sorry about the orthographic pun.
 
 Regardless, my inferior brainstem feels like babbling about a few videos by Casey Muratori on the excellent Youtube channel `Molly Rocket`, namely:
+
 - [The Philosophy Of Optimization](https://www.youtube.com/watch?v=pgoetgxecw8), and I strongly encourage to watch the full "Rfterm" episodes.
 - [Where Does Bad Code Come From?](https://youtu.be/7YpFGkG-u1w?si=qVWfQ-WoOnT0sRmj)
 - [Many Videos From The Software Quality Playlist](https://www.youtube.com/watch?v=Ge3aKEmZcqY&list=PLEMXAbCVnmY4JbNByvpgEzWsLRKVaF_pk)
 
-
-While Casey has quite a few hot takes, we will speak only here about the "optimization" part and not some other topics like: "Code is running much slower nowadays that it should". Mainly because I'm not a developer, and my very limited with compiled languages makes my rotten brain unable to grasp enough information to form a judgment here.
+While Casey has quite a few hot takes, we will speak only here about the "optimization" part and not some other topics like: "Code is running much slower nowadays that it should". Mainly because I'm not a developer, and my very limited experience with compiled languages makes my rotten brain unable to form a judgment here.
 
 The main conundrum is this: There is a finite upper limit for the optimization of a given piece of code but there is no lower limit to how slow and crappy you can make it.
+
+So bottom line, it is usually easier, faster, and more achievable to avoid putting garbage in the code rather than trying to optimize the shit out of it. Don't make things bad, m'kay?
 
 Not convinced? I'll give you a clear practical example to other moronic data scientists like me that have never seen the inside of a compiler.
 Look at BigQuery: this stuff is pure magic for processing Petabyte-scale datasets, with almost infinite scalability, and infinite parallelization.
@@ -26,6 +28,8 @@ Yet, with the right amount of criminal intellectual deviance, you can still make
 Now that I have your ameboid brain on board, let's go to the main topic:
 
 ## The Definition Of Non-Pessimization And Optimization
+
+According to Casey, there are 3 different sides to what people call optimization:
 
 1. Optimization:
 
@@ -55,7 +59,7 @@ So we have to focus on things that are reasonable.
 > - "But Dr. Rants, how can I possibly know when should I do N°1,2?"
 > - "WRONG! N°1 does not exist for you! For you, it's myth! Otherwise you would not need to ask the question".
 >   It's plain simple really. If you're trying to do Optimization on a code that bad because you just did not understand the concept of non-pessimization, then you're back to the whack-job N°3!
-For you only one thing matter:
+>   For you only one thing matter:
 >
 >   NON-PESSIMIZATION!"
 
@@ -111,8 +115,23 @@ In SQL and your average distributed database, if your are treating a few GBs and
 But at least, you have the excuse of being able to time your code properly.
 This strengthen even more the need for non-pessimization, precisely because N°1. optimization is even more difficult!
 
-Besides, you don't want to be the person that write SQL for 2 years before asking:  "Wait a minute, does it change anything if my database is row- or column-oriented?"
+Besides, you don't want to be the person that write SQL for 2 years before asking: "Wait a minute, does it change anything if my database is row- or column-oriented?"
 You think I'm joking?
 Most juniors I have seen, including myself, only get a brief exposure to SQL, land a job and then you better pray all gods in creation that a randomly passing senior will explain to them what life is all about. Or else they will gutter the data pipeline inside-out before turning into agents of Chaos!
 
-Anyway, you can start by removing all the `ORDER BY` that basically rime with bottleneck, or your average `SELECT DISTINCT` which is only there to hide your shameful joins, and while you're at it, learning about window functions won't kill you.
+Anyway, you can start by removing all the `ORDER BY` that basically rime with bottleneck, or your average `SELECT DISTINCT` which is only there to hide your shameful joins or a non-existing primary key, and while you're at it, learning about window functions won't kill you.
+
+## You Make It Sound Easy
+
+Well at least not terribly difficult...
+Still it requires at least a few cardinal skills that are unattainable to the average LinkedIn shitposter compulsively liking all post labelled: "17 core python functions you should know".
+By that, I mean the capacity to perform a google/LLM search with at least one brain cell engaged, the magic power of reading the documentation without experiencing an anxiety and/or boredom attack, and probably the most seldom of the three, a little shred of curiosity for what is the best way to use your current tool, framework, or DSL.
+
+C'mon, let's talk real for a second!
+When is the last time you added the words "best practices" to your search?
+Instead you started hacking code as if your product owner was trying to pin down JIRA tickets between your butt cheeks.
+How many fucking hours do you spend each week in pandas/SQL?
+Isn't it worth to spend at least 5% of this time to learn how to better use the tool?
+No need to answer, that's called a rhetorical question.
+
+Learn a thing or two about your CPU, read something about the engine of your database, do a lot more than that if you use GPUs, and for the sake of everyone's sanity do a lot more than that if your model even remotely interacts with humans...
