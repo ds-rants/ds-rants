@@ -3,7 +3,6 @@ title: "A Case Defense Of Casey Muratori: Non-Pessimization Vs. Optimization"
 author: "DS Rants"
 date: "2025-06-05"
 categories: [data science, performance, CPU, optimization]
-draft: true
 draft-mode: unlinked
 ---
 
