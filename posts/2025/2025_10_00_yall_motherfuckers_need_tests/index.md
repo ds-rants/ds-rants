@@ -5,6 +5,7 @@ date: "2025-10-20"
 categories: [data science, software engineering, tests, best practices]
 # image: ouroboros.png
 draft: true
+draft-mode: visible
 ---
 
 ## Big Brain Moment:
@@ -17,48 +18,77 @@ draft: true
 >
 > _Michael C. Feathers, Working Effectively with Legacy Code_
 
-##
+## I Am A Simple Data Scientist, Are Your Sure I Need Test?
 
-Writing tests in data science is particularly difficult because most of the objects we deal with are collections of items, usually quite complex, and which are only independent in the best case scenarios but most likely related to each other in some kind of nasty way.
-How many time did you had to do an analysis in which on record at a given time strongly influence what was to be done on surrounding elements but only until variable B changes to a different value ?
+Which blog are you on? _**Data Science Rants!**_ Of course you need tests!
 
-You don't believe me? Let's assume for ungodly reasons, that you can only use 50% of your dataset for training your model, are you keeping the latest 50%, the oldest, or randomly discarding data?
-Even if we strip out this made-up convoluted scenario, I cannot recall since I started working in the industry, a single real-life dataset in which time played no role at all in some kind of weird way or disguised influence (say goodbye to your kaggle/tutorial static datasets).
+### Why Should I Test?
 
-This is a strong yet hidden form of coupling which is difficult to express in automated tests (unit- or integration) but is a major concern for any king of data science workflow.
-This is a question that can remain largely unaddressed in the pure 'developer' world because as long as the object themselves remain valid and the code processing them remains correct, then the system is working properly.
+Larger context, all good dev do it, this is a solved problem in the dev world
 
-Now, let's examine:
+Finally, a lot of recent advances in the Developer and DevOps world have yet to make their entry in the data world ([Data: The Land That DevOps Forgot](https://www.youtube.com/watch?v=459-H33is6o))
+
+
+Here's my pseudo-standard definition:
+
+- **Unit-tests:** performed to validate the behavior of isolated functions and methods (more rarely classes and modules). Fast: < 1 ms.
+
+  My personal grain of salt: Without any dependency to I/O or external systems (disk access, internet, database...), with absolute control of inputs and precise evaluations of outputs.
+
+- **Integration tests:** performed on a collection of functions, usually at the level of classes and modules. Slower in general but a few secondes max.
+
+  I/O becomes possible, but my hot-take is: you should only interact with local elements (mostly disk, local database replica, components or binaries from other sub-systems) and nothing that touches the internet.
+
+- **Acceptance tests:** performed on critical paths of the system to ensure key functionalities. Much slower and should aim to be around a few minutes or even lower, otherwise they are ran less often.
+
+  Here, you can interact with other external systems over the network database and such.
+
+### Yet Most Data Science Project Fail To Ever Reach Production
+
+This means were are wasting time, money, and worst we are wasting efforts in dead projects when we could do more interesting and useful things for our kind.
+
+There are some valid reasons, in data science we are usually in a much worse situation than developers find themselves in.
+Most of the times we need to produce large amount of code and analysis to determine if a given model has at least a chance to be even remotely useful.
+Small changes over time in the data distribution tend to have tremendous impact over machine learning systems, even though the data model itself stays accurate.
+And you know when that happens? _All time for every damn use-case!_
+
+This means we need discipline, and one hell of a kind!
+We need to important key practices from other disciplines of IT, that have demonstrated effectiveness to create reliable software.
+
+One of these practices is testing.
 
 ## The Different Strategies Of Testing
 
-#### 1. Writing No Tests At All
+### 1. Writing No Tests At All
 
 You sir, are a dangerous. You should be thrown in jail, and your ugly, dishonest and deceiving notebook code should be lit on fire.
-You are basically handing over a pile of garbage to your coworkers and yell as you exit the building: "And good luck with any changes in business requirements, upgrade in package versions, refactoring or generally future evolutions..."
+You are basically handing over a pile of garbage to your coworkers and yell as you exit the building: "And good luck with any changes in business requirements, upgrade in package versions, refactoring or generally future evolutions, because you know it works on my machine..."
 
 I despise you with every fiber of my being and will definitively high five you at the first occasion... in the face... with a shovel!
 
-#### 2. Writing Tests After Writing The Code
+### 2. Writing Tests After Writing The Code
 
 Either you probably have good intentions and don't know how to do it but you heart is in a good place. Or you have been told to write tests and you reluctantly follow the orders as a good soldier.
 Regardless there are a few problems with that approach:
 
 1. Assuming you are a not complete moron, you have at least manually run and tested your code visually, made sure it compiled.
    Then, the idea of writing a automated test already start to loose meaning because you just saw it with you own eyes: the code is running.
-2. Because your code has not be written with testability as a core requirement, then writing the test afterwards will be extremely painful.
-   Good luck being able to isolate some deterministic behavior in a 100 lines of spaghetti with mutation everywhere and no clear responsibilities.
-3. As a direct consequence, the tests also tend to become coupled with the implementation details, making them brittle, sometimes flaky, and generally more difficult to maintain.
-   This is the typical case were you want to change one line in your production code, you clearly see it but then you also have to change 20 tests...
-4. Some large chunks of the system will very likely escape any form of testing (consequence of `2.`) because of the impossibility to control their inputs and outputs.
 
-#### 3. Writing Tests At The Same Time You Are Writing The Code
+1. Because your code has not be written with testability as a core requirement, then writing the test afterwards will be extremely painful.
+   Good luck being able to isolate some deterministic behavior in a 100 lines of spaghetti with mutation everywhere and no clear responsibilities.
+
+1. As a direct consequence, the tests also tend to become coupled with the implementation details, making them brittle, sometimes flaky, and generally more difficult to maintain.
+   This is the typical case were you want to change one line in your production code, you clearly see it but then you also have to change 20 tests...
+
+1. Some large chunks of the system will very likely escape any form of testing (consequence of `2.`) because of the impossibility to control their inputs and outputs.
+
+### 3. Writing Tests At The Same Time You Are Writing The Code
 
 Now we are finally getting somewhere. Most of the issues mentioned in the previous section start to erode with the main exception of `N°3`. The main risk with writing tests at the same time as the code, is to increase the coupling between the test and the code, beyond what is strictly required, thus impairing maintainability and limiting future changes and evolution.
 
 However, there are cases were this approach can be actually fruitful, especially for certain scopes and contexts (More on that later).
 
-#### 4. Writing Tests Before You Write Any Code
+### 4. Writing Tests Before You Write Any Code
 
 At last, for any sleeping data scientist that managed to open an eyelid, this is the bread and butter of any self-respecting developer these days. This is how you do Test Driven Development, a.k.a. **TDD**, properly:
 
@@ -109,8 +139,10 @@ Writing tests is difficult. Writing test first in a TDD fashion is actually easi
 
 1.  The things you will try to tests at first will probably be too large, and the scope poorly defined.
     This will make the size of the inputs probably larger than what would be reasonable,
+
     > Solution: Try to really limit the size, scope, functionalities you try to test at a given time.
     > Take a smaller sized approach.
+
 1.  One very common error is to try to test the main functionality of a future piece of code right from the get-go. Rookie mistake!
     This is like head-butting a piece of concrete to make a wall fall down, it might work but you might not be able to repeat that feat once your skull is cracked open.
 
@@ -123,15 +155,19 @@ Writing tests is difficult. Writing test first in a TDD fashion is actually easi
     This will make your tests coupled to external dependencies, meaning you don't control them.
     This will make your tests brittle and flaky
 
-    > Solution: Stay away from any kind of I/O, i.e. disk reads or writes, network calls, database calls, cloud interaction. They do not belong to your unit-testing strategy, and even in integration testing use them only if they **REALLY CAN NOT BE AVOIDED**.
+    > Solution: Stay away from any kind of I/O, i.e. disk reads or writes, network calls, database calls, cloud interaction.
+    > They do not belong to your unit-testing strategy, and even in integration testing use them only if they **REALLY CAN NOT BE AVOIDED**.
 
 1.  Not properly setting up your local environment, and not learning to use your IDE/text editor is a very good way to set you up for failure.
     Although it may seem secondary, you absolutely need to properly configure and be comfortable with your local environment, to help you write tests and navigate your code.
     Otherwise it will become a mental blocker and a hidden obstacle to your workflow.
+
     > Solution: Install test extensions or plugins for your language inside your editor.
     > You need first class support to be able to run a single test, or all of them for a given class/file, or you whole test suite at will, using single click or a small terminal call.
 
 ## Why Is Writing Tests So Difficult In Data Science?
+
+In this bit we are going to focus mostly on unit tests.
 
 What are features of good unit-tests:
 
@@ -140,11 +176,25 @@ What are features of good unit-tests:
 - They need to be deterministic, and produce always the same result when run multiple times
 - They also need to be easy to write, and tests on dataframes are more difficult to write that the average test.
 
+### The Specific Couplings In Data Science
+
+Writing tests in data science is particularly difficult because most of the objects we deal with are collections of items, usually quite complex.
+Those items are usually independent only in the best case scenarios but most likely related to each other in some kind of nasty way.
+How many time did you had to do an analysis in which on record at a given time strongly influence what was to be done on surrounding elements but only until variable B changes to a different value?
+
+You don't believe me? Let's assume for ungodly reasons, that you can only use 50% of your dataset for training your model, are you keeping the latest 50%, the oldest, or randomly discarding data?
+Even if we strip out this made-up convoluted scenario, I cannot recall since I started working in the industry, a single real-life dataset in which time played no role at all in some kind of weird way or disguised influence (say goodbye to your kaggle/tutorial static datasets).
+
+This is a strong yet hidden form of coupling which is difficult to express in automated tests (unit- or integration) but is a major concern for any king of data science workflow.
+This is a question that can remain largely unaddressed in the pure 'developer' world because as long as the object themselves remain valid and the code processing them remains correct, then the system is working properly.
+
+### Dataframe-Like Structures And Testing
+
 In order for a data scientist to write meaningful unit-tests, assuming a processing done largely on some kind of dataframe / array (which will encompass 95% of the `pandas` and `numpy` junkies), this setup may require a relatively large amount of boilerplate even for some simple data and light transformations.
 
 As mentioned previously for the one sleeping in the back of the classroom, data scientists largely deal with large collections of records.
 In order to write a test that is not excruciating to write, one needs to strip away all surrounding the complexity, meaning using the smallest amount of rows and columns.
-A good rule of thumb is usually 2R _ xC or 3R _ xC to get you started.
+A good rule of thumb is usually 2R \* xC or 3R \* xC to get you started.
 
 But them comes another difficulty, assuming you have a shred of decency for your coworkers, meaning your transformations look like this:
 
@@ -159,6 +209,8 @@ daily_awesome_ = (
 )
 ```
 
+If not please go see [here](../../2025/2025_04_13_your_pandas_code_is_bad/index.qmd) and [there](../../2025/2025_04_28_angry_pandas_guide/angry_pandas_tutorial.qmd).
+
 Here with the use of [DSL](https://en.wikipedia.org/wiki/Domain-specific_language) like `pandas` / `polars`/ `numpy`, it can be tricky to determine if you are actually testing **your custom** logic or re-testing the methods of the library that are already (hopefully) battle-tested.
 
 Expressing this again requires a fairly decent of time trying to determine the seams / separations in your coding where:
@@ -167,8 +219,31 @@ Expressing this again requires a fairly decent of time trying to determine the s
 2. There is not to much logic, to avoid that the test becomes too permissive (ex: just checking that I have more rows in my dataframe after 30 transformations is unlikely to be informative...)
 3. There is a enough logic in the code so that the test is not redundant with those of the library.
 
-## What About Integration And Acceptance Testing
+## Testing At Larger Scale
+### What About Integration And Acceptance Testing?
 
-## The Holy Grail Of Data Tests
+There is sort of opposition between scale,
+
+how to be better at integration testing
+
+advantages of acceptance testing, they are very good to verify the bare minimum working state of your system.
+With them you should be able to obtain a definitive answer to the question: "Is my system in a working state so that it can be deployed?"
+In that regard, data science systems make no exceptions, this is were you will be able to plug you database, buckets and APIs.
+By their nature, scale, coupling to external dependencies, acceptance tests are much more difficult to write in a test-first approach.
+Similarly, they also tend to appear later through the life of IT projects.
+
+Again their purpose is not to make sure all the functionalities work for every possible type of inputs, but to ensure that critical and hot paths are functional.
+Accounting for all use-case, would make the testing unnecessary slow, bulky and in the end useless.
+Indeed the cornerstone of a good testing strategy is **to obtain a fast, reliable and deterministic feedback** that allows the IT practitioner to have confidence about the proposed changes are safe to release.
+
+### Integration And Acceptance Testing In The Data World
+
+### The Holy Grail Of Data Tests
+
+This is where DBT and similar frameworks that allow to test data at a large scale really shine.
+
+In this paradigm it is still possible to write code using TDD, simplify rather than starting to write SQL code, you will start by specifying in the metadata the types and the tests for a given column.
 
 You are one year away to production
+
+## Conclusion
