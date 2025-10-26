@@ -5,10 +5,10 @@ date: "2025-10-20"
 categories: [data science, software engineering, tests, best practices]
 # image: ouroboros.png
 draft: true
-# draft-mode: visible
+draft-mode: visible
 ---
 
-## Big Brain Moment:
+## Big Brain Moment
 
 > “To me, legacy code is simply code without tests.”
 >
@@ -18,52 +18,69 @@ draft: true
 >
 > _Michael C. Feathers, Working Effectively with Legacy Code_
 
+Note: [Big Brain Reference](https://grugbrain.dev/)
+
 ## I Am A Simple Data Scientist, Are Your Sure I Need Test?
 
 Which blog are you on? _**Data Science Rants!**_ Of course you need tests!
 
 ### Why Should I Test?
 
+Dev do it, all senior advocates for it, state of devops reporting shows testing as a major component of performance.
 Larger context, all good dev do it, this is a solved problem in the dev world
 
 Finally, a lot of recent advances in the Developer and DevOps world have yet to make their entry in the data world ([Data: The Land That DevOps Forgot](https://www.youtube.com/watch?v=459-H33is6o))
 
-Here's my pseudo-standard definition:
-
-- **Unit-tests:** performed to validate the behavior of isolated functions and methods (more rarely classes and modules). Fast: < 1 ms.
-
-  My personal grain of salt: Without any dependency to I/O or external systems (disk access, internet, database...), with absolute control of inputs and precise evaluations of outputs.
-
-- **Integration tests:** performed on a collection of functions, usually at the level of classes and modules. Slower in general but a few secondes max.
-
-  I/O becomes possible, but my hot-take is: you should only interact with local elements (mostly disk, local database replica, components or binaries from other sub-systems) and nothing that touches the internet.
-
-- **Acceptance tests:** performed on critical paths of the system to ensure key functionalities. Much slower and should aim to be around a few minutes or even lower, otherwise they are ran less often.
-
-  Here, you can interact with other external systems over the network database and such.
-
+Yet, these concepts are usually totally absent of your average data scientist workflow.
 Why should we adopt something like this that is usually so different from our ways?
 
-### Because Most Data Science Project Fail To Ever Reach Production
+### Because Most Data Science Projects Never Reach Production
 
-This means were are wasting time, money, and worst we are wasting efforts in dead projects when we could do more interesting and useful things for our kind.
+This means were are wasting time, money, and worst, we are wasting efforts in dead projects when we could do more interesting and useful things for our kind.
+But it's fine because we have been told that companies are the pinnacle of efficiency.
 
-There are some valid reasons for that.
-In data science, we are usually in a much worse situation than typical developers, namely that their best practices have generally not reached us.
+However, this bitter state of the profession is grounded in some harsh realities.
+In data science, we are usually in a much worse situation than typical developers, namely because their best practices have generally not reached us.
 Some alleged data scientists will happily tell you that they don't version their code without trembling...
 
-In addition, we usually need to produce large amounts of code and analysis to determine if a given model has at least a chance to be even remotely useful.
-Small changes over time in the data distribution tend to have tremendous impact over machine learning systems, even though the data model itself stays accurate.
-And you know when that happens? _All time for every damn use-case!_
+In addition, we have by nature a particularly strong coupling to the data (shocker right?).
+Even small changes over time in the data distribution tend to have tremendous impact over machine learning systems, even though the structure of the data itself stays the same.
+And you know when that happens? _All the damn time for every damn use-case!_
 
-This means we need discipline, and one hell of a kind!
+Finally, we usually need to produce large amounts of code and analysis to determine if a given model has even a chance of being remotely useful.
+This create a tension because the code seems constantly in a superposition of state: useless exploratory junk _AND_ awesome preprocessing for big gains model.
+Then some very natural cognitive mechanism step in: "I don't need a test because I don't know if my code has any worth".
+It is too late at this point, because will see the tremendous forces that prevent us from writing tests after the code.
+
+Facing those difficulties means we need discipline, and one hell of a kind!
 We need to important key practices from other disciplines of IT, that have demonstrated effectiveness to create reliable software.
 
 One of these practices is testing, so let's recap briefly some generalities.
 
-## The Different Strategies Of Testing
+### The Main Types Of Tests
 
-### Writing No Tests At All
+Unless you are living under a rock, you probably heard of unit, integration and acceptance testing. Here's my pseudo-standard definition:
+
+- **Unit-tests:** performed to validate the behavior of isolated functions and methods (more rarely classes and modules).
+  Fast: < 1 ms.
+
+  My personal grain of salt: Without any dependency to I/O or external systems (disk access, internet, database...), with absolute control of inputs and precise evaluations of outputs.
+
+- **Integration tests:** performed on a collection of functions, usually at the level of classes and modules.
+  Slower in general but a few seconds max.
+
+  I/O becomes possible, but my hot-take is: you should only interact with local elements (mostly disk, local database replica, components or binaries from other sub-systems) and nothing that touches the internet.
+
+- **Acceptance tests:** performed on critical paths of the system to ensure key functionalities.
+  Much slower and should aim to be around a few minutes or even lower, otherwise they are ran less often, and start to lose their value.
+
+  Here, you can interact with other external systems over the network database and such.
+
+These 3 types of tests constitute the cornerstone of good test-suite, that will allow you to determine with confidence if your system is working and behaving as expected.
+
+## Adopting A Testing Strategies
+
+### No Tests At All
 
 You sir, are a dangerous. You should be thrown in jail, and your ugly, dishonest and deceiving notebook code should be lit on fire.
 You are basically handing over a pile of garbage to your coworkers and yell as you exit the building:
@@ -80,11 +97,11 @@ Regardless there are a few problems with that approach:
 1. Assuming you are a not complete moron, you have at least manually run and tested your code visually, made sure it compiled.
    Then, the idea of writing a automated test already start to loose meaning because you just saw it with you own eyes: the code is running.
 
-1. Because your code has not be written with testability as a core requirement, then writing the test afterwards will be extremely painful.
+1. Because your code has not be written with testability as a core requirement, then writing the test afterwards will be extremely painful and difficult.
    Good luck being able to isolate some deterministic behavior in a 100 lines of spaghetti with mutation everywhere and no clear responsibilities.
 
-1. As a direct consequence, the tests also tend to become coupled with the implementation details, making them brittle, sometimes flaky, and generally more difficult to maintain.
-   This is the typical case were you want to change one line in your production code, you clearly see it but then you also have to change 20 tests...
+1. As a direct consequence, the tests also tend to become coupled with the implementation details, making them brittle, or flaky, and generally more difficult to maintain.
+   the typical example is when you want to change one line in your production code, you clearly see the change, but then you also have to change 20 tests...
 
 1. Some large chunks of the system will very likely escape any form of testing (consequence of `2.`) because of the impossibility to control their inputs and outputs.
 
@@ -96,7 +113,7 @@ However, there are cases were this approach can be actually fruitful, especially
 
 ### Writing Tests Before You Write Any Code
 
-At last, for any sleeping data scientist that managed to open an eyelid, this is the bread and butter of any self-respecting developer these days. This is how you do Test Driven Development, a.k.a. **TDD**, properly:
+At last, for any sleeping data scientist that managed to open an eyelid, this is the bread and butter of any self-respecting developer these days. This is called Test Driven Development, a.k.a. **TDD**, and this is how to do it properly:
 
 1. **RED:** You write a **failing** test, which from well defined inputs asserts that a given piece of code has certain well defined outputs. This is akin to writing specifications in the code.
 2. **GREEN:** You write the smallest, most simplistic, even idiotic code you can think of to make the test pass. Nothing more!
@@ -205,7 +222,7 @@ A good rule of thumb is usually 2R \* xC or 3R \* xC to get you started.
 But them comes another difficulty, assuming you have a shred of decency for your coworkers, meaning your transformations look like this:
 
 ```javascript
-daily_awesome_ = (
+daily_awesome_calculations = (
     original_record_with_meaningful_name
     .drop_nulls()
     .filter(...)
@@ -217,7 +234,7 @@ daily_awesome_ = (
 
 If not please go see [here](../../2025/2025_04_13_your_pandas_code_is_bad/index.qmd) and [there](../../2025/2025_04_28_angry_pandas_guide/angry_pandas_tutorial.qmd).
 
-Here with the use of [DSL](https://en.wikipedia.org/wiki/Domain-specific_language) like `pandas` / `polars`/ `numpy`, it can be tricky to determine if you are actually testing **your custom** logic or re-testing the methods of the library that are already (hopefully) battle-tested.
+Here with the use of [DSL](https://en.wikipedia.org/wiki/Domain-specific_language) (Domain-specific language) like `pandas` / `polars`/ `numpy`, it can be tricky to determine if you are actually testing **your custom** logic or re-testing the methods of the library that are already (hopefully) battle-tested.
 
 Expressing this again requires a fairly decent of time trying to determine the seams / separations in your coding where:
 
