@@ -250,30 +250,51 @@ It requires more skill and time to get used to than non-data-science code.
 
 ## Testing At Larger Scale
 
-### What About Integration And Acceptance Testing?
+There is a sort of opposition between scale and easiness to apply TDD principles.
+Indeed the cornerstone of a good testing strategy is **to obtain a fast, reliable and deterministic feedback** that allows the IT practitioner to have confidence about the proposed changes are safe to release.
+Accounting for all use-cases would make the testing unnecessary slow, bulky and in the end useless.
 
-There is sort of opposition between scale,
+### What About Integration Testing?
 
-how to be better at integration testing
+The role of integration testing is to make sure that the sub-components and modules of your system are working properly and fit together to produce some expected behavior.
 
-advantages of acceptance testing, they are very good to verify the bare minimum working state of your system.
+In the Data Land, integration tests can be usually done by taking a larger chunk of your datasets (plural, because have you ever seen a project with just 1...).
+For example in Machine Learning workflows, you can try to pass the smallest possible of data through your preprocessing, then assert that you indeed got rid of certain columns, managed to remove nulls in certain others.
+
+You can then continue passing this small sample through your training and at least make sure that the training is able to start. There is a tremendous difference between fully automating this and using a pseudo manual verification (either inside a notebook, or via a CLI that you might forget to type).
+
+Again the point here, is to ensure that preprocessing, training, evaluation and similar components can feed into each other, not to talk about model performance, nor to tune hyperparameters.
+
+### Acceptance Testing In The Data World a.k.a Evaluation?
+
+Traditionally, acceptance tests are designed to verify the bare minimum working state of your system, again by validating the critical or major hot paths within your application.
+Similarly, they also tend to appear later through the life of IT projects, once the scope become clearer.
+
 With them you should be able to obtain a definitive answer to the question: "Is my system in a working state so that it can be deployed?"
 In that regard, data science systems make no exceptions, this is were you will be able to plug you database, buckets and APIs.
-By their nature, scale, coupling to external dependencies, acceptance tests are much more difficult to write in a test-first approach.
-Similarly, they also tend to appear later through the life of IT projects.
 
-Again their purpose is not to make sure all the functionalities work for every possible type of inputs, but to ensure that critical and hot paths are functional.
-Accounting for all use-case, would make the testing unnecessary slow, bulky and in the end useless.
-Indeed the cornerstone of a good testing strategy is **to obtain a fast, reliable and deterministic feedback** that allows the IT practitioner to have confidence about the proposed changes are safe to release.
-
-### Integration And Acceptance Testing In The Data World
+In ML workflows, the automated evaluation of a model performance, comparison with previously deployed model can usually be good approach to a form of acceptance testing.
+However the scope of this question is so large that tons of books have been written on the subject, and sadly, this blog has very little to offer in comparison (especially on the politically correct side of things...).
+The final strategy will vary very much depending on the size of your data, the necessary retraining frequency, the selected metrics and type of model considered.
 
 ### The Holy Grail Of Data Tests
 
-This is where DBT and similar frameworks that allow to test data at a large scale really shine.
+Data tests stand in a weird position because they can fit at all levels of the testing pyramid.
+Similarly to integration tests for data science, the point here is to validate... the data!
+There tests ensure that you actually got a primary key (unique **and** non-null for the sleepy ones), that numeric column fit within a certain range, that you got rid of null...
 
+This is where DBT, dataform, SQLMesh and similar frameworks that allow to test data at a large scale really shine.
 In this paradigm it is still possible to write code using TDD, simplify rather than starting to write SQL code, you will start by specifying in the metadata the types and the tests for a given column.
+They are obviously SQL oriented but their contribution to our field is really a game changer.
 
-You are one year away to production
+In python some packages have been developed to help you do that.
+The problem is that none of them managed to obtain the same reach and influence as the SQL based, with the notable exception of `great-expectations` (which can be a little quirky and slow to use, and not necessarily fitted for TDD).
+Other defensive analysis packages for `pandas` such as `engarde` or `bulwark` are not maintained anymore.
+They also suffer from a decorator oriented approach and very sparse type-hinting, that is again not ideal for TDD.
+On the `polars` side, there is one obscure package called `pelage` but the level of adoption seems to be currently on par with number of working brain cells of the average Elon Musk fan boy...
+
+In the end, if you have the possibility to jam as many tests as you can within your SQL pipelines, please knock yourself out!
+Worst case scenario, your analytics table might end up having an actual working primary key, which would be a nice change once in a while... just saying...
+And who knows, we could end up accidentally with a dashboard in which the numbers are not just straight made-up lies, nor a rough estimates but actually accurate...
 
 ## Conclusion
