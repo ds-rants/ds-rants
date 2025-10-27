@@ -19,7 +19,7 @@ format:
     grid:
       body-width: 600px
     toc: true
-    code-block-border-left: true
+    # code-block-border-left: "yellowgreen"
     highlight-style: breezedark
 
 execute:
