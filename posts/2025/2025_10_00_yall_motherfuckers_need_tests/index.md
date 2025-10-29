@@ -94,20 +94,22 @@ I despise you with every fiber of my being and will definitively high five you a
 Either you probably have good intentions and don't know how to do it but you heart is in a good place. Or you have been told to write tests and you reluctantly follow the orders as a good soldier.
 Regardless there are a few problems with that approach:
 
-1. Assuming you are a not complete moron, you have at least manually run and tested your code visually, made sure it compiled.
+1. Assuming you are a not complete moron, you have at least manually run and tested your code manually, visually, or made sure it compiled.
    Then, the idea of writing a automated test already start to loose meaning because you just saw it with you own eyes: the code is running.
+   This mental block is to me, and by far, the largest factor that prevents junior from realizing the value of automated tests.
 
-1. Because your code has not be written with testability as a core requirement, then writing the test afterwards will be extremely painful and difficult.
+1. In addition, writing the test afterwards will be extremely painful and difficult, because your code has not be written with testability as a core requirement, then .
    Good luck being able to isolate some deterministic behavior in a 100 lines of spaghetti with mutation everywhere and no clear responsibilities.
 
 1. As a direct consequence, the tests also tend to become coupled with the implementation details, making them brittle, or flaky, and generally more difficult to maintain.
-   the typical example is when you want to change one line in your production code, you clearly see the change, but then you also have to change 20 tests...
+   The typical example is when you want to change one line in your production code, you clearly see the change, but then you also have to change 20 tests...
+   This is usually a sign of bad coupling between tests and implementation.
 
-1. Some large chunks of the system will very likely escape any form of testing (consequence of `2.`) because of the impossibility to control their inputs and outputs.
+1. Some large chunks of the system will very likely escape any form of testing (consequence of `reason N°2.`) because of the impossibility to control their inputs and outputs.
 
 ### Writing Tests At The Same Time You Are Writing The Code
 
-Now we are finally getting somewhere. Most of the issues mentioned in the previous section start to erode with the main exception of `N°3`. The main risk with writing tests at the same time as the code, is to increase the coupling between the test and the code, beyond what is strictly required, thus impairing maintainability and limiting future changes and evolution.
+Now we are finally getting somewhere. Most of the issues mentioned in the previous section start to erode with the main exception of `reason N°3`. The main risk with writing tests at the same time as the code, is to increase the coupling between the test and the code, beyond what is strictly required, thus impairing maintainability and limiting future changes and evolution.
 
 However, there are cases were this approach can be actually fruitful, especially for certain scopes and contexts (More on that later).
 
@@ -146,60 +148,97 @@ Writing tests is difficult, even for seasoned developers. However, writing test 
     Do not try to jump directly with code in the old legacy project if you have never written an automated test.
     You are setting yourself up for failure.
 
-    > Solution: Start practicing regularly with simple code katas, do not try to jump directly to writing tests for legacy codebases or data science workflows.
-    > It will very likely take you at least 6 months to get comfortable with the basics of testing.
+    ::: {.callout-tip}
 
-    > If possible use a small side project at work where your hands are free to move.
+    ## Solution
+
+    Start practicing regularly with simple code katas, do not try to jump directly to writing tests for legacy codebases or data science workflows.
+    It will very likely take you at least 6 months to get comfortable with the basics of testing
+
+    If possible use a small side project at work where your hands are free to move.
+    :::
 
 1.  The more you wait to incorporate tests in your workflow, more difficult it will get to do it.
     Imagine saying to your Product Manager, that after 6 months of crunching and regurgitating code, suddenly you want to write tests because one day you woke up and decided you cared about quality (hopefully after reading this rant).
 
     Now imagine that at the start of your project, you said to that blissfully unaware PM: "There shall be a test for every bit of code produced, and no test means no code, means no feature!"
 
-    > Solution: Start adopting a testing strategy as soon as possible in the project lifetime.
-    > In the extremely likely case of a legacy project, you must be aware that some bit will be extremely difficult to test.
-    > This is where practicing in isolation first (step 1.) will save you on more than a couple occasion.
+    ::: {.callout-tip}
+
+    ## Solution
+
+    Start adopting a testing strategy as soon as possible in the project lifetime.
+    In the extremely likely case of a legacy project, you must be aware that some bit will be extremely difficult to test.
+    This is where practicing in isolation first (step 1.) will save you on more than a couple occasion.
+    :::
 
 1.  The things you will try to tests at first will probably be too large, and the scope poorly defined.
     This will make the size of the inputs probably larger than what would be reasonable,
 
-    > Solution: Try to really limit the size, scope, functionalities you try to test at a given time.
-    > Take a smaller sized approach.
+    ::: {.callout-tip}
+
+    ## Solution
+
+    Try to really limit the size, scope, functionalities you try to test at a given time.
+    Take a smaller sized approach.
+    :::
 
 1.  One very common error is to try to test the main functionality of a future piece of code right from the get-go. Rookie mistake!
     This is like head-butting a piece of concrete to make a wall fall down, it might work but you might not be able to repeat that feat once your skull is cracked open.
 
-    > Solution: Do not jump directly to the core of the functionalities start with the simple things and let the behavior progressively emerge from the iterative process.
-    > Let's take an idiotic example, imagine you want to sort elements of a list.
-    > Rather than giving a list of 10 numbers and making sure they are sorted in the end, start by passing an empty list (Great! We just found an edge-case!), then perhaps a list with one element (shocker, input and output should be the same...).
+    ::: {.callout-tip}
+
+    ## Solution
+
+    Do not jump directly to the core of the functionalities start with the simple things and let the behavior progressively emerge from the iterative process.
+    Let's take an idiotic example, imagine you want to sort elements of a list.
+    Rather than giving a list of 10 numbers and making sure they are sorted in the end, start by passing an empty list (Great! We just found an edge-case!), then perhaps a list with one element (shocker, input and output should be the same...).
+    :::
 
 1.  You will probably try to tests things while reading from the disk or worse the network or the database.
     You should refrain from committing such ungodly horrors.
     This will make your tests coupled to external dependencies, meaning you don't control them.
     This will make your tests brittle and flaky
 
-    > Solution: Stay away from any kind of I/O, i.e. disk reads or writes, network calls, database calls, cloud interaction.
-    > They do not belong to your unit-testing strategy, and even in integration testing use them only if they **REALLY CAN NOT BE AVOIDED**.
+    ::: {.callout-tip}
+
+    ## Solution
+
+    Stay away from any kind of I/O, i.e. disk reads or writes, network calls, database calls, cloud interaction.
+    They do not belong to your unit-testing strategy, and even in integration testing use them only if they **REALLY CAN NOT BE AVOIDED**.
+    :::
 
 1.  Not knowing your testing framework is a pretty good way to butcher and obscure your test suite.
     Similarly you can abuse mocking and stubbing your classes and functions, to ensure that nobody even you in two weeks understands whatever the test is doing.
     Continue in that direction, and you will even find test that test nothing at all!
 
-    > Solution: Take the time to understand how your testing framework is designed, what it allows you to reuse and what you should rewrite.
-    > Limit the mocking to the strict minimum to avoid dependencies to external services, but beware of their dark side.
+    ::: {.callout-tip}
+
+    ## Solution
+
+    Take the time to understand how your testing framework is designed, what it allows you to reuse and what you should rewrite.
+    Limit the mocking to the strict minimum to avoid dependencies to external services, but beware of their dark side.
+    :::
 
 1.  Not properly setting up your local environment, and not learning to use your IDE/text editor is a very good way to set you up for failure.
     Although it may seem secondary, you absolutely need to properly configure and be comfortable with your local environment, to help you write tests and navigate your code.
     Otherwise it will become a mental blocker and a hidden obstacle to your workflow.
 
-    > Solution: Install test extensions or plugins for your language inside your editor.
-    > You need first class support to be able to run a single test, or all of them for a given class/file, or you whole test suite at will, using single click or a small terminal call.
+    ::: {.callout-tip}
+
+    ## Solution
+
+    Install test extensions or plugins for your language inside your editor.
+    You need first class support to be able to run a single test, or all of them for a given class/file, or you whole test suite at will, using single click or a small terminal call.
+    :::
 
 ## Why Is Writing Tests So Difficult In Data Science?
 
 In this bit we are going to focus mostly on unit tests. Reminder the features of good unit-tests are: _fast, deterministic, reproducible, decoupled from implementation details_.
 
 ### The Specific Couplings In Data Science
+
+As mentioned previously for the one sleeping in the back of the classroom, data scientists largely deal with large collections of records.
 
 Writing tests in data science is particularly difficult because most of the objects we deal with are collections of items, usually quite complex.
 Those items are usually independent only in the best case scenarios but most likely related to each other in some kind of nasty way.
@@ -213,13 +252,10 @@ This is a question that can remain largely unaddressed in the pure 'developer' w
 
 ### Problems With Dataframe-Like Structures And Remediation Strategies
 
-In order for a data scientist to write meaningful unit-tests, assuming a processing done largely on some kind of dataframe/array (which will encompass 95% of the `pandas` and `numpy` junkies), this setup may require a relatively large amount of boilerplate even for some simple data and light transformations.
-
 As mentioned previously for the one sleeping in the back of the classroom, data scientists largely deal with large collections of records.
-In order to write a test that is not excruciating to write, one needs to strip away all surrounding the complexity, meaning using the smallest amount of rows and columns.
-A good rule of thumb is usually 2R \* xC or 3R \* xC to get you started.
+In order for a data scientist to write meaningful unit-tests, assuming a processing done largely on some kind of dataframe/array (which will encompass 95% of the `pandas` and `numpy` junkies), this setup may require some amount of boilerplate even for some simple data and light transformations.
 
-But them comes another difficulty, assuming you have a shred of decency for your coworkers, meaning your transformations look like this:
+I will assume you have a shred of decency for your coworkers, meaning your transformations look like this:
 
 ```javascript
 daily_awesome_calculations = (
@@ -236,17 +272,55 @@ If not please go see [here](../../2025/2025_04_13_your_pandas_code_is_bad/index.
 
 Here with the use of [DSL](https://en.wikipedia.org/wiki/Domain-specific_language) (Domain-specific language) like `pandas` / `polars`/ `numpy`, it can be tricky to determine if you are actually testing **your custom** logic or re-testing the methods of the library that are already (hopefully) battle-tested.
 
-Expressing this again requires a fairly decent of time trying to determine the seams / separations in your coding where:
+For a dataframe test that is not excruciating to write, one needs to strip away all surrounding the complexity.
+This means using the smallest amount of rows and columns.
+A good rule of thumb is usually 2-Rows \* x-Columns or 3-Rows \* x-Columns to get you started. If you can manage with only one row, you should!
+Expressing this again requires a fairly decent of bit of expertise to determine the seams / separations in your coding where to make testing easier.
 
-1. The test is easy to write.
-2. There is not to much logic, to avoid that the test becomes too permissive (ex: just checking that I have more rows in my dataframe after 30 transformations is unlikely to be informative...)
-3. There is a enough logic in the code so that the test is not redundant with those of the library.
+Regardless, here are some simple pointers:
 
-separate dataframe logic from other python logic
+1. Separate dataframe and pure python logic python logic as much as you can.
+   Generally speaking, mixing pandas and python, is a sure-fire way to make your code slow and in most cases false.
+   Additionally, python logic is much easier to perform unit-tests on.
 
-Unit-testing on dataframes is still possible with very small examples
+1. Unit-testing on dataframes is still possible with very small examples.
+   Keep things as simple as you can with very small data subsets, here again shapes of 2-Rows \* x-Columns or 3-Rows \* x-Columns or even smaller are your best friends.
+   LLMs can help you with the first draft of the boilerplate.
+   Once you have the general structure, it can usually be reused on multiple tests.
 
-It requires more skill and time to get used to than non-data-science code.
+1. Make the data inside the example dataframe as plain, idiotic and stupid simple as possible (during test setup or 'given' stage).
+   This will likely decrease the coupling with your implementation code.
+   It will also augment the maintainability of your test in the long run.
+
+   ```python
+   given = pd.DataFrame(
+        {
+            "station": ["a", "b"],
+            "temperature": [1.1, 2.3],
+        }
+    )
+   ```
+
+   is better than:
+
+   ```python
+   given = pd.DataFrame(
+        {
+            "station": ["NZ_EXT_1", "DE_INT_42"],
+            "temperature": [1.132554, 2.3738687],
+        }
+    )
+   ```
+
+1. Testing on dataframes requires more skill and time to get used to than non-data-science code.
+   Again practice testing on pure python first before jumping straight into the complexity ocean.
+   Similarly, practice on things with smaller scope at first.
+
+1. Be wary of the scope.
+   With too many steps and too much logic, you might have to make your tests extremely permissive.
+   For example, just checking that you have more rows in your dataframe after 30 transformations is unlikely to be highly informative...
+
+
 
 ## Testing At Larger Scale
 
@@ -283,7 +357,7 @@ Data tests stand in a weird position because they can fit at all levels of the t
 Similarly to integration tests for data science, the point here is to validate... the data!
 There tests ensure that you actually got a primary key (unique **and** non-null for the sleepy ones), that numeric column fit within a certain range, that you got rid of null...
 
-This is where DBT, dataform, SQLMesh and similar frameworks that allow to test data at a large scale really shine.
+This is where `dbt`, `dataform`, `SQLMesh` and similar frameworks that allow to test data at a large scale really shine.
 In this paradigm it is still possible to write code using TDD, simplify rather than starting to write SQL code, you will start by specifying in the metadata the types and the tests for a given column.
 They are obviously SQL oriented but their contribution to our field is really a game changer.
 
@@ -295,6 +369,6 @@ On the `polars` side, there is one obscure package called `pelage` but the level
 
 In the end, if you have the possibility to jam as many tests as you can within your SQL pipelines, please knock yourself out!
 Worst case scenario, your analytics table might end up having an actual working primary key, which would be a nice change once in a while... just saying...
-And who knows, we could end up accidentally with a dashboard in which the numbers are not just straight made-up lies, nor a rough estimates but actually accurate...
+And who knows, you could end up accidentally with a dashboard in which the numbers are not just straight-up lies, nor a rough estimate but actually accurate...
 
 ## Conclusion
