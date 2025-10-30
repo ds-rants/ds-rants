@@ -6,6 +6,7 @@ categories: [data science, software engineering, tests, best practices]
 # image: ouroboros.png
 draft: true
 draft-mode: visible
+number-sections: true
 ---
 
 ## Big Brain Moment
@@ -29,14 +30,14 @@ Which blog are you on? _**Data Science Rants!**_ Of course you need tests!
 Dev do it, all senior advocates for it, state of devops reporting shows testing as a major component of performance.
 Larger context, all good dev do it, this is a solved problem in the dev world
 
-Finally, a lot of recent advances in the Developer and DevOps world have yet to make their entry in the data world ([Data: The Land That DevOps Forgot](https://www.youtube.com/watch?v=459-H33is6o))
+Finally, a lot of "recent" advances in the Developer and DevOps world have yet to make their entry in the data world ([Data: The Land That DevOps Forgot](https://www.youtube.com/watch?v=459-H33is6o))
 
 Yet, these concepts are usually totally absent of your average data scientist workflow.
 Why should we adopt something like this that is usually so different from our ways?
 
 ### Because Most Data Science Projects Never Reach Production
 
-This means were are wasting time, money, and worst, we are wasting efforts in dead projects when we could do more interesting and useful things for our kind.
+This means were are wasting time, money, and worst, we are wasting efforts in dead projects when we could do more interesting and useful things for society.
 But it's fine because we have been told that companies are the pinnacle of efficiency.
 
 However, this bitter state of the profession is grounded in some harsh realities.
@@ -78,7 +79,7 @@ Unless you are living under a rock, you probably heard of unit, integration and 
 
 These 3 types of tests constitute the cornerstone of good test-suite, that will allow you to determine with confidence if your system is working and behaving as expected.
 
-## Adopting A Testing Strategies
+## Adopting A Testing Strategy
 
 ### No Tests At All
 
@@ -107,13 +108,13 @@ Regardless there are a few problems with that approach:
 
 1. Some large chunks of the system will very likely escape any form of testing (consequence of `reason N°2.`) because of the impossibility to control their inputs and outputs.
 
-### Writing Tests At The Same Time You Are Writing The Code
+### Writing Tests And Code At The Same Time
 
 Now we are finally getting somewhere. Most of the issues mentioned in the previous section start to erode with the main exception of `reason N°3`. The main risk with writing tests at the same time as the code, is to increase the coupling between the test and the code, beyond what is strictly required, thus impairing maintainability and limiting future changes and evolution.
 
 However, there are cases were this approach can be actually fruitful, especially for certain scopes and contexts (More on that later).
 
-### Writing Tests Before You Write Any Code
+### Writing Tests Before Any Code
 
 At last, for any sleeping data scientist that managed to open an eyelid, this is the bread and butter of any self-respecting developer these days. This is called Test Driven Development, a.k.a. **TDD**, and this is how to do it properly:
 
@@ -247,10 +248,10 @@ How many time did you had to do an analysis in which on record at a given time s
 You don't believe me? Let's assume for ungodly reasons, that you can only use 50% of your dataset for training your model, are you keeping the latest 50%, the oldest, or randomly discarding data?
 Even if we strip out this made-up convoluted scenario, I cannot recall since I started working in the industry, a single real-life dataset in which time played no role at all in some kind of weird way or disguised influence (say goodbye to your kaggle/tutorial static datasets).
 
-This is a strong yet hidden form of coupling which is difficult to express in automated tests (unit- or integration) but is a major concern for any king of data science workflow.
+This is a strong yet hidden form of coupling which is difficult to circumvent in automated tests but is a major concern for any data science workflow.
 This is a question that can remain largely unaddressed in the pure 'developer' world because as long as the object themselves remain valid and the code processing them remains correct, then the system is working properly.
 
-### Problems With Dataframe-Like Structures And Remediation Strategies
+### Issues With Dataframe-Like Testing And Remediation Strategies
 
 As mentioned previously for the one sleeping in the back of the classroom, data scientists largely deal with large collections of records.
 In order for a data scientist to write meaningful unit-tests, assuming a processing done largely on some kind of dataframe/array (which will encompass 95% of the `pandas` and `numpy` junkies), this setup may require some amount of boilerplate even for some simple data and light transformations.
@@ -320,8 +321,6 @@ Regardless, here are some simple pointers:
    With too many steps and too much logic, you might have to make your tests extremely permissive.
    For example, just checking that you have more rows in your dataframe after 30 transformations is unlikely to be highly informative...
 
-
-
 ## Testing At Larger Scale
 
 There is a sort of opposition between scale and easiness to apply TDD principles.
@@ -353,7 +352,7 @@ The final strategy will vary very much depending on the size of your data, the n
 
 ### The Holy Grail Of Data Tests
 
-Data tests stand in a weird position because they can fit at all levels of the testing pyramid.
+Data tests, also called defensive testing, stand in a weird position because they can fit at all levels of the testing pyramid.
 Similarly to integration tests for data science, the point here is to validate... the data!
 There tests ensure that you actually got a primary key (unique **and** non-null for the sleepy ones), that numeric column fit within a certain range, that you got rid of null...
 
@@ -361,14 +360,24 @@ This is where `dbt`, `dataform`, `SQLMesh` and similar frameworks that allow to 
 In this paradigm it is still possible to write code using TDD, simplify rather than starting to write SQL code, you will start by specifying in the metadata the types and the tests for a given column.
 They are obviously SQL oriented but their contribution to our field is really a game changer.
 
-In python some packages have been developed to help you do that.
-The problem is that none of them managed to obtain the same reach and influence as the SQL based, with the notable exception of `great-expectations` (which can be a little quirky and slow to use, and not necessarily fitted for TDD).
+In python few packages have been developed to help you use a TDD workkflow in data science.
+One issue is perhaps that tend to be quite different from the DSL you are working with. (While Kent Beck says that a testing framework should be in the same language as the code for TDD).
+Another problem is that none of them managed to obtain the same reach and influence as the SQL based, with the notable exception of `great-expectations` (which can be a little quirky and slow to use) and the great `pydantic` (more oriented for APIs).
+The catch being again that they are not necessarily fitted for TDD in Data Science.
 Other defensive analysis packages for `pandas` such as `engarde` or `bulwark` are not maintained anymore.
 They also suffer from a decorator oriented approach and very sparse type-hinting, that is again not ideal for TDD.
-On the `polars` side, there is one obscure package called `pelage` but the level of adoption seems to be currently on par with number of working brain cells of the average Elon Musk fan boy...
+On the `polars` side, there is one obscure package called `pelage`, fairly similar to dbt tests, but the level of adoption seems to be currently on par with number of working brain cells for the average Elon Musk fan boy...
 
 In the end, if you have the possibility to jam as many tests as you can within your SQL pipelines, please knock yourself out!
 Worst case scenario, your analytics table might end up having an actual working primary key, which would be a nice change once in a while... just saying...
-And who knows, you could end up accidentally with a dashboard in which the numbers are not just straight-up lies, nor a rough estimate but actually accurate...
+And who knows, you could accidentally end up with a dashboard in which the numbers are not just straight-up lies, nor a rough estimate but actually accurate...
 
 ## Conclusion
+
+DS suffers from their distance with typical dev
+Workload
+
+Particularly TDD
+
+I hope you are absolutely convinced, as I am, of the imperious necessity of importing good testing strategies in Data Science.
+Otherwise, let's hope you and I will never find ourselves in the same room, because I will definitely reach for that shovel.
