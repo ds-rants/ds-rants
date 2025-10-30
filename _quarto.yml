@@ -18,8 +18,8 @@ format:
     css: styles.css
     grid:
       body-width: 600px
+      margin-width: 350px
     toc: true
-    # code-block-border-left: "yellowgreen"
     highlight-style: breezedark
 
 execute:
