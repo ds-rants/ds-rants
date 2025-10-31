@@ -27,12 +27,16 @@ Which blog are you on? _**Data Science Rants!**_ Of course you need tests!
 
 ### Why Should I Test?
 
-Dev do it, all senior advocates for it, state of devops reporting shows testing as a major component of performance.
-Larger context, all good dev do it, this is a solved problem in the dev world
+Because it would be nice to have a data science project working once in while that is not a complete dumpster-fire.
+Just for context and reference, for developers nowadays the question in not "should I automate my tests?" but how, when, on which infrastructure to mirror prod as close as possible, and independently from other people working on different features.
+All senior developers advocate for massive strategies, state of devops reporting shows testing as a major component of performance.
 
-Finally, a lot of "recent" advances in the Developer and DevOps world have yet to make their entry in the data world ([Data: The Land That DevOps Forgot](https://www.youtube.com/watch?v=459-H33is6o))
+Sure, a lot of "recent" advances in the Developer and DevOps world have yet to make their entry in the data world ([Data: The Land That DevOps Forgot](https://www.youtube.com/watch?v=459-H33is6o)).
+One could say that we are poorly equipped in terms of tooling.
+But one could also say that we missed the fucking memo.
+Try convincing a junior DS to do something outside of his notebook without throwing a panic fit, or that the selection of model should be fully automated by a simple CI/CD pipeline.
 
-Yet, these concepts are usually totally absent of your average data scientist workflow.
+Yet, the data science people are still curled up in foetal position because these concepts are usually totally absent of our average workflow.
 Why should we adopt something like this that is usually so different from our ways?
 
 ### Because Most Data Science Projects Never Reach Production
@@ -374,10 +378,17 @@ And who knows, you could accidentally end up with a dashboard in which the numbe
 
 ## Conclusion
 
-DS suffers from their distance with typical dev
-Workload
+Sure they are specifics issues with data science that make it more difficult to test.
+Sure you might not know if you are going to keep that 500-line analysis you just wrote.
+But let's be real for a minute, the fact that your 500-lines have not been tested is probably a good reason why it will go down the drain.
+The main reason you are probably not doing it, is that you have no idea how to test a function that is not FizzBuzz, let alone in a TDD workflow.
+Testing in Data Science is hard but do not kid yourself, it is doable and should be done.
 
-Particularly TDD
+Clearly the "Dev" culture has not yet been imported in the Data Science world, and most of us definitely missed the DevOps train.
+Yet people who have jumped on it are out there.
+They deploy 5 times a day to production, doing canary-release after training 10 models concurrently on perfect copies of their prod environment, after a simple commit-push.
+In the end, this is a shame because we all have to be **Software Engineers**.
+If anything the specific hardship of Data Science should make us yearn for already proven solutions.
 
-I hope you are absolutely convinced, as I am, of the imperious necessity of importing good testing strategies in Data Science.
+I hope you are now absolutely convinced, as I am, of the imperious necessity of importing good testing strategies in Data Science.
 Otherwise, let's hope you and I will never find ourselves in the same room, because I will definitely reach for that shovel.
