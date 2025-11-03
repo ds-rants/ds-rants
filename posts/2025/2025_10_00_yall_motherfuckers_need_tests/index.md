@@ -4,8 +4,6 @@ author: "DS Rants"
 date: "2025-10-20"
 categories: [data science, software engineering, tests, best practices]
 # image: ouroboros.png
-draft: true
-draft-mode: visible
 number-sections: true
 ---
 
@@ -78,7 +76,7 @@ Unless you are living under a rock, you probably heard of unit, integration and 
 - **Acceptance tests:** performed on critical paths of the system to ensure key functionalities.
   Much slower and should aim to be around a few minutes or even lower, otherwise they are ran less often, and start to lose their value.
 
-  Here, you can interact with other external systems over the network database and such.
+  Here, you can interact with other external systems over the network database and such, but beware, beware!
 
 These 3 types of tests constitute the cornerstone of a good and fully automated test suite, that will allow you to determine with confidence if your system is working and behaving as expected.
 Now, one question remains when should you write your tests?
@@ -104,6 +102,14 @@ Regardless there are a few problems with that approach:
    Strangely, the idea of writing a test already starts to lose meaning because you just saw it with you own eyes: the code is running.
    This mental block is, to me, and by far, the largest factor that prevents juniors from realizing the value of automated tests.
 
+   ::: {.callout-important}
+
+   Really, that's the main danger. The code runs, you just saw it.
+   Then the brain automatically disconnects, and then lingering thought: "Do I really need a test?".
+   This is where it all ends.
+   
+   :::
+
 1. In addition, writing the test afterwards will be extremely painful and difficult, because your code has not been written with testability as a core requirement.
    Then you will need some decent luck, and great efforts to isolate some deterministic behavior in a 100 lines of spaghetti with mutations everywhere and no clear responsibilities.
 
@@ -125,7 +131,7 @@ However, there are cases where this approach can be actually fruitful, especiall
 ### Writing Tests Before Any Code
 
 At last, for any sleeping data scientist that managed to open an eyelid, this is the bread and butter of any self-respecting developer these days.
-This is called Test-Driven Development, a.k.a. **TDD**, and this is how to do it properly:
+This is called Test-Driven Development, a.k.a. **TDD**, and this is [how to do it properly](https://www.youtube.com/watch?v=B1j6k2j2eJg):
 
 1. **RED:** You write a **failing** test, which, from well-defined inputs, asserts that a given piece of code has certain well-defined outputs. This is akin to writing specifications in the code.
 2. **GREEN:** You write the smallest, most simplistic, even idiotic code you can think of to make the test pass. Nothing more!
@@ -400,20 +406,21 @@ And who knows, you could accidentally end up with a dashboard in which the numbe
 
 ## Conclusion
 
-What I just described, lying dashboards and misleading analyses, is just a clear sign that our profession still lacks discipline.
-We will need to incorporate this in our work, it may take many different forms but I am sure that testing will be a part of it.
+This glorious landscape made of lying dashboards, misleading analyses, and an astonishing 80% of machine learning projects that die without reaching production, are just a clear sign that our profession still lacks discipline.
+We will need to incorporate better practices in our work, which may take many different forms but I am sure that testing will be a part of it.
 
-Sure, there are specific issues with data science that make it more difficult to test, and you might not know if you are going to keep that 500-line analysis you just wrote.
+Sure, there are specific issues with data science that make it more difficult to test. Granted, you might not know if you are going to keep that freshly-made 500-line analysis.
 But let's be real for a minute, the fact that your 500-lines have not been tested is probably a good reason why it will end up down the drain.
-The main reason you are probably not testing is that you have no idea how to test a function that is not FizzBuzz, let alone in a TDD workflow.
+The main reason you are probably not testing is that you have no idea how to do it on anything beyond FizzBuzz, let alone in a TDD workflow.
 Testing in Data Science is hard but do not kid yourself, it is doable and should be done.
 If anything the specific hardships of Data Science should make us yearn for already proven solutions that increase software reliability and decrease our cognitive burden.
+But I guess some people like their legacy projects served early in the morning with entire chucks of burn-out in them.
 
 Clearly the "Dev" culture has not yet been imported in the Data Science world, and most of us definitely missed the DevOps train.
 Yet people who have jumped on it are out there.
-They deploy 5 times a day to production, doing canary-release after training 10 models concurrently on perfect copies of their prod environment, after a simple commit-push.
-None of these steps can be reached by greasy data scientist fingers, all of them are automated.
-This is the quality standard we should strive for if we ever want to be considered as **serious software engineers**.
+They deploy 5 times a day to production, use canary-release after training 10 models concurrently on perfect copies of their prod environment, after a simple commit-push.
+None of these steps can be reached without strict automated testing, nor a strong self-discipline such as not touching the production with greasy data scientist fingers.
+We should strive for better quality standards if we ever want to be considered as **serious software engineers**.
 
-I hope you are now absolutely convinced, as I am, of the imperious necessity of importing good testing strategies into Data Science.
-Otherwise, let's hope you and I will never find ourselves in the same room, because I will definitely reach for that shovel.
+In the end, mastery is what we need. With this demonstration, I hope you are now absolutely convinced, as I am, of the imperious necessity of importing good testing strategies into Data Science.
+Otherwise, it's better if you and I never find ourselves in the same room, because I will definitely reach for that shovel.
