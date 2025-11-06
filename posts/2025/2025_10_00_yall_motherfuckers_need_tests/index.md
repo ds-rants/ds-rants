@@ -5,6 +5,7 @@ date: "2025-10-20"
 categories: [data science, software engineering, tests, best practices]
 # image: ouroboros.png
 number-sections: true
+number-depth: 3
 ---
 
 ## Big Brain Moment
@@ -61,7 +62,7 @@ One of these practices is testing, so let's recap briefly some generalities.
 
 ### The Main Types of Tests
 
-Unless you are living under a rock, you probably heard of unit, integration and acceptance testing. Here's my pseudo-standard definition:
+Unless you are living under a rock, you probably heard of unit, integration and acceptance testing. If you want a good definition go see [Martin Fowler Website](https://martinfowler.com/testing/), in the meantime my pseudo-standard definition will be:
 
 - **Unit tests:** performed to validate the behavior of isolated functions and methods (more rarely classes and modules).
   Fast: < 1 ms.
@@ -105,9 +106,9 @@ Regardless there are a few problems with that approach:
    ::: {.callout-important}
 
    Really, that's the main danger. The code runs, you just saw it.
-   Then the brain automatically disconnects, and then lingering thought: "Do I really need a test?".
+   Then the brain automatically disconnects, and then lingering thought comes up: "Do I really need a test?".
    This is where it all ends.
-   
+
    :::
 
 1. In addition, writing the test afterwards will be extremely painful and difficult, because your code has not been written with testability as a core requirement.
@@ -118,6 +119,9 @@ Regardless there are a few problems with that approach:
    This is usually a sign of bad coupling between tests and implementation.
 
 1. Some large chunks of the system will very likely escape any form of testing (a consequence of `reason N°2.`) because of the impossibility to control their inputs and outputs.
+
+Regardless, writing tests after will probably be a lot of pain, especially if a higher-up dropped a decaying legacy project on your lap.
+In which case you should turn to experts, that will tell you how to effectively [test and manage complexity of legacy codebase (remember code without tests)](https://youtu.be/P_6eDL1aqtA?si=DieijfL9LdZeWTlj).
 
 ### Writing Tests And Code At The Same Time
 
@@ -424,3 +428,11 @@ We should strive for better quality standards if we ever want to be considered a
 
 In the end, mastery is what we need. With this demonstration, I hope you are now absolutely convinced, as I am, of the imperious necessity of importing good testing strategies into Data Science.
 Otherwise, it's better if you and I never find ourselves in the same room, because I will definitely reach for that shovel.
+
+### Good Reading {.unnumbered}
+
+- Modern Software Engineering - David Farley - ISBN: 9780137314867
+- Extreme Programming Explained: Embrace Change - Beck, Kent; Andres, Cynthia - ISBN 10: 0321278658 / ISBN 13: 9780321278654
+- Team Topologies - Matthew Skelton; Manuel Pais - ISBN: 9781966280002
+- Accelerate: The Science of Lean Software and DevOps - Gene Kim, Jez Humble, Nicole Forsgren - ISBN 10: 1942788339 / ISBN 13: 9781942788331
+- Test Driven Development: By Example - Kent Beck - ISBN: 9780321146533
