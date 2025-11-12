@@ -3,20 +3,24 @@ title: "Y'All Motherfuckers Need Tests"
 author: "DS Rants"
 date: "2025-10-20"
 categories: [data science, software engineering, tests, best practices]
-# image: ouroboros.png
+image: image.png
+# draft: true
+# draft-mode: visible
 number-sections: true
 number-depth: 3
 ---
 
+![](image.png){fig-align="center" width="80%"}
+
 ## Big Brain Moment
 
 > “To me, legacy code is simply code without tests.”
->
-> _Michael C. Feathers, Working Effectively with Legacy Code_
+
+_Michael C. Feathers, Working Effectively with Legacy Code_
 
 > "With tests, we can change the behavior of our code quickly and verifiably. Without them, we really don't know if our code is getting better or worse.”
->
-> _Michael C. Feathers, Working Effectively with Legacy Code_
+
+_Michael C. Feathers, Working Effectively with Legacy Code_
 
 Note: [Big Brain Reference](https://grugbrain.dev/)
 
@@ -177,7 +181,7 @@ Reminder the features of good unit-tests are: _fast, deterministic, reproducible
 
     ::: {.callout-tip}
 
-    ## Solution
+    ### Solution
 
     Start practicing regularly with simple code katas, do not try to jump directly to writing tests for legacy codebases or data science workflows.
     It will very likely take you at least 3-4 months to get comfortable with the basics of testing
@@ -193,7 +197,7 @@ Reminder the features of good unit-tests are: _fast, deterministic, reproducible
 
     ::: {.callout-tip}
 
-    ## Solution
+    ### Solution
 
     Start adopting a testing strategy as soon as possible in the project lifetime.
     In the extremely likely case of a legacy project, you must be aware that some bits will be extremely difficult to test.
@@ -207,7 +211,7 @@ Reminder the features of good unit-tests are: _fast, deterministic, reproducible
 
     ::: {.callout-tip}
 
-    ## Solution
+    ### Solution
 
     Try to really limit the size, scope, functionalities you try to test at a given time.
     Take a smaller sized approach.
@@ -218,7 +222,7 @@ Reminder the features of good unit-tests are: _fast, deterministic, reproducible
 
     ::: {.callout-tip}
 
-    ## Solution
+    ### Solution
 
     Do not jump directly to the core of the functionalities; start with the simple things and let the behavior progressively emerge from the iterative process.
     Let's take an idiotic example, imagine you want to sort elements of a list.
@@ -231,7 +235,7 @@ Reminder the features of good unit-tests are: _fast, deterministic, reproducible
 
     ::: {.callout-tip}
 
-    ## Solution
+    ### Solution
 
     Stay away from any kind of I/O, i.e. disk reads or writes, network calls, database calls, cloud interaction.
     They do not belong in your unit-testing strategy, and even in integration testing, use them only if they **REALLY CAN NOT BE AVOIDED**.
@@ -243,7 +247,7 @@ Reminder the features of good unit-tests are: _fast, deterministic, reproducible
 
     ::: {.callout-tip}
 
-    ## Solution
+    ### Solution
 
     Take the time to understand how your testing framework is designed, what it allows you to reuse and what you should rewrite.
     Limit the mocking to the strict minimum to avoid dependencies to external services, but beware of their dark side.
@@ -255,7 +259,7 @@ Reminder the features of good unit-tests are: _fast, deterministic, reproducible
 
     ::: {.callout-tip}
 
-    ## Solution
+    ### Solution
 
     Install test extensions or plugins for your language inside your editor.
     You need first-class support to be able to run a single test, or all of them for a given class/file.
