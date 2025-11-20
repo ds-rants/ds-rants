@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.8.26">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -35,14 +35,15 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b65e0acc1123cb31b45e68ef6c5ac2c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-5d4073339ea55b1ad5ce071f10a273ff.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-109b4ad6f112555a30aefc1bba789060.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-9433ce5a74f539ffa23693f38c94ac7f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -114,7 +115,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -202,7 +203,7 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="ZGF0YSUyMHNjaWVuY2UlMkNwZXJmb3JtYW5jZSUyQ0NQVSUyQ29wdGltaXphdGlvbg==" data-listing-date-sort="1749081600000" data-listing-file-modified-sort="1749166188700" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1566">
+<div class="quarto-post image-right" data-index="0" data-categories="ZGF0YSUyMHNjaWVuY2UlMkNwZXJmb3JtYW5jZSUyQ0NQVSUyQ29wdGltaXphdGlvbg==" data-listing-date-sort="1749081600000" data-listing-file-modified-sort="1763625164782" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1568">
 <div class="thumbnail"><a href="./posts/2025/2025_06_05_non-pessimization/non-pessimization.html" class="no-external">
 
 <img loading="lazy" src="./posts/2025/2025_06_05_non-pessimization/young-c.jpg" class="thumbnail-image">
@@ -239,7 +240,7 @@ DS Rants
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="ZGF0YSUyMHNjaWVuY2UlMkNwYW5kYXMlMjBjb2RlJTJDbm9uLXBlc3NpbWl6YXRpb24=" data-listing-date-sort="1745798400000" data-listing-file-modified-sort="1749166188697" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="15" data-listing-word-count-sort="2867">
+<div class="quarto-post image-right" data-index="1" data-categories="ZGF0YSUyMHNjaWVuY2UlMkNwYW5kYXMlMjBjb2RlJTJDbm9uLXBlc3NpbWl6YXRpb24=" data-listing-date-sort="1745798400000" data-listing-file-modified-sort="1763625164779" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="15" data-listing-word-count-sort="2867">
 <div class="thumbnail"><a href="./posts/2025/2025_04_28_angry_pandas_guide/angry_pandas_tutorial.html" class="no-external">
 
 <img loading="lazy" src="./posts/2025/2025_04_28_angry_pandas_guide/cover-angry-pandas-guide.png" class="thumbnail-image">
@@ -274,7 +275,7 @@ DS Rants
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="c29mdHdhcmUlMjBlbmdpbmVlcmluZyUyQ2Zha2UlMjBhZ2lsZSUyQ3NjcnVtJTIwY2x1c3RlcmZ1Y2slMkNtZWV0aW5ncw==" data-listing-date-sort="1745107200000" data-listing-file-modified-sort="1749166188696" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="788">
+<div class="quarto-post image-right" data-index="2" data-categories="c29mdHdhcmUlMjBlbmdpbmVlcmluZyUyQ2Zha2UlMjBhZ2lsZSUyQ3NjcnVtJTIwY2x1c3RlcmZ1Y2slMkNtZWV0aW5ncw==" data-listing-date-sort="1745107200000" data-listing-file-modified-sort="1763625164778" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="788">
 <div class="thumbnail"><a href="./posts/2025/2025_04_20_pre-pre-sprint-planning/index.html" class="no-external">
 
 <img loading="lazy" src="./posts/2025/2025_04_20_pre-pre-sprint-planning/ouroboros.png" class="thumbnail-image">
@@ -311,7 +312,7 @@ DS Rants
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="cGFuZGFzJTIwY29kZSUyQ3BlcmZvcm1hbmNlJTJDcHJvZHVjdGlvbg==" data-listing-date-sort="1744502400000" data-listing-file-modified-sort="1749166188695" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1648">
+<div class="quarto-post image-right" data-index="3" data-categories="cGFuZGFzJTIwY29kZSUyQ3BlcmZvcm1hbmNlJTJDcHJvZHVjdGlvbg==" data-listing-date-sort="1744502400000" data-listing-file-modified-sort="1763625164777" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1648">
 <div class="thumbnail"><a href="./posts/2025/2025_04_13_your_pandas_code_is_bad/index.html" class="no-external">
 
 <img loading="lazy" src="./posts/2025/2025_04_13_your_pandas_code_is_bad/bad_pandas_code.png" class="thumbnail-image">
@@ -400,13 +401,14 @@ DS Rants
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
