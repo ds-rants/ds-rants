@@ -6,7 +6,6 @@ categories: [data science, performance, CPU, optimization]
 image: young-c.jpg
 ---
 
-
 Sorry, I am not sorry about the orthographic pun.
 
 Regardless, my inferior brainstem feels like babbling about a few videos by Casey Muratori on the excellent YouTube channel `Molly Rocket`, namely:
@@ -60,7 +59,8 @@ So we have to focus on things that are reasonable.
 
 > - "But Dr. Rants, how can I possibly know when should I do No. 1, 2?"
 > - "WRONG! No. 1 does not exist for you! For you, it's myth! Otherwise, you would not need to ask the question."
->   It's plain simple really. If you're trying to do Optimization on a code that bad because you just did not understand the concept of non-pessimization, then you're back to the whack-job No. 3!
+>   It's plain simple really.
+>   If you're trying to do Optimization on a code that's bad because you just did not understand the concept of non-pessimization, then you're back to the whack-job No. 3!
 >   For you only one thing matters:
 >
 >   NON-PESSIMIZATION!"
