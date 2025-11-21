@@ -1,12 +1,12 @@
 ---
-title: "Y'All Motherfuckers Need Tests"
+title: "Y'All Motherfuckers Need Tests (1/2)"
 author: "DS Rants"
 date: "2025-10-20"
 categories: [data science, software engineering, tests, best practices]
 image: image.png
 draft: true
 draft-mode: visible
-number-sections: true
+# number-sections: true
 number-depth: 3
 ---
 
@@ -176,20 +176,21 @@ Reminder the features of good unit-tests are: _fast, deterministic, reproducible
 
 1.  Most people advocating for the practice of TDD will repeat that it is an acquired skill, one that you need to train regularly.
     It will take you time and practice to master it.
-    Do not try to jump directly with code in the old legacy project if you have never written an automated test.
-    You are setting yourself up for failure.
+    You can obviously set yourself up for failure, by jumping directly in an old legacy project when you have never written an automated test.
 
     ::: {.callout-tip}
 
     ### Solution
 
-    Start practicing regularly with simple code katas, do not try to jump directly to writing tests for legacy codebases or data science workflows.
-    It will very likely take you at least 3-4 months to get comfortable with the basics of testing
+    Start practicing regularly with simple code katas.
+    Do not attempt to test legacy codebase or data science workflows yet.
+    It will very likely take you at least 3-4 months to get comfortable with the basics of testing.
 
     If possible use a small side project at work where your hands are free to move.
     :::
 
-1.  The more you wait to incorporate tests in your workflow, the more difficult it will get to do it.
+1.  Please be sure to wait until you discover some dramatic issue in production like loosing financial transactions or that you have a very strong bias in your model, before incorporating any kind of testing strategy.
+
     Imagine after 6 months of crunching and regurgitating code, saying to your Product Manager, that suddenly you want to write tests because one day you woke up and decided you cared about quality (hopefully after reading this rant).
 
     Now imagine that at the start of your project, you said to that blissfully unaware PM: "There shall be a test for every bit of code produced, and no test means no code, means no feature!".
@@ -201,10 +202,11 @@ Reminder the features of good unit-tests are: _fast, deterministic, reproducible
 
     Start adopting a testing strategy as soon as possible in the project lifetime.
     In the extremely likely case of a legacy project, you must be aware that some bits will be extremely difficult to test.
-    This is where practicing in isolation first (step 1.) will save you on more than a couple of occasions.
-    Find the separations inside the codebase where testing is possible in isolation, move it apart from the rest of the junk.
-    Test the newly produced code.
-    :::
+    This is where practicing in isolation first (step 1.) will save you on more than a couple of occasions:
+
+    - Find the separations inside the codebase where testing is possible in isolation, move it apart from the rest of the junk.
+    - Test the newly produced code.
+      :::
 
 1.  The things you will try to test at first will probably be too large, and the scope poorly defined.
     This will make the size of the inputs probably larger than what would be reasonable.
@@ -229,15 +231,15 @@ Reminder the features of good unit-tests are: _fast, deterministic, reproducible
     Rather than giving a list of 10 numbers and making sure they are sorted in the end, start by passing an empty list (Great! We just found an edge-case!), then perhaps a list with one element (shocker, input and output should be the same...).
     :::
 
-1.  You will probably try to test things while reading from the disk or worse the network or the database.
-    You should refrain from committing such ungodly horrors.
-    This will make your unit-tests slow, way too slow and sometimes brittle and flaky.
+1.  Please make sure to make your tests as slow, flaky and brittle as possible by systematically reading from the disk or worse the network or the database.
+    This way you will be sure the tests are never run because they take 3 hours to complete and you never know why they fail.
 
     ::: {.callout-tip}
 
     ### Solution
 
     Stay away from any kind of I/O, i.e. disk reads or writes, network calls, database calls, cloud interaction.
+    You should refrain from committing such ungodly horrors.
     They do not belong in your unit-testing strategy, and even in integration testing, use them only if they **REALLY CAN NOT BE AVOIDED**.
     :::
 
@@ -254,13 +256,16 @@ Reminder the features of good unit-tests are: _fast, deterministic, reproducible
     :::
 
 1.  Not properly setting up your local environment, and not learning to use your IDE/text editor is a very good way to set you up for failure.
-    Although it may seem secondary, you absolutely need to properly configure and be comfortable with your local environment, to help you write tests and navigate your code.
-    Otherwise it will become a mental blocker and a hidden obstacle to your workflow.
+    I see you clearly delve in self-inflicted pain because you manually renamed the 10 occurrences of your variable when I forced you get rid of the name `temp`.
+    I noticed your hesitation when I spoke about extracting a method and you reached for the copy/paste like a headless chicken.
+    How can you hope to write tests if you can't even navigate your codebase, and perform the most basic actions to change it?
 
     ::: {.callout-tip}
 
     ### Solution
 
+    Although it may appear secondary, you absolutely need to properly configure and be comfortable with your local environment.
+    Otherwise it will become a mental blocker and a hidden obstacle to your workflow.
     Install test extensions or plugins for your language inside your editor.
     You need first-class support to be able to run a single test, or all of them for a given class/file.
     Your whole test suite should run at will, using single click or a small terminal call.
