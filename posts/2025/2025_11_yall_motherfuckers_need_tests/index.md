@@ -122,7 +122,7 @@ Regardless there are a few problems with that approach:
    The typical example is when you want to change one line in your production code; you clearly see the change, but then you also have to change 20 tests...
    This is usually a sign of bad coupling between tests and implementation.
 
-1. Some large chunks of the system will very likely escape any form of testing (a consequence of `reason N°2.`) because of the impossibility to control their inputs and outputs.
+1. Some large chunks of the system will very likely escape any form of testing (a consequence of `reason #2.`) because of the impossibility to control their inputs and outputs.
 
 Regardless, writing tests after will probably be a lot of pain, especially if a higher-up dropped a decaying legacy project on your lap.
 In which case you should turn to experts, that will tell you how to effectively [test and manage complexity of legacy codebase (remember code without tests)](https://youtu.be/P_6eDL1aqtA?si=DieijfL9LdZeWTlj).
@@ -130,7 +130,7 @@ In which case you should turn to experts, that will tell you how to effectively 
 ### Writing Tests And Code At The Same Time
 
 Now we are finally getting somewhere.
-Most of the issues mentioned in the previous section start to erode, with the main exception of `reason N°3`.
+Most of the issues mentioned in the previous section start to erode, with the main exception of `reason #3`.
 The main risk with writing tests at the same time as the code, is to increase the coupling between the test and the code, beyond what is strictly required.
 This reduces maintainability and limits future changes and evolution.
 
