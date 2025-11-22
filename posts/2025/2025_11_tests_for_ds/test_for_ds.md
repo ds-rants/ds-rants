@@ -1,18 +1,30 @@
 ---
-title: "Y'All Motherfuckers Need Tests"
+title: "Y'All Motherfuckers Need Tests And Stop Making Lazy Excuses"
 author: "DS Rants"
 date: "2025-10-20"
 categories: [data science, software engineering, tests, best practices]
 image: image.png
-draft: true
-draft-mode: visible
-number-sections: true
-number-depth: 3
+# draft: true
+# draft-mode: visible
+# number-sections: true
+# number-depth: 3
 ---
 
 ![](image.png){fig-align="center" width="80%"}
 
-## Specific Problems With Testing In Data Science
+This is the second part of a larger rant on tests with the first part available [here](../../2025/2025_11_yall_motherfuckers_need_tests/index.md).
+
+In the first parts I mainly addressed the canonical definitions of testing, the typical difficulties that arise, and potential strategies to progressively get better at testing.
+By now, with the bold assumption that you possess a shred of common sense (and survival instinct), you should at least have a strong feeling that testing in data science should have a much greater importance, to say the least.
+
+But sadly, there will always be some junky data scientist snorting LinkedIn posts and drunk on Jeff Bezos' apocryphal success stories, to tell you how special his work is, and how testing does not work for him.
+Despite my strong desire to pulverize said person on the spot and curse all their family branches for the next 13 generations, I will momentarily refrain from violence.
+
+Instead I will try to address some reasonable objections one could raise regarding quirks and specificities that make testing in the data world trickier.
+But don't mistake this moment of kindness for any form of weakness, at the end you will have no excuses left.
+
+
+## The Specific Problems With Testing In Data Science
 
 ### The Hidden Forms Of Couplings
 
