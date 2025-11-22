@@ -1,5 +1,5 @@
 ---
-title: "Y'All Motherfuckers Need Tests (1/2)"
+title: "Y'All Motherfuckers Need Tests"
 author: "DS Rants"
 date: "2025-10-20"
 categories: [data science, software engineering, tests, best practices]
@@ -52,7 +52,7 @@ However, this bitter state of the data science profession is grounded in some ha
 In addition to the absence of best practices of software engineering, we are usually in a much worse situation than typical developers.
 Indeed, we have by nature a particularly strong coupling to the data (shocker right?).
 Even small changes over time in the data distribution tend to have tremendous impact on machine learning systems, even though the structure of the data itself stays the same.
-And you know when that happens? _All the damn time for every damn use-case!_
+And you know when that happens? _All the fucking time for every damn use-case!_
 
 Finally, we usually need to produce large amounts of code to determine if a given model or analysis has even a chance of being remotely useful.
 This creates a tension because the code seems constantly in a superposition of state: useless exploratory junk _AND_ awesome preprocessing for big gains model.
@@ -141,9 +141,12 @@ However, there are cases where this approach can be actually fruitful, especiall
 At last, for any sleeping data scientist that managed to open an eyelid, this is the bread and butter of any self-respecting developer these days.
 This is called Test-Driven Development, a.k.a. **TDD**, and this is [how to do it properly](https://www.youtube.com/watch?v=B1j6k2j2eJg):
 
-1. **RED:** You write a **failing** test, which, from well-defined inputs, asserts that a given piece of code has certain well-defined outputs. This is akin to writing specifications in the code.
+1. **RED:** You write a **failing** test, which, from well-defined inputs, asserts that a given piece of code has certain well-defined outputs.
+   This is akin to writing specifications in the code.
 2. **GREEN:** You write the smallest, most simplistic, even idiotic code you can think of to make the test pass. Nothing more!
-3. **REFACTOR:** You replace the idiotic part you just wrote with something less stupid or ugly. **But pay attention!** You should not write anything that is not inside the test. The point is to let the tests and specifications drive the code.
+3. **REFACTOR:** You replace the idiotic part you just wrote with something less stupid or ugly.
+   **But pay attention!** You should not write anything that is not inside the test.
+   The point is to let the tests and specifications drive the code.
 
 And you repeat the cycle!
 
@@ -168,6 +171,8 @@ Ain't that good enough in itself?
 ## The Top 7 Obstacles That Prevent You From Testing
 
 Dear reader, I apologize for the sudden surge of click-bait writing style, but this will likely be a long post, anyhow...
+Actually I am not sorry at all.
+I am simply taking into account your ritalin infused brain equipped with the attention span of a cocaine-high chihuahua.
 
 Writing tests is difficult, even for seasoned developers.
 However, writing tests first with TDD is actually easier but also requires a strong shift of mindset.
@@ -177,6 +182,7 @@ Reminder the features of good unit-tests are: _fast, deterministic, reproducible
 1.  Most people advocating for the practice of TDD will repeat that it is an acquired skill, one that you need to train regularly.
     It will take you time and practice to master it.
     You can obviously set yourself up for failure, by jumping directly in an old legacy project when you have never written an automated test.
+    That sounds like a totally reasonable thing to do.
 
     ::: {.callout-tip}
 
@@ -186,10 +192,11 @@ Reminder the features of good unit-tests are: _fast, deterministic, reproducible
     Do not attempt to test legacy codebase or data science workflows yet.
     It will very likely take you at least 3-4 months to get comfortable with the basics of testing.
 
-    If possible use a small side project at work where your hands are free to move.
+    If possible use a small side project at work where your hands are free to move, safe from the nasty hands of a greedy product manager.
     :::
 
-1.  Please be sure to wait until you discover some dramatic issue in production like loosing financial transactions or that you have a very strong bias in your model, before incorporating any kind of testing strategy.
+1.  Please be sure to wait until you discover some catastrophic production failure before incorporating any kind of testing strategy.
+    You want to loose financial transactions or have a very strong bias in your model exposed to your users, that will motivate you.
 
     Imagine after 6 months of crunching and regurgitating code, saying to your Product Manager, that suddenly you want to write tests because one day you woke up and decided you cared about quality (hopefully after reading this rant).
 
@@ -200,16 +207,18 @@ Reminder the features of good unit-tests are: _fast, deterministic, reproducible
 
     ### Solution
 
-    Start adopting a testing strategy as soon as possible in the project lifetime.
-    In the extremely likely case of a legacy project, you must be aware that some bits will be extremely difficult to test.
-    This is where practicing in isolation first (step 1.) will save you on more than a couple of occasions:
+    Start adopting a testing strategy as soon as possible in the project lifetime, and hold onto it like your grandma holds onto the steering wheel while plowing through a crowd.
+    In the extremely likely case of a legacy project, you must be aware that some bits will be impossible to test.
+    This is where having practiced in isolation first (step 1.) will save you on more than a couple of occasions:
 
     - Find the separations inside the codebase where testing is possible in isolation, move it apart from the rest of the junk.
     - Test the newly produced code.
-      :::
+
+    :::
 
 1.  The things you will try to test at first will probably be too large, and the scope poorly defined.
-    This will make the size of the inputs probably larger than what would be reasonable.
+    You can try to test the thing that has 10 input parameters and 3 different possible outputs types.
+    Sure, you can try...
 
     ::: {.callout-tip}
 
@@ -217,6 +226,7 @@ Reminder the features of good unit-tests are: _fast, deterministic, reproducible
 
     Try to really limit the size, scope, functionalities you try to test at a given time.
     Take a smaller sized approach.
+    When you think this is small enough, make it even smaller!
     :::
 
 1.  One very common error is to try to test the main functionality of a future piece of code right from the get-go. Rookie mistake!
@@ -256,8 +266,8 @@ Reminder the features of good unit-tests are: _fast, deterministic, reproducible
     :::
 
 1.  Not properly setting up your local environment, and not learning to use your IDE/text editor is a very good way to set you up for failure.
-    I see you clearly delve in self-inflicted pain because you manually renamed the 10 occurrences of your variable when I forced you get rid of the name `temp`.
-    I noticed your hesitation when I spoke about extracting a method and you reached for the copy/paste like a headless chicken.
+    I saw you clearly wallowing in self-inflicted pain because you renamed manually each of the 10 occurrences of your variable when I forced you get rid of the thing you so proudly named "temp".
+    Your hesitation was palpable when I spoke about extracting a method and you reached for the copy/paste like a headless chicken.
     How can you hope to write tests if you can't even navigate your codebase, and perform the most basic actions to change it?
 
     ::: {.callout-tip}
@@ -273,6 +283,24 @@ Reminder the features of good unit-tests are: _fast, deterministic, reproducible
 
 This list of recommendations is a watered down version of the many pieces of advices available in the sources and links of this rant.
 Please go check them out.
+Or don't I am not the boss of you, but then don't complain if you have a ludicrous 3 week ping-pong workflow with the Devs and Ops teams to put your scrappy model in production...
+
+## Wrapping Up
+
+The purpose of this rant is not to help the greedy manager piling up more tasks on the shoulder of burned-out developers, nor give them excuses to say: "You need to be more productive".
+My goal is to give you tools and feedbacks that have been shown to reduce mental workload and make projects more manageable.
+I want you to be able to free some time to reflect on our own data science practices.
+
+A basic understanding of the properties around testing is probably the best chance we have to integrate quality in data science.
+This will allows us and also be required, in order to kill dangerous or useless projects as soon as possible, and select the ones that should live.
+We are definitely going to need it, if we want to do anything remotely useful in our society.
+
+We will see next time the specifics around testing in data science, but in the meantime, let's keep in mind:
+
+> Primum Non Nocere
+
+First, do no harm.
+
 
 ### Good Reading {.unnumbered}
 
