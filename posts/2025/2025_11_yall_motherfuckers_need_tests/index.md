@@ -4,13 +4,11 @@ author: "DS Rants"
 date: "2025-10-20"
 categories: [data science, software engineering, tests, best practices]
 image: image.png
-draft: true
+# draft: true
 draft-mode: visible
----
-
 # number-sections: true
-
-## number-depth: 3
+# number-depth: 3
+---
 
 ![](image.png){fig-align="center" width="80%"}
 
@@ -140,6 +138,8 @@ This is called Test-Driven Development, a.k.a. **TDD**, and this is [how to do i
 
 And you repeat the cycle!
 
+### The Advantages Of TDD
+
 This (apparently contrived) way of testing has dramatic advantages:
 
 - It completely breaks the idea of: "I don't need a test because I just saw my code run" because the code doesn't even exist yet.
@@ -202,7 +202,8 @@ Reminder: the features of good unit tests are: _fast, deterministic, reproducibl
 
     - Find the separations inside the codebase where testing is possible in isolation; move it apart from the rest of the junk.
     - Test the newly produced code.
-      :::
+
+    :::
 
 1.  The things you'll try to test at first will probably be too large, and the scope poorly defined.
     You can try to test the thing that has 10 input parameters and 3 different possible output types.
