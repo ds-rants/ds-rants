@@ -32,7 +32,8 @@ Which blog are you on? _**Data Science Rants!**_ Of course you need tests!
 
 Because it would be nice to have a data science project working once in a while that isn't a complete dumpster fire.
 Just for context, for developers nowadays the question isn't "should I automate my tests?", but rather "how, when, and on which infrastructure to mirror prod as closely as possible, and independently from other people working on different features?"
-All senior developers advocate for regular and comprehensive testing strategies. The "State of DevOps" reports show testing as a major component of team performance and software reliability.
+All senior developers advocate for regular and comprehensive testing strategies.
+The "State of DevOps" reports show testing as a major component of team performance and software reliability.
 
 Sure, a lot of 'recent' advances in the developer and DevOps world have yet to make their entrée into the data world ([Data: The Land That DevOps Forgot](https://www.youtube.com/watch?v=459-H33is6o)).
 One could say we're poorly equipped in terms of tooling, but one could also say we missed the fucking memo.
@@ -44,7 +45,7 @@ In the end, why should we adopt something so different from our ways?
 
 ### Because Most Data Science Projects Never Reach Production
 
-This means we're wasting time, money, and worse, efforts in dead projects when we could be doing more interesting and useful things for society.
+This means we're wasting time, money, and worse, effort in dead projects when we could be doing more interesting and useful things for society.
 But it's fine because we've always been told companies are the pinnacle of efficiency.
 
 However, this bitter state of the data science profession is grounded in some harsh realities.
@@ -67,11 +68,17 @@ One of these practices is testing, so let's briefly recap some generalities.
 
 Unless you're living under a rock, you've probably heard of unit, integration, and acceptance testing. For a good definition, check out [Martin Fowler's Website](https://martinfowler.com/testing/). In the meantime, my pseudo-standard definitions are:
 
-- **Unit tests:** Performed to validate the behavior of isolated functions and methods (more rarely classes and modules). Fast: < 1 ms. My personal grain of salt: No dependency on I/O or external systems (disk access, internet, database...), with absolute control of inputs and precise evaluation of outputs.
+- **Unit tests:** Performed to validate the behavior of isolated functions and methods (more rarely classes and modules).
+  Fast: < 1 ms.
+  My personal take: No dependency on I/O or external systems (disk access, internet, database...), with absolute control of inputs and precise evaluation of outputs.
 
-- **Integration tests:** Performed on a collection of functions, usually at the class and module level. Slower in general, but a few seconds max. I/O becomes possible, but my hot take is: you should only interact with local elements (mostly disk, local database replicas, components, or binaries from other sub-systems) and nothing that touches the internet.
+- **Integration tests:** Performed on a collection of functions, usually at the class and module level.
+  Slower in general, but a few seconds max.
+  I/O becomes possible, but my hot take is: you should only interact with local elements (mostly disk, local database replicas, components, or binaries from other subsystems) and nothing that touches the internet.
 
-- **Acceptance tests:** Performed on critical system paths to ensure key functionalities. Much slower, aiming for around a few minutes or even less. Otherwise, they're run less often and start losing value. Here, you can interact with other external systems over the network, databases, and such, but beware, beware!
+- **Acceptance tests:** Performed on critical system paths to ensure key functionalities.
+  Much slower, aiming for around a few minutes or even less. Otherwise, they're run less often and start losing value.
+  Here, you can interact with other external systems over the network, databases, and such, but beware, beware!
 
 These three types of tests constitute the cornerstone of a good, fully automated test suite that will allow you to determine with confidence if your system is working and behaving as expected.
 Now, one question remains: when should you write your tests?
@@ -85,32 +92,32 @@ You're basically handing over a pile of garbage to your coworkers and yelling as
 
 > "And good luck with any changes in business requirements, package version upgrades, refactoring, or general future evolutions, because you know it works on my machine... Oh, and by the way, the business wants this model in production next week..."
 
-I despise you with every fiber of my being and will definitively high-five you at the first occasion... in the face... with a shovel!
+I despise you with every fiber of my being and will definitely high-five you at the first occasion... in the face... with a shovel!
 
 ### Writing Tests After Writing The Code
 
-Either you probably have good intentions and don't know how to do it, but your heart is in a good place.
+Either you have good intentions but don't know how to do it, and your heart is in the right place.
 Or you've been told to write tests by a concerned tech lead because prod was on fire three times this week, and you reluctantly follow orders like a good soldier.
 Regardless, there are a few problems with that approach:
 
 1.  Assuming you're not a complete moron, you have at least run and tested your code manually, visually, or made sure it compiled.
     Strangely, the idea of writing a test already starts to lose meaning because you just saw it with your own eyes: the code is running.
-    This mental block is, to me, and by far, the largest factor that prevents juniors from realizing the value of automated tests.
+    This mental block is, to me, by far the largest factor that prevents juniors from realizing the value of automated tests.
 
     ::: {.callout-important}
-    Really, that's the main danger. The code runs, you just saw it.
+    Really, that's the main danger. The code runs! You just saw it.
     Then the brain automatically disconnects, and the lingering thought comes up: "Do I really need a test?"
     This is where it all ends.
     :::
 
-1.  In addition, writing the test afterwards will be extremely painful and difficult because your code has not been written with testability as a core requirement.
+2.  In addition, writing the test afterwards will be extremely painful and difficult because your code has not been written with testability as a core requirement.
     Then you'll need some decent luck and great efforts to isolate deterministic behavior in 100 lines of spaghetti with mutations everywhere and no clear responsibilities.
 
-1.  As a direct consequence, tests also tend to become coupled with implementation details, making them brittle or flaky, and generally more difficult to maintain.
+3.  As a direct consequence, tests also tend to become coupled with implementation details, making them brittle or flaky, and generally more difficult to maintain.
     The typical example is when you want to change one line in your production code; you clearly see the change, but then you also have to change 20 tests...
     This is usually a sign of bad coupling between tests and implementation.
 
-1.  Some large chunks of the system will very likely escape any form of testing (a consequence of `reason #2.`) because of the impossibility to control their inputs and outputs.
+4.  Some large chunks of the system will very likely escape any form of testing (a consequence of `reason #2`) because of the impossibility to control their inputs and outputs.
 
 Regardless, writing tests after will probably be a lot of pain, especially if a higher-up dropped a decaying legacy project on your lap.
 In which case, you should turn to experts who will tell you how to effectively [test and manage the complexity of legacy codebases (remember: code without tests)](https://youtu.be/P_6eDL1aqtA?si=DieijfL9LdZeWTlj).
@@ -182,10 +189,10 @@ Reminder: the features of good unit tests are: _fast, deterministic, reproducibl
     Do not attempt to test legacy codebases or data science workflows yet.
     It will very likely take you at least 3-4 months to get comfortable with the basics of testing.
 
-    If possible, use a small side project at work where your hands are free to move, safe from the nasty hands of a greedy product manager.
+    If possible, use a small side project at work where your hands are free to move, safe from the nasty clutches of a greedy product manager.
     :::
 
-1.  The things you'll try to test at first will probably be too large, and the scope poorly defined.
+2.  The things you'll try to test at first will probably be too large, and the scope poorly defined.
     You can try to test the thing that has 10 input parameters and 3 different possible output types.
     Sure, you can try...
 
@@ -194,11 +201,11 @@ Reminder: the features of good unit tests are: _fast, deterministic, reproducibl
     ### Solution
 
     Try to really limit the size and scope of functionalities you try to test at a given time.
-    Take a smaller-sized approach.
+    Take a smaller approach.
     When you think this is small enough, make it even smaller!
     :::
 
-1.  One very common error is to try to test the main functionality of a future piece of code right from the get-go. Rookie mistake!
+3.  One very common error is to try to test the main functionality of a future piece of code right from the get-go. Rookie mistake!
     This is like head-butting a piece of concrete to make a wall fall down; it might work, but you might not be able to repeat that feat once your skull is cracked open.
 
     ::: {.callout-tip}
@@ -207,11 +214,12 @@ Reminder: the features of good unit tests are: _fast, deterministic, reproducibl
 
     Do not jump directly to the core of the functionalities; start with the simple things and let the behavior progressively emerge from the iterative process.
     Let's take an idiotic example: imagine you want to sort elements of a list.
-    Rather than giving a list of 10 numbers and making sure they are sorted in the end, start by passing an empty list (Great! We just found an edge-case!), then perhaps a list with one element (shocker, input and output should be the same...).
+    Rather than giving a list of 10 numbers and making sure they are sorted in the end, start by passing an empty list (Great! We just found an edge case!), then perhaps a list with one element (shocker, input and output should be the same...).
     :::
 
-1.  Once you get the basics, please be sure to wait until you discover some catastrophic production failure before incorporating any kind of testing strategy.
-    You definitely want to lose financial transactions first or have a very strong bias in your model exposed to your users, that will motivate you.
+4.  Once you get the basics, please be sure to wait until you discover some catastrophic production failure before incorporating any kind of testing strategy.
+    You definitely want to lose financial transactions first or have a very strong bias in your model exposed to your users.
+    This should motivate you.
     Now let's back up a bit, and imagine after 6 months of crunching and regurgitating code, you're saying to your Product Manager that suddenly you want to write tests because one day you woke up and decided you cared about quality (hopefully after reading this rant).
 
     Now imagine that at the start of your project, you said to that blissfully unaware PM: "There shall be a test for every bit of code produced, and no test means no code, means no feature!"
@@ -230,7 +238,7 @@ Reminder: the features of good unit tests are: _fast, deterministic, reproducibl
 
     :::
 
-1.  Please make sure to make your tests as slow, flaky, and brittle as possible by systematically reading from the disk or, worse, the network or the database.
+5.  Please make sure to make your tests as slow, flaky, and brittle as possible by systematically reading from the disk or, worse, the network or the database.
     This way, you'll be sure the tests are never run because they take 3 hours to complete, and you never know why they fail.
 
     ::: {.callout-tip}
@@ -242,7 +250,7 @@ Reminder: the features of good unit tests are: _fast, deterministic, reproducibl
     They do not belong in your unit-testing strategy, and even in integration testing, use them only if they **REALLY CANNOT BE AVOIDED**.
     :::
 
-1.  Not knowing your testing framework is a pretty good way to butcher and obscure your test suite.
+6.  Not knowing your testing framework is a pretty good way to butcher and obscure your test suite.
     Similarly, you can abuse mocking and stubbing your classes and functions to ensure that nobody, not even you in two weeks, understands whatever the test is doing.
     Continue in that direction, and you will even create tests that assert nothing at all!
 
@@ -254,8 +262,8 @@ Reminder: the features of good unit tests are: _fast, deterministic, reproducibl
     Limit the mocking to the strict minimum to avoid dependencies on external services, but beware of their dark side.
     :::
 
-1.  Not properly setting up your local environment and not learning to use your IDE/text editor is a very good way to set yourself up for failure.
-    I saw you clearly wallowing in self-inflicted pain because you renamed manually each of the 10 occurrences of your variable when I forced you to get rid of the thing you so proudly named "temp".
+7.  Not properly setting up your local environment and not learning to use your IDE/text editor is a very good way to set yourself up for failure.
+    I saw you clearly wallowing in self-inflicted pain because you manually renamed each of the 10 occurrences of your variable when I forced you to get rid of the thing you so proudly named "temp".
     Your hesitation was palpable when I spoke about extracting a method, and you reached for the copy/paste like a headless chicken.
     How can you hope to write tests if you can't even navigate your codebase and perform the most basic actions to change it?
 
@@ -276,15 +284,15 @@ Or don't; I'm not the boss of you, but then don't complain if you have a ludicro
 
 ## Wrapping Up
 
-The purpose of this rant is not to help the greedy manager piling up more tasks on the shoulders of burned-out developers, nor give them excuses to say: "You need to be more productive".
+The purpose of this rant is not to help the greedy manager piling up more tasks on the shoulders of burned-out developers, nor to give them excuses to say: "You need to be more productive".
 My goal is to give you tools and feedback that have been shown to reduce mental workload and make projects more manageable.
-I want you to be able to free some time to reflect on our own data science practices.
+I want you to be able to free up some time to reflect on your own data science practices.
 
-I don't necessarily want to you to use TDD everywhere.
-But it is one the fundamentals of software engineering, and like any basic move, one should master it before claiming they don't need it.
+I don't necessarily want you to use TDD everywhere.
+But it is one of the fundamentals of software engineering, and like any basic move, one should master it before claiming they don't need it.
 
 Mastering the fundamentals of testing is probably the best chance we have to integrate quality into data science.
-This much needed desire for quality will allow us to kill dangerous or useless projects from the start and select the ones that should live.
+This much-needed desire for quality will allow us to kill dangerous or useless projects from the start and select the ones that should live.
 We are definitely going to require that if we want to do anything remotely useful in our society.
 
 And for that, we will see next time the specifics of testing in data science, but in the meantime, let's keep in mind:
