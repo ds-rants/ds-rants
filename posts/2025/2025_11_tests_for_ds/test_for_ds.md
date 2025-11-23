@@ -4,11 +4,8 @@ author: "DS Rants"
 date: "2025-10-20"
 categories: [data science, software engineering, tests, best practices]
 image: image.png
-# draft: true
-# draft-mode: visible
-# number-sections: true
-# number-depth: 3
 ---
+
 ![](image.png){fig-align="center" width="80%"}
 
 This is the second part of a larger rant on tests with the first part available [here](../../2025/2025_11_yall_motherfuckers_need_tests/index.md).
@@ -16,19 +13,19 @@ This is the second part of a larger rant on tests with the first part available 
 In the first parts I mainly addressed the canonical definitions of testing, the typical difficulties that arise, and potential strategies to progressively get better at testing.
 By now, with the bold assumption that you possess a shred of common sense (and survival instinct), you should at least have a strong feeling that testing in data science should have a much greater importance, to say the least.
 
-But sadly, there'll always be some junky data scientist snorting LinkedIn posts and drunk on Jeff Bezos' apocryphal success stories, to tell you how special his work is, and how testing does not work for him.
-Despite my strong desire to vaporize said person on the spot and curse all their family branches for the next 13 generations, I will momentarily refrain from violence.
+But sadly, there'll always be some junky data scientists snorting LinkedIn posts and drunk on Jeff Bezos' apocryphal success stories, to tell you how special their work is, and how testing does not work for them, and would only slow them down.
+Despite my strong desire to caress the frontal lobe of such person with a shovel, vaporize them on the spot and curse all their family branches for the next 13 generations, I will momentarily refrain from violence.
 
 Instead I'll try to address some reasonable objections one could raise regarding quirks and specificities that make testing in the data world trickier.
 But don't mistake this moment of kindness for any form of weakness, at the end you'll have no excuses left.
 
 ## The Specific Problems With Testing In Data Science
 
-### The Hidden Forms Of Couplings
-
 As mentioned previously for the ones sleeping in the back of the classroom, data scientists largely deal with large amounts of... data.
 This means the first action is typically to pull something from a database (lucky you), or read a decently structured CSV (we all have to eat), a manually filled excel file (fly you fools!) or way worse, and believe me you don't want to know.
 Do you remember what I said about testing, let alone TDD, being difficult with I/O and external coupling?
+
+### The Hidden Forms Of Couplings
 
 In addition, the testing process is particularly difficult because most of the objects we deal with are collections of items, usually quite complex.
 Now add a sprinkle of types and object structures which are usually looser than you own mother morals.
@@ -36,11 +33,13 @@ On top of that, these items are usually independent only in the best case scenar
 How many times did you have to do an analysis in which on record at a given time strongly influence what was to be done on surrounding elements, but only until variable B changes to a different value?
 
 You don't believe me? Let's assume for ungodly reasons, that you can only use 50% of your dataset for training your model, are you keeping the latest 50%, the oldest, or randomly discarding data?
-Even if we strip out this made-up convoluted scenario, I cannot recall, since I started working in the industry, a single real-life dataset in which time played no role at all in some kind of weird way or disguised influence (say goodbye to your kaggle/tutorial static datasets).
+Sure, we can set aside this scenario which is as plausible as Mark Zuckerberg giving a rat's ass about your privacy or the people he fired.
+But, I cannot recall, since I started working in the industry, a single real-life dataset in which time played no role at all in some kind of weird way or disguised influence (say goodbye to your kaggle/tutorial static datasets).
 
-This question can remain largely secondary in the pure 'developer' world.
+These questions can remain somewhat secondary in the pure 'developer' world.
 Indeed, as long as the objects themselves remain valid and the code processing them remains correct, then the system is working properly.
 This is a strong yet hidden form of coupling which is difficult to circumvent in automated tests but is a major concern for any data science workflow.
+
 And it has only just begun...
 
 ### Issues With Dataframe-Like Testing And Remediation Strategies
@@ -62,7 +61,7 @@ daily_awesome_calculations = (
 ```
 
 If not please go see [here](../../2025/2025_04_13_your_pandas_code_is_bad/index.qmd) and [there](../../2025/2025_04_28_angry_pandas_guide/angry_pandas_tutorial.qmd).
-In the absence of any kind of improvement on this matter, I will eagerly greet you with a shovel.
+In the absence of any kind of improvement on this matter, I will eagerly greet you with a shovel as mentioned earlier.
 You have been warned...
 
 Here with the use of [DSL](https://en.wikipedia.org/wiki/Domain-specific_language) (Domain-specific language) like `pandas` / `polars`/ `numpy`, it can be tricky to determine if you are actually testing **your custom** logic or re-testing the methods of the library that are already (hopefully) battle-tested.
@@ -72,7 +71,9 @@ This requires the ability to use the smallest amount of rows and columns.
 A good rule of thumb is usually 2-Rows \* x-Columns or 3-Rows \* x-Columns to get you started.
 If you can manage with only one row, you should!
 
-Regardless, here are some simple pointers:
+Regardless, here are some general pointers:
+
+### Simple Advice For Writing DataFrame Tests
 
 1. Separate dataframe and pure Python logic as much as you can.
    Generally speaking, mixing pandas and Python, is a sure-fire way to make your code slow and in most cases, false.
@@ -80,10 +81,11 @@ Regardless, here are some simple pointers:
 
 1. Unit testing on dataframes is still possible with very small examples.
    Keep things as simple as you can with very small data subsets, here again, shapes of 2-Rows \* x-Columns or 3-Rows \* x-Columns or even smaller are your best friends.
-   LLMs can help you with the first draft of the boilerplate.
+   Your favorite LLM overlord can help you with the first draft of the boilerplate.
    Once you have the general structure, it can usually be reused on multiple tests.
 
-1. Make the data inside the example dataframe as plain, idiotic and stupid simple as possible (during test setup or 'given' stage).
+1. Make the data inside the example dataframe as plain, idiotic and stupid simple as possible.
+   You should aim for the average cryptobro level here, especially during test setup or 'given' stage.
    This will likely decrease the coupling with your implementation code.
    It will also increase the maintainability of your test in the long run.
 
@@ -91,7 +93,7 @@ Regardless, here are some simple pointers:
    given = pd.DataFrame(
         {
             "station": ["a", "b"],
-            "temperature_in_c": [1.1, 2.3],
+            "temperature_in_celsius": [1.1, 2.3],
         }
     )
    ```
@@ -102,7 +104,7 @@ Regardless, here are some simple pointers:
    given = pd.DataFrame(
         {
             "station": ["NZ_EXT_1", "DE_INT_42"],
-            "temperature_in_c": [1.132554, 2.3738687],
+            "temperature_in_celsius": [1.132554, 2.3738687],
         }
     )
    ```
@@ -111,17 +113,16 @@ Regardless, here are some simple pointers:
    Again practice testing on pure Python first before jumping straight into the complexity ocean.
    Similarly, practice on things with smaller scope at first.
 
-1. Be wary of the scope.
-   With too many steps and too much logic, you might have to make your tests extremely permissive.
+1. Be wary of the scope: with too many steps and too much logic, you might have to make your tests extremely permissive.
    For example, just checking that you have more rows in your dataframe after 30 transformations is unlikely to be highly informative...
 
-Again, combining those ideas requires a fairly decent bit of expertise to determine the seams / separations in your coding where to make testing easier.
+Again, combining those ideas requires a fairly decent bit of expertise to determine the seams / separations in your code to make testing easier.
 
 ## Testing At Larger Scale
 
 There is a sort of opposition between scale and ease of applying TDD principles.
 Indeed the cornerstone of a good testing strategy is **to obtain a fast, reliable and deterministic feedback** that allows the developer to have confidence that the proposed changes are safe to release.
-Accounting for all use-cases in the integration and acceptance steps would make the testing unnecessarily slow, bulky and probably as useful as a statement from Sam Altman.
+Accounting for all use-cases in the integration and acceptance steps would make the testing unnecessarily slow, bulky and probably as useful as a statement from Sam Altman on AGI.
 
 ### What About Integration Testing?
 
@@ -130,9 +131,11 @@ The role of integration testing is to make sure that the sub-components and modu
 In the Data Land, integration tests can be usually done by taking a larger chunk of your datasets (plural, because have you ever seen a project with just one...).
 For example in Machine Learning workflows, you can try to pass the smallest possible amount of data through your preprocessing, then assert that you indeed got rid of certain columns, managed to remove nulls in certain others.
 
-You can then continue passing this small sample through your training and at least make sure that the training is able to start. There is a tremendous difference between fully automating this and using a pseudo manual verification (either inside a notebook, or via a CLI that you might forget to type).
+You can then continue passing this small sample through your training and at least make sure that the training is able to start.
+There is a tremendous difference between fully automating this and using a pseudo manual verification (either inside a notebook, or via a CLI that you might forget to type).
 
-Again the point here, is to ensure that preprocessing, training, evaluation and similar components can feed into each other, not to talk about model performance, nor to tune hyper-parameters.
+Again the point here, is to ensure that preprocessing, training, evaluation and similar components can feed into each other.
+We are not talking about model performance, nor hyper-parameters tuning.
 
 ### Acceptance Testing In The Data World a.k.a Evaluation?
 
@@ -180,7 +183,8 @@ And who knows, you could accidentally end up with a dashboard in which the numbe
 ## Conclusion
 
 This glorious landscape made of lying dashboards, misleading analyses, and an astonishing 80-90% of machine learning projects that die without reaching production, are just a clear sign that our profession still lacks discipline.
-We will need to incorporate better practices in our work, which may take many different forms but I am sure that testing will be a part of it.
+We need to incorporate better practices in our work.
+It may take many different forms but I am sure that testing will and should be a part of it.
 
 Certainly, there are specific issues with data science that make it more difficult to test.
 Granted, you might not know if you are going to keep that freshly-made 500-line analysis.
