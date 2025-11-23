@@ -185,26 +185,6 @@ Reminder: the features of good unit tests are: _fast, deterministic, reproducibl
     If possible, use a small side project at work where your hands are free to move, safe from the nasty hands of a greedy product manager.
     :::
 
-1.  Please be sure to wait until you discover some catastrophic production failure before incorporating any kind of testing strategy.
-    You want to lose financial transactions or have a very strong bias in your model exposed to your users? That will motivate you.
-    Imagine after 6 months of crunching and regurgitating code, saying to your Product Manager that suddenly you want to write tests because one day you woke up and decided you cared about quality (hopefully after reading this rant).
-
-    Now imagine that at the start of your project, you said to that blissfully unaware PM: "There shall be a test for every bit of code produced, and no test means no code, means no feature!"
-    The only possible answer for that PM will be: "Amen."
-
-    ::: {.callout-tip}
-
-    ### Solution
-
-    Start adopting a testing strategy as soon as possible in the project's lifetime, and hold onto it like your grandma holds onto the steering wheel while plowing through a crowd.
-    In the extremely likely case of a legacy project, you must be aware that some bits will be impossible to test.
-    This is where having practiced in isolation first (step 1.) will save you on more than a couple of occasions:
-
-    - Find the separations inside the codebase where testing is possible in isolation; move it apart from the rest of the junk.
-    - Test the newly produced code.
-
-    :::
-
 1.  The things you'll try to test at first will probably be too large, and the scope poorly defined.
     You can try to test the thing that has 10 input parameters and 3 different possible output types.
     Sure, you can try...
@@ -228,6 +208,26 @@ Reminder: the features of good unit tests are: _fast, deterministic, reproducibl
     Do not jump directly to the core of the functionalities; start with the simple things and let the behavior progressively emerge from the iterative process.
     Let's take an idiotic example: imagine you want to sort elements of a list.
     Rather than giving a list of 10 numbers and making sure they are sorted in the end, start by passing an empty list (Great! We just found an edge-case!), then perhaps a list with one element (shocker, input and output should be the same...).
+    :::
+
+1.  Once you get the basics, please be sure to wait until you discover some catastrophic production failure before incorporating any kind of testing strategy.
+    You definitely want to lose financial transactions first or have a very strong bias in your model exposed to your users, that will motivate you.
+    Now let's back up a bit, and imagine after 6 months of crunching and regurgitating code, you're saying to your Product Manager that suddenly you want to write tests because one day you woke up and decided you cared about quality (hopefully after reading this rant).
+
+    Now imagine that at the start of your project, you said to that blissfully unaware PM: "There shall be a test for every bit of code produced, and no test means no code, means no feature!"
+    The only possible answer for that PM will be: "Amen."
+
+    ::: {.callout-tip}
+
+    ### Solution
+
+    Start adopting a testing strategy as soon as possible in the project's lifetime, and hold onto it like your grandma holds onto the steering wheel while plowing through a crowd.
+    In the extremely likely case of a legacy project, you must be aware that some bits will be impossible to test.
+    This is where having practiced in isolation first (step 1.) will save you on more than a couple of occasions:
+
+    - Find the separations inside the codebase where testing is possible in isolation; move it apart from the rest of the junk.
+    - Test the newly produced code.
+
     :::
 
 1.  Please make sure to make your tests as slow, flaky, and brittle as possible by systematically reading from the disk or, worse, the network or the database.
@@ -280,11 +280,14 @@ The purpose of this rant is not to help the greedy manager piling up more tasks 
 My goal is to give you tools and feedback that have been shown to reduce mental workload and make projects more manageable.
 I want you to be able to free some time to reflect on our own data science practices.
 
-A basic understanding of the properties around testing is probably the best chance we have to integrate quality into data science.
-This will allow us, and also be required, in order to kill dangerous or useless projects as soon as possible and select the ones that should live.
-We are definitely going to need it if we want to do anything remotely useful in our society.
+I don't necessarily want to you to use TDD everywhere.
+But it is one the fundamentals of software engineering, and like any basic move, one should master it before claiming they don't need it.
 
-We will see next time the specifics around testing in data science, but in the meantime, let's keep in mind:
+Mastering the fundamentals of testing is probably the best chance we have to integrate quality into data science.
+This much needed desire for quality will allow us to kill dangerous or useless projects from the start and select the ones that should live.
+We are definitely going to require that if we want to do anything remotely useful in our society.
+
+And for that, we will see next time the specifics of testing in data science, but in the meantime, let's keep in mind:
 
 > Primum Non Nocere
 
