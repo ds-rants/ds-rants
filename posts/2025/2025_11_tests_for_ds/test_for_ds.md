@@ -9,7 +9,6 @@ image: image.png
 # number-sections: true
 # number-depth: 3
 ---
-
 ![](image.png){fig-align="center" width="80%"}
 
 This is the second part of a larger rant on tests with the first part available [here](../../2025/2025_11_yall_motherfuckers_need_tests/index.md).
@@ -17,21 +16,23 @@ This is the second part of a larger rant on tests with the first part available 
 In the first parts I mainly addressed the canonical definitions of testing, the typical difficulties that arise, and potential strategies to progressively get better at testing.
 By now, with the bold assumption that you possess a shred of common sense (and survival instinct), you should at least have a strong feeling that testing in data science should have a much greater importance, to say the least.
 
-But sadly, there will always be some junky data scientist snorting LinkedIn posts and drunk on Jeff Bezos' apocryphal success stories, to tell you how special his work is, and how testing does not work for him.
-Despite my strong desire to pulverize said person on the spot and curse all their family branches for the next 13 generations, I will momentarily refrain from violence.
+But sadly, there'll always be some junky data scientist snorting LinkedIn posts and drunk on Jeff Bezos' apocryphal success stories, to tell you how special his work is, and how testing does not work for him.
+Despite my strong desire to vaporize said person on the spot and curse all their family branches for the next 13 generations, I will momentarily refrain from violence.
 
-Instead I will try to address some reasonable objections one could raise regarding quirks and specificities that make testing in the data world trickier.
-But don't mistake this moment of kindness for any form of weakness, at the end you will have no excuses left.
-
+Instead I'll try to address some reasonable objections one could raise regarding quirks and specificities that make testing in the data world trickier.
+But don't mistake this moment of kindness for any form of weakness, at the end you'll have no excuses left.
 
 ## The Specific Problems With Testing In Data Science
 
 ### The Hidden Forms Of Couplings
 
-As mentioned previously for the ones sleeping in the back of the classroom, data scientists largely deal with large collections of records.
+As mentioned previously for the ones sleeping in the back of the classroom, data scientists largely deal with large amounts of... data.
+This means the first action is typically to pull something from a database (lucky you), or read a decently structured CSV (we all have to eat), a manually filled excel file (fly you fools!) or way worse, and believe me you don't want to know.
+Do you remember what I said about testing, let alone TDD, being difficult with I/O and external coupling?
 
-Writing tests in data science is particularly difficult because most of the objects we deal with are collections of items, usually quite complex.
-Those items are usually independent only in the best case scenarios but most likely related to each other in some kind of nasty way.
+In addition, the testing process is particularly difficult because most of the objects we deal with are collections of items, usually quite complex.
+Now add a sprinkle of types and object structures which are usually looser than you own mother morals.
+On top of that, these items are usually independent only in the best case scenarios but most likely related to each other in some kind of nasty way.
 How many times did you have to do an analysis in which on record at a given time strongly influence what was to be done on surrounding elements, but only until variable B changes to a different value?
 
 You don't believe me? Let's assume for ungodly reasons, that you can only use 50% of your dataset for training your model, are you keeping the latest 50%, the oldest, or randomly discarding data?
@@ -40,11 +41,10 @@ Even if we strip out this made-up convoluted scenario, I cannot recall, since I 
 This question can remain largely secondary in the pure 'developer' world.
 Indeed, as long as the objects themselves remain valid and the code processing them remains correct, then the system is working properly.
 This is a strong yet hidden form of coupling which is difficult to circumvent in automated tests but is a major concern for any data science workflow.
-It is not the only one though.
+And it has only just begun...
 
 ### Issues With Dataframe-Like Testing And Remediation Strategies
 
-As mentioned previously for the ones sleeping in the back of the classroom, data scientists largely deal with large collections of records.
 For a data scientist, writing meaningful unit-tests may require decent amount of boilerplate even for some simple data and light transformations.
 This assumes a processing done largely on some kind of dataframe/array (which will encompass 95% of the `pandas` and `numpy` junkies).
 
@@ -62,6 +62,8 @@ daily_awesome_calculations = (
 ```
 
 If not please go see [here](../../2025/2025_04_13_your_pandas_code_is_bad/index.qmd) and [there](../../2025/2025_04_28_angry_pandas_guide/angry_pandas_tutorial.qmd).
+In the absence of any kind of improvement on this matter, I will eagerly greet you with a shovel.
+You have been warned...
 
 Here with the use of [DSL](https://en.wikipedia.org/wiki/Domain-specific_language) (Domain-specific language) like `pandas` / `polars`/ `numpy`, it can be tricky to determine if you are actually testing **your custom** logic or re-testing the methods of the library that are already (hopefully) battle-tested.
 
@@ -69,7 +71,6 @@ For a dataframe test that is not excruciating to write, one needs to strip away 
 This requires the ability to use the smallest amount of rows and columns.
 A good rule of thumb is usually 2-Rows \* x-Columns or 3-Rows \* x-Columns to get you started.
 If you can manage with only one row, you should!
-Expressing this again requires a fairly decent bit of expertise to determine the seams / separations in your coding where to make testing easier.
 
 Regardless, here are some simple pointers:
 
@@ -90,7 +91,7 @@ Regardless, here are some simple pointers:
    given = pd.DataFrame(
         {
             "station": ["a", "b"],
-            "temperature": [1.1, 2.3],
+            "temperature_in_c": [1.1, 2.3],
         }
     )
    ```
@@ -101,7 +102,7 @@ Regardless, here are some simple pointers:
    given = pd.DataFrame(
         {
             "station": ["NZ_EXT_1", "DE_INT_42"],
-            "temperature": [1.132554, 2.3738687],
+            "temperature_in_c": [1.132554, 2.3738687],
         }
     )
    ```
@@ -114,11 +115,13 @@ Regardless, here are some simple pointers:
    With too many steps and too much logic, you might have to make your tests extremely permissive.
    For example, just checking that you have more rows in your dataframe after 30 transformations is unlikely to be highly informative...
 
+Again, combining those ideas requires a fairly decent bit of expertise to determine the seams / separations in your coding where to make testing easier.
+
 ## Testing At Larger Scale
 
 There is a sort of opposition between scale and ease of applying TDD principles.
 Indeed the cornerstone of a good testing strategy is **to obtain a fast, reliable and deterministic feedback** that allows the developer to have confidence that the proposed changes are safe to release.
-Accounting for all use-cases in the integration and acceptance steps would make the testing unnecessarily slow, bulky and in the end useless.
+Accounting for all use-cases in the integration and acceptance steps would make the testing unnecessarily slow, bulky and probably as useful as a statement from Sam Altman.
 
 ### What About Integration Testing?
 
@@ -137,7 +140,8 @@ Traditionally, acceptance tests are designed to verify the bare minimum working 
 Similarly, they also tend to appear later through the life of IT projects, once the scope become clearer.
 
 With them you should be able to obtain a definitive answer to the question: "Is my system in a working state so that it can be deployed?"
-In that regard, data science systems make no exceptions; this is where you will be able to plug in your database, buckets and APIs.
+In that regard, data science systems make no exceptions.
+This is where you will be able to plug in your database, buckets and APIs.
 
 In ML workflows, the automated evaluation of a model's performance, comparison with a previously deployed model can usually be a good approach for acceptance testing.
 However the scope of this question is so large that tons of books have been written on the subject, and sadly, this blog has very little to offer in comparison (especially on the politically correct side of things...).
@@ -159,9 +163,15 @@ In Python, few packages have been developed to help you use a TDD workflow in da
 One issue is perhaps that they tend to be quite different from the DSL you are working with. (While Kent Beck says that a testing framework should be in the same language as the code for TDD).
 Another problem is that none of them has managed to obtain the same reach and influence as the SQL based, with the notable exceptions of `great-expectations` (which can be a little quirky and slow to use) and the great `pydantic` (more oriented for APIs).
 The catch being again that they are not necessarily fitted for TDD in Data Science.
-Other defensive analysis packages for `pandas` such as `engarde` or `bulwark` are not maintained anymore.
-They also suffer from a decorator oriented approach and very sparse type-hinting, that is again not ideal for TDD.
-On the `polars` side, there is one obscure package called `pelage`, fairly similar to dbt tests, but the level of adoption seems to be currently on par with the number of working brain cells for the average Elon Musk fanboy...
+
+Other defensive analysis packages for `pandas` such as `engarde` or `bulwark` receive less maintenance than your great-great-great-grandparent tombs.
+They also have a MAJOR design flow, because someone thought it would be a good idea to promote a decorator oriented approach.
+Clearly simple designs are for weak-minded people.
+Similarly, type-hints which have been around since 2015, have been carefully omitted to ensure that after one step my IDE has no fucking idea of the object type it is currently dealing with.
+That is again not ideal for TDD.
+
+On the `polars` side, there is one obscure package called `pelage`, providing fairly similar functionality to dbt tests.
+Thanks to the total absence of marketing, the level of adoption is currently on par with the number of working brain cells for the average Elon Musk fanboy...
 
 In the end, if you have the possibility to jam as many tests as you can within your SQL pipelines, please knock yourself out!
 Worst case scenario, your analytics tables might end up having an actual working primary key, which would be a nice change once in a while... just saying...
@@ -169,10 +179,11 @@ And who knows, you could accidentally end up with a dashboard in which the numbe
 
 ## Conclusion
 
-This glorious landscape made of lying dashboards, misleading analyses, and an astonishing 80% of machine learning projects that die without reaching production, are just a clear sign that our profession still lacks discipline.
+This glorious landscape made of lying dashboards, misleading analyses, and an astonishing 80-90% of machine learning projects that die without reaching production, are just a clear sign that our profession still lacks discipline.
 We will need to incorporate better practices in our work, which may take many different forms but I am sure that testing will be a part of it.
 
-Sure, there are specific issues with data science that make it more difficult to test. Granted, you might not know if you are going to keep that freshly-made 500-line analysis.
+Certainly, there are specific issues with data science that make it more difficult to test.
+Granted, you might not know if you are going to keep that freshly-made 500-line analysis.
 But let's be real for a minute, the fact that your 500-lines have not been tested is probably a good reason why it will end up down the drain.
 The main reason you are probably not testing is that you have no idea how to do it on anything beyond FizzBuzz, let alone in a TDD workflow.
 Testing in Data Science is hard but do not kid yourself, it is doable and should be done.
