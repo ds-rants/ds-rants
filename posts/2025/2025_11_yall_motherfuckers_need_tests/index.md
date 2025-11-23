@@ -1,13 +1,9 @@
 ---
 title: "Y'All Motherfuckers Need Tests"
 author: "DS Rants"
-date: "2025-10-20"
+date: "2025-11-20"
 categories: [data science, software engineering, tests, best practices]
 image: image.png
-# draft: true
-draft-mode: visible
-# number-sections: true
-# number-depth: 3
 ---
 
 ![](image.png){fig-align="center" width="80%"}

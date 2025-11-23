@@ -1,7 +1,7 @@
 ---
 title: "Y'all Motherfuckers Need Tests, So Stop Making Lazy Excuses"
 author: "DS Rants"
-date: "2025-10-20"
+date: "2025-11-20"
 categories: [data science, software engineering, tests, best practices]
 image: image.png
 ---
