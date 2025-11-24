@@ -202,3 +202,11 @@ We should strive for better quality standards if we ever want to be considered *
 
 In the end, mastery is what we need. With this demonstration, I hope you are now as absolutely convinced as I am of the imperious necessity of importing good testing strategies into Data Science.
 Otherwise, it's better if you and I never find ourselves in the same room, because I will definitely reach for that shovel.
+
+### Good Reading {.unnumbered}
+
+- Modern Software Engineering - David Farley - ISBN: 9780137314867
+- Extreme Programming Explained: Embrace Change - Beck, Kent; Andres, Cynthia - ISBN 10: 0321278658 / ISBN 13: 9780321278654
+- Team Topologies - Matthew Skelton; Manuel Pais - ISBN: 9781966280002
+- Accelerate: The Science of Lean Software and DevOps - Gene Kim, Jez Humble, Nicole Forsgren - ISBN 10: 1942788339 / ISBN 13: 9781942788331
+- Test Driven Development: By Example - Kent Beck - ISBN: 9780321146533
