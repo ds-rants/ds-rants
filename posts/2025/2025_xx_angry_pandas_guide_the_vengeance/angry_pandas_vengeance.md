@@ -57,7 +57,7 @@ ugly_as_fuck_df = ugly_as_fuck_df.merge(
 Do you understand that your criminal and deviant mind has been feeding your poor DataFrame with its own offsprings?
 Whenever you take a aggregated DF derived from a parent,and merge it back with the parent, you are committing a cardinal sin.
 In reality, you're just trying to create a new column with the result of aggregation.
-There is a name for this; this is called a `window function` in good ol' SQL and in pandas it's called a `groupby().transform()`
+There is a name for this; this is called a __window function__ in good ol' SQL and in pandas it's called a `groupby().transform()`.
 
 ### The Chained Solution
 
@@ -68,7 +68,11 @@ This is how you would do it:
 ```python
 my_new_cool_df = (
     ugly_as_fuck_df.assign(
-        avg_blood_pressure=lambda df: df.groupby(["patiend_id", "year"])["blood_pressure_value"].transform("mean")
+        avg_blood_pressure=lambda df: (
+            df.groupby(["patiend_id", "year"])
+            ["blood_pressure_value"]
+            .transform("mean")
+        )
     )
 )
 ```
@@ -78,7 +82,11 @@ For the slow data scientists with limited cerebrospinal fluid circulation and st
 ```python
 ugly_as_fuck_df == ...
 
-avg_blood_pressure = ugly_as_fuck_df.groupby(["patiend_id", "year"])["blood_pressure_value"].transform("mean")
+avg_blood_pressure = (
+    ugly_as_fuck_df.groupby(["patiend_id", "year"])
+    ["blood_pressure_value"]
+    .transform("mean")
+)
 
 ugly_as_fuck_df["avg_blood_pressure"] = avg_blood_pressure
 ```
@@ -114,8 +122,7 @@ Have you ever done something like this:
 
 ```python
 my_awesome_df["string_column"].apply(lambda x: x.strip().split(" "))
-
-my_awesome_df["string_column"].apply(lambda x: x.strip().split(" "))
+my_awesome_df["datetime_column"].apply(lambda x: x.date())
 ```
 
 Have you ever heard of vectorized operation?
@@ -123,9 +130,52 @@ They are the ones that allow to process Gigabytes of data in few seconds, yes I 
 And do you know how ludicrous do you look?
 In order to used these vectorized operations, rather than rushing for the `.apply`, all you had to do was to write `.str.something()` or `.dt.something_else()` instead.
 
+```python
+my_awesome_df["string_column"].str.strip().str.split(" ")
+my_awesome_df["datetime_column"].dt.date()
+```
+
+Did your foggy brain saturated with scrum vapors happen to notice that the `.str` and `.dt` accessors made the stupid-ass names "string_column" and "datetime_column" completely irrelevant?
 Do you know understand how stupid you looks with your automated use of `.apply()`?
-You exhibited a typical default flight response like a screeching libertarian billionaire confronted to the idea that taxes are actually necessary to educat people, and that he is going to have to pay.
+You exhibited a typical default flight response at the idea of looking at the documentation.
+You behaved like a screeching libertarian billionaire confronted to the idea that taxes are actually necessary to educate people, and that he is going to have to pay.
+You were literally one keystroke away from producing something useful and still managed to fail...
 
-Anyway go read the damn [documentation about pandas datetimes and derived](https://pandas.pydata.org/docs/user_guide/timeseries.html).
+I am impressed by such dedication towards mediocrity. Anyway go read the damn [documentation about pandas datetimes and derived](https://pandas.pydata.org/docs/user_guide/timeseries.html), before we head to the next abomination.
 
-### Apply On Multiple Columns
+### Apply(..., index=1) Is For Zeroes
+
+Do you really want me to start digging a grave for your challenged neo-cortex that went on permanent vacation?
+This a for loop in disguise, and you know what happens to people that use for loops around here don't you?
+Great, at least you seem to have developed enough survival instinct to calm my anger...for now!
+
+From now on, you will have only one God and its glorious name is __Vectorization__!
+You will seek its favors at all times when you write `pandas` code.
+This will be your sole purpose in life, your only hope for salvation.
+You will follow the holy scriptures derived from the mathematical operators or the built-in `.dt` and `.str` accessors.
+You may _very sparsely_ consult a scripture from the nearby `numpy` church, when no solace can be found
+in the original divine texts.
+Beware, many heretics have abused the alternative scriptures and have fostered a blasphemous unreadable hybrid, for which mercy compels us to shoot on sight.
+
+Once you do everything we mentioned so far, you code will be largely free from vomit projections or gangrenous infections.
+As long as you avoid those pitfalls carefully, Pandas will become quite fast.
+To give you a ballpark idea, you should be able to process several GBs of __real-life data__ in a matter of seconds.
+This freedom will leave some space to address some little shenanigans.
+
+### Quirks Of Apply On Multiple Columns
+
+Now is time for a little confession, we're approaching the only instance where I might, maybe, perhaps acknowledge distantly that method chaining is slightly less readable than traditional OOP syntax. Here is the traditional way:
+
+Now, applying the same transformation on multiple columns using pure method chaining requires a combination of lambdas, dict-comprehension and unpacking...which may look a little cabalistic for unaccustomed eyes:
+
+Don't gloat you overly inefficient entshitificator, this is not a moment of weakness from me.
+The atrocities you committed and indulged in disqualify you from making any desirable comment!
+The only reason for this is pandas venerable age and sadly the absence of a unified and clear syntax. But not all hope is lost as larger animals will demonstrate much later...
+
+> But you just used for loops with a pandas DataFrame and you told me not to! That's not fair!
+
+Sigh... Do I really have to explain everything?
+What your eyes equipped with the sharp intelligence of a dead fish just witnessed in the former example, is indeed a for loop.
+And this for loop is used to create a **_finite collection of functions_**, not to iterate over the whole fucking DataFrame, nor to perform 4 level of nasty nested group-by operations, that even a moronic ape smashing on a keyboard would not dare to do!
+
+## Final Thoughts
