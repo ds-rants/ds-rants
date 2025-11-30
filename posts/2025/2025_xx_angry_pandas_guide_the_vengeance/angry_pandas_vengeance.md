@@ -14,27 +14,28 @@ draft-mode: visible
 
 Beware I have returned and I'm looking for blood...
 
-It is time to revisit the pandas hell hole, and I'll bring you all down there with me.
+It is time to revisit the _pandas_ hell hole, and I'll bring you all down there with me.
 You have no luck, I took methamphetamine instead Xanax, so I'm up for intellectual murder in all kinds of degrees.
 In case you have intellectual IQ of a burnt sushi, I will repeat once more: what we did last time was no optimization!
 We just did the bare minimum such that our code does not utterly suck, just enough for me to keep a human form and not bite your head off.
 
 Let's recap for those who sniffed glue and ate the memo before reading it.
-They are clear signs for a pandas code that should be drenched in gasoline and light on fire:
+They are clear signs for a _pandas_ code that should be drenched in gasoline and light on fire:
 
 1. For loops because they literally transform your computer into a 1950's toaster, just producing waste heat.
 2. The infamous `inplace=True` because they don't save memory and introduce horrible mutations like your horrible inbreed family.
 
-On the opposite side, in the beautiful pandas world, you use **method chaining** to perform successive transformations, and there you can use a `lambda` to reference your **current DataFrame** in methods such as `.assign()` or `.loc[]`
+On the opposite side, in the beautiful _pandas_ world, you use **method chaining** to perform successive transformations.
+There you can use a `lambda` to reference your **current DataFrame** in methods such as `.assign()` or `.loc[]`.
 
 Now we're going to see some more anti-patterns that will demonstrate that apparently a simple google search is beyond your reach.
-After killing the King, today we're killing the Queen and and the whole court, i.e. self-joins and `.apply()`.
+After killing the King, today we're killing the Queen and and the whole court, i.e. the self-joins and `.apply()`.
 
 ## The Nasty Inbreeding Caused By Self-Joins
 
 ### The Diagnostic
 
-You need to recognized this horrendous habit of yours. It is a pandas anti-pattern demonstrating clearly that you are just vomiting code.
+You need to recognized this horrendous habit of yours. It is a _pandas_ anti-pattern demonstrating clearly that you are just vomiting code.
 Here is how it will look in the wild:
 
 ```python
@@ -57,7 +58,7 @@ ugly_as_fuck_df = ugly_as_fuck_df.merge(
 Do you understand that your criminal and deviant mind has been feeding your poor DataFrame with its own offsprings?
 Whenever you take a aggregated DF derived from a parent,and merge it back with the parent, you are committing a cardinal sin.
 In reality, you're just trying to create a new column with the result of aggregation.
-There is a name for this; this is called a __window function__ in good ol' SQL and in pandas it's called a `groupby().transform()`.
+There is a name for this; this is called a **window function** in good ol' SQL and in _pandas_ it's called a `groupby().transform()`.
 
 ### The Chained Solution
 
@@ -108,7 +109,7 @@ You can even supply your own aggregation functions as long as they return either
 
 ## Killing All The Apply
 
-Now that we killed the Queen, the self-joins, which serve no-purpose at all except begging for more brioche like a product owner begs for more features, we have to to take care of the court: the `.apply()`
+Now that we killed the Queen, the self-joins, which serve no-purpose at all except begging for more brioche like a product owner begs for more features, we have to to take care of the court: the `.apply()`.
 
 Like princesses and princes of the old days, most of them are lazy, parasitic, and notoriously harmful for the whole country, and thus should be eliminated without any shred of regret.
 Yet, on very few instances, some might hide a little bit of common sense, and one should just tolerate them, after stripping them of their privileges of course!
@@ -141,7 +142,7 @@ You exhibited a typical default flight response at the idea of looking at the do
 You behaved like a screeching libertarian billionaire confronted to the idea that taxes are actually necessary to educate people, and that he is going to have to pay.
 You were literally one keystroke away from producing something useful and still managed to fail...
 
-I am impressed by such dedication towards mediocrity. Anyway go read the damn [documentation about pandas datetimes and derived](https://pandas.pydata.org/docs/user_guide/timeseries.html), before we head to the next abomination.
+I am impressed by such dedication towards mediocrity. Anyway go read the damn [documentation about _pandas_ datetimes and derived](https://pandas.pydata.org/docs/user_guide/timeseries.html), before we head to the next abomination.
 
 ### Apply(..., index=1) Is For Zeroes
 
@@ -149,33 +150,102 @@ Do you really want me to start digging a grave for your challenged neo-cortex th
 This a for loop in disguise, and you know what happens to people that use for loops around here don't you?
 Great, at least you seem to have developed enough survival instinct to calm my anger...for now!
 
-From now on, you will have only one God and its glorious name is __Vectorization__!
-You will seek its favors at all times when you write `pandas` code.
+From now on, you will have only one God and its glorious name is **Vectorization**!
+You will seek its favors at all times when you write _pandas_ code.
 This will be your sole purpose in life, your only hope for salvation.
 You will follow the holy scriptures derived from the mathematical operators or the built-in `.dt` and `.str` accessors.
-You may _very sparsely_ consult a scripture from the nearby `numpy` church, when no solace can be found
-in the original divine texts.
+
+You may _**very sparsely**_ consult a scripture from the nearby _numpy_ church, when no solace can be found in the original divine texts.
 Beware, many heretics have abused the alternative scriptures and have fostered a blasphemous unreadable hybrid, for which mercy compels us to shoot on sight.
+Especially, you will burn at the stake if I see any instance of nested `np.where()`, because we have seen the light of the glorious [case_when in v2.2.0](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.case_when.html) (replacing the venerable [np.select](https://numpy.org/devdocs/reference/generated/numpy.select.html)).
 
 Once you do everything we mentioned so far, you code will be largely free from vomit projections or gangrenous infections.
-As long as you avoid those pitfalls carefully, Pandas will become quite fast.
-To give you a ballpark idea, you should be able to process several GBs of __real-life data__ in a matter of seconds.
-This freedom will leave some space to address some little shenanigans.
+As long as you avoid those pitfalls carefully, _pandas_ will become quite fast.
+To give you a ballpark idea, you should be able to process several GBs of **real-life data** in a matter of seconds, yes I said seconds!
+If you reach such a state, an encounter with your code will not induce any ferocious fury fit that typically have me reach for a flamethrower, but may actually leave me in a decent mood.
+
+This leave us in good dispositions to talk about some edge-cases.
 
 ### Quirks Of Apply On Multiple Columns
 
-Now is time for a little confession, we're approaching the only instance where I might, maybe, perhaps acknowledge distantly that method chaining is slightly less readable than traditional OOP syntax. Here is the traditional way:
+Now is time for a little confession, we're approaching the only instance where I might, maybe, perhaps acknowledge distantly that method chaining is slightly less readable than traditional OOP syntax. Here is a quick example:
 
+```python
+import pandas as pd
+import seaborn as sns
+
+
+def z_score(col: pd.Series) -> pd.Series:
+    return (col - col.mean()) / col.std()
+
+```
+Here is the traditional way :
+
+```python
+diamonds = sns.load_dataset("diamonds")
+diamonds[["carat", "depth", "table", "price"]] = diamonds[
+    ["carat", "depth", "table", "price"]
+].apply(z_score)
+diamonds.head()
+```
 Now, applying the same transformation on multiple columns using pure method chaining requires a combination of lambdas, dict-comprehension and unpacking...which may look a little cabalistic for unaccustomed eyes:
+
+```python
+diamonds = sns.load_dataset("diamonds").assign(
+    **{
+        col: lambda df: z_score(df[col])
+        for col in ["carat", "depth", "table", "price"]
+    }
+)
+diamonds.head()
+```
+Let's decompose this quickly:
+
+- `**` to transform the dictionary in kwargs,
+- then the column name and a lambda to reference the **current dataframe**,
+- the function to use inside the body of the lambda,
+- the columns to iterate over which define our dict-comprehension,
+- you can even add a prefix/suffix by swapping the dictionary key with a f-string: `f"prefix_{col}"`/`f"{col}_suffix"`.
+
+Again I will acknowledge that this may not be trivial to write, but at least I am sure you learnt a thing or two.
 
 Don't gloat you overly inefficient entshitificator, this is not a moment of weakness from me.
 The atrocities you committed and indulged in disqualify you from making any desirable comment!
-The only reason for this is pandas venerable age and sadly the absence of a unified and clear syntax. But not all hope is lost as larger animals will demonstrate much later...
+The only reason for this is _pandas_ venerable age and sadly the absence of a unified and clear syntax. But not all hope is lost as larger animals will demonstrate much later...
 
-> But you just used for loops with a pandas DataFrame and you told me not to! That's not fair!
+> But Sir Rants, you just used for loops with a _pandas_ DataFrame and you told me not to! That's not fair!
 
 Sigh... Do I really have to explain everything?
-What your eyes equipped with the sharp intelligence of a dead fish just witnessed in the former example, is indeed a for loop.
-And this for loop is used to create a **_finite collection of functions_**, not to iterate over the whole fucking DataFrame, nor to perform 4 level of nasty nested group-by operations, that even a moronic ape smashing on a keyboard would not dare to do!
+Since your mind is equipped with the agility of a dead bird engulfed in a oil spill, I will articulate this more clearly.
+What you just witnessed in the former example, is indeed a for loop.
+This for loop is used to create a **_finite collection of functions_**, but everything is done by the `.assign()` method.
+This for loop is not involved in any calculation.
+It does not iterate over the whole fucking DataFrame, nor perform 4 levels of nasty nested group-by operations, that even a moronic ape smashing on a keyboard would not dare to do!
+
+### Advanced Apply Operations
 
 ## Final Thoughts
+
+Let's recap one more time how to write _pandas_ that will not trigger the next maintainers of your code to spiral down into depression, hang themselves and/or gouge their eyes out.
+
+1. No ...
+
+   > No fucking for loops, Sir Rants, I learnt the message!
+
+   Good lad!
+
+1. No `inplace=True`, they prevent method chaining and do nothing for memory.
+
+1. Use `lambda df: df...` to reference the current dataframe when filtering or creating new columns.
+1. Do not create DataFrame inbreeding with horrible self-joins. You should use the `groupby().transform()` which are similar to SQL window functions.
+1. The use of `.apply` is typically done be weak minded people who have no clue of the absolute glory of _**Vectorization**_.
+1. The only acceptable places for `.apply` are usually when using the same transformation on multiple columns for sake of readability, or after `.groupby` operations but beware of the complexity demon here!
+1. Any preprocessing of ≈10GBs on the average hardware nowadays should definitely take less a few 10s of seconds.
+   Be extremely skeptic if you reach a minute or above.
+
+If you use this simple rules of thumbs, you will have a code that is not only motherfuckingly fast even for _pandas_ but also extremely readable and debuggable.
+Your coworker will stop despise you when you hand them over some code, your manager will give you the employee of the month trophy and your significant other won't dump your sorry ass
+(The last two promises are only binding for those who believe in politician lies and the tooth-fairy existence).
+
+Again we are not doing any kind of optimization around here, we are just write code that does not suck utterly and that is not a waste of CPU cycles.
+Method chaining is a good way to limit your own ability to do stupid shit, and it keeps you within a decent range of the "optimal" processing time you can hope to have in pure _pandas_.
