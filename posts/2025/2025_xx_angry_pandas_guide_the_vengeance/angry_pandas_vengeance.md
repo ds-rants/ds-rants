@@ -12,7 +12,7 @@ draft: true
 draft-mode: visible
 ---
 
-Beware I have returned and I'm looking for blood...
+Beware I have returned and I'm looking for blood!
 
 It is time to revisit the _pandas_ hell hole, and I'll bring you all down there with me.
 You have no luck, I took methamphetamine instead of Xanax, so I'm up for intellectual murder in all kinds of degrees.
@@ -230,6 +230,26 @@ It does not iterate over the whole fucking DataFrame, nor perform 4 levels of na
 
 ### Advanced Apply Operations
 
+Here we are mostly speaking about the pattern `.groupby().apply()`.
+Again there is some leeway, because on one hand it allows you to perform simply some operations that could be quite complex when written with a different syntax.
+On the other hand, it can become extremely fast a foot-gun loaded with unnecessary complexity, even faster than an executive sabotaging a good product because now it must use AI.
+
+Regardless, use a more straightforward and explicit syntax if possible:
+
+```python
+(
+    fancy_name_because_i_use_method_chaining
+    .groupby(["column_name_1", "column_name_2"])
+    .agg(
+        avg_price=("price", "mean"),
+        avg_price_change=("price", lambda x: x.diff().mean()),
+        awesome_feature=("scores", function_defined_elsewhere),
+    )
+)
+```
+This very expressive syntax is usually a good seatbelt against our own stupidity while being only slightly more verbose.
+But since when is the number of characters you type the bottleneck of your work?
+
 ## Final Thoughts
 
 Let's recap one more time how to write _pandas_ that will not trigger the next maintainers of your code to spiral down into depression, hang themselves, and/or gouge their eyes out.
@@ -239,15 +259,16 @@ Let's recap one more time how to write _pandas_ that will not trigger the next m
    > No fucking for loops, Sir Rants, I learned the message!
 
    Good lad!
+
 1. No `inplace=True`. It prevents method chaining and does nothing for memory.
 1. Use `lambda df: df...` to reference the current dataframe when filtering or creating new columns.
 1. Do not create DataFrame inbreeding with horrible self-joins. You should use the `groupby().transform()` which are similar to SQL window functions.
 1. The use of `.apply` is typically done be weak minded people who have no clue of the absolute glory of _**Vectorization**_.
-1. The only acceptable places for `.apply` are usually when using the same transformation on multiple columns for sake of readability, or after `.groupby` operations but beware of the complexity demon here!
+1. The only places where `.apply` can be tolerated are usually when using the same transformation on multiple columns for sake of readability, or after `.groupby` operations but beware of the complexity demon here!
 1. Any preprocessing of ≈10GBs on average hardware nowadays should definitely take less than a few 10s of seconds.
    Be extremely skeptic if you reach a minute or above.
 
-If you use these simple rules of thumb, you will have a code that is not only motherfuckingly fast even for _pandas_ but also extremely readable and debuggable.
+If you use these simple rules of thumb, you will have a code that is not only surprisingly fast even for _pandas_ but also extremely readable and debuggable.
 Your coworker will stop despising you when you hand them over some code, your manager will give you the employee of the month trophy, and your significant other won't dump your sorry ass
 (The last two promises are only binding for those who believe in politician lies and the tooth-fairy's existence).
 
