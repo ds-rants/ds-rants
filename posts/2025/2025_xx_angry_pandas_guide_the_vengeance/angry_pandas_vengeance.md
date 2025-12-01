@@ -7,7 +7,7 @@ categories:
   - pandas code
   - non-pessimization
   - performance
-# image: image.png
+image: image.png
 draft: true
 draft-mode: visible
 ---
@@ -247,6 +247,7 @@ Regardless, use a more straightforward and explicit syntax if possible:
     )
 )
 ```
+
 This very expressive syntax is usually a good seatbelt against our own stupidity while being only slightly more verbose.
 But since when is the number of characters you type the bottleneck of your work?
 
