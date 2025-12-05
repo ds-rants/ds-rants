@@ -1,7 +1,7 @@
 ---
 title: The Angry Guide To Pandas Code - Applying Vengeance (Part 2)
 author: "DS Rants"
-date: "2025-11-31"
+date: "2025-12-05"
 categories:
   - data science
   - pandas code
