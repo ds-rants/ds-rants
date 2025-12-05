@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="DS Rants">
+<meta name="dcterms.date" content="2025-12-05">
+
+<title>The Angry Guide To Pandas Code - Applying Vengeance (Part 2) – Data Science Rants</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-5d4073339ea55b1ad5ce071f10a273ff.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-9433ce5a74f539ffa23693f38c94ac7f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<meta name="quarto:status" content="draft">
+
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>Draft</div>
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Data Science Rants</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">The Angry Guide To Pandas Code - Applying Vengeance (Part 2)</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">data science</div>
+                <div class="quarto-category">pandas code</div>
+                <div class="quarto-category">non-pessimization</div>
+                <div class="quarto-category">performance</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>DS Rants </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">December 5, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-nasty-inbreeding-caused-by-self-joins" id="toc-the-nasty-inbreeding-caused-by-self-joins" class="nav-link active" data-scroll-target="#the-nasty-inbreeding-caused-by-self-joins">The Nasty Inbreeding Caused By Self-Joins</a>
+  <ul class="collapse">
+  <li><a href="#the-diagnostic" id="toc-the-diagnostic" class="nav-link" data-scroll-target="#the-diagnostic">The Diagnostic</a></li>
+  <li><a href="#the-chained-solution" id="toc-the-chained-solution" class="nav-link" data-scroll-target="#the-chained-solution">The Chained Solution</a></li>
+  </ul></li>
+  <li><a href="#killing-all-the-apply" id="toc-killing-all-the-apply" class="nav-link" data-scroll-target="#killing-all-the-apply">Killing All The Apply</a>
+  <ul class="collapse">
+  <li><a href="#youre-too-dumb-to-press-dot-on-your-keyboard" id="toc-youre-too-dumb-to-press-dot-on-your-keyboard" class="nav-link" data-scroll-target="#youre-too-dumb-to-press-dot-on-your-keyboard">You’re Too Dumb To Press “Dot” On Your Keyboard</a></li>
+  <li><a href="#apply-index1-is-for-zeroes" id="toc-apply-index1-is-for-zeroes" class="nav-link" data-scroll-target="#apply-index1-is-for-zeroes">Apply(…, index=1) Is For Zeroes</a></li>
+  <li><a href="#quirks-of-apply-on-multiple-columns" id="toc-quirks-of-apply-on-multiple-columns" class="nav-link" data-scroll-target="#quirks-of-apply-on-multiple-columns">Quirks Of Apply On Multiple Columns</a></li>
+  <li><a href="#advanced-apply-operations" id="toc-advanced-apply-operations" class="nav-link" data-scroll-target="#advanced-apply-operations">Advanced Apply Operations</a></li>
+  </ul></li>
+  <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts">Final Thoughts</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>Beware I have returned and I’m looking for blood!</p>
+<p>It is time to revisit the <em>pandas</em> hell hole, and I’ll bring you all down there with me. You have no luck, I took methamphetamine instead of Xanax, so I’m up for intellectual murder in all kinds of degrees. In case you have the intellectual IQ of a burnt sushi, I will repeat once more: what we did last time was no optimization! We just did the bare minimum such that our code does not utterly suck, just enough for me to keep a human form and not bite your head off.</p>
+<p>Let’s recap for those who sniffed glue and ate the memo before reading it. There are clear signs for <em>pandas</em> code that should be drenched in gasoline and lit on fire:</p>
+<ol type="1">
+<li>For loops, because they literally transform your computer into a 1950’s toaster, just producing waste heat.</li>
+<li>The infamous <code>inplace=True</code>, because it doesn’t save memory and introduces horrible mutations like in your horrible inbreed family.</li>
+</ol>
+<p>On the opposite side, in the beautiful <em>pandas</em> world, you use <strong>method chaining</strong> to perform successive transformations. There, you can use a <code>lambda</code> to reference your <strong>current DataFrame</strong> in methods such as <code>.assign()</code> or <code>.loc[]</code>.</p>
+<p>Now we’re going to see some more anti-patterns that will demonstrate that, apparently, a simple Google search is beyond your reach. After killing the King, today we’re killing the Queen and the whole court—i.e., the self-joins and <code>.apply()</code>.</p>
+<section id="the-nasty-inbreeding-caused-by-self-joins" class="level2">
+<h2 class="anchored" data-anchor-id="the-nasty-inbreeding-caused-by-self-joins">The Nasty Inbreeding Caused By Self-Joins</h2>
+<section id="the-diagnostic" class="level3">
+<h3 class="anchored" data-anchor-id="the-diagnostic">The Diagnostic</h3>
+<p>You need to recognize this horrendous habit of yours. It is a <em>pandas</em> anti-pattern, demonstrating clearly that you are just vomiting code. Here is how it will look in the wild:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ugly_as_fuck_df <span class="op">=</span> ...</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>stupid_calculation <span class="op">=</span> (</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    ugly_as_fuck_df</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    .groupby([<span class="st">"patiend_id"</span>, <span class="st">"year"</span>])</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    .agg({<span class="st">"blood_pressure_value"</span>: <span class="st">"mean"</span>})</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    .rename(columns<span class="op">=</span>{<span class="st">"blood_pressure_value"</span>: <span class="st">"avg_blood_pressure"</span>})</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>ugly_as_fuck_df <span class="op">=</span> ugly_as_fuck_df.merge(</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    stupid_calculation,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    on<span class="op">=</span>[<span class="st">"patient_id"</span>, <span class="st">"year"</span>],</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Do you understand that your criminal and deviant mind has been feeding your poor DataFrame with its own offspring? Whenever you take an aggregated DF derived from a parent and merge it back with the parent, you are committing a cardinal sin. In reality, you’re just trying to create a new column with the result of an aggregation. There is a name for this: this is called a <strong>window function</strong> in good ol’ SQL, and in <em>pandas</em> it’s called a <code>groupby().transform()</code>.</p>
+</section>
+<section id="the-chained-solution" class="level3">
+<h3 class="anchored" data-anchor-id="the-chained-solution">The Chained Solution</h3>
+<p>The <code>.transform()</code> method will produce an output with “the same indexes as the original object filled with the transformed values” meaning with the same DataFrame shape as <strong>before</strong> the <code>.groupby()</code>.</p>
+<p>This is how you would do it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>my_new_cool_df <span class="op">=</span> (</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    ugly_as_fuck_df.assign(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        avg_blood_pressure<span class="op">=</span><span class="kw">lambda</span> df: (</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>            df.groupby([<span class="st">"patient_id"</span>, <span class="st">"year"</span>])</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>            [<span class="st">"blood_pressure_value"</span>]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>            .transform(<span class="st">"mean"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>For the slow data scientists with limited cerebrospinal fluid circulation and still drinking the OOP/imperative Kool-Aid, the code above will produce a similar output to the following one (but without the intermediate results saved inside moronic variables):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ugly_as_fuck_df <span class="op">=</span> ...</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>avg_blood_pressure <span class="op">=</span> (</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    ugly_as_fuck_df.groupby([<span class="st">"patient_id"</span>, <span class="st">"year"</span>])</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"blood_pressure_value"</span>]</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    .transform(<span class="st">"mean"</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>ugly_as_fuck_df[<span class="st">"avg_blood_pressure"</span>] <span class="op">=</span> avg_blood_pressure</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Pathetic… You were close to greatness… My disappointment is immeasurable…</p>
+<p>Do you see how concise, clearer, and cooler the first version is? You are clearly expressing your motherfucking intent, which is:</p>
+<ul>
+<li>creating (assigning) a new column</li>
+<li>derived from “blood_pressure_value” aggregated with the “mean” function</li>
+<li>this calculation is done independently for each combination of “patiend_id” and “year”.</li>
+</ul>
+<p>Do you want more awesomeness in your awesomeness because I’m feeling generous? Your function inside the <code>.transform</code> will work if it returns a single value (like mean, min, max) <strong>OR</strong> if it returns a Series with the same size as the current group (like cumsum). In both cases, the <code>.transform</code> will be able to do the joining part for you and put the result of the calculation back with matching keys!</p>
+<p>You can even supply your own aggregation functions as long as they return either a single value or an output with the same size (number of rows) as the input. But don’t start pulling some stupid-ass stunts like the ones we’re going to address next…</p>
+</section>
+</section>
+<section id="killing-all-the-apply" class="level2">
+<h2 class="anchored" data-anchor-id="killing-all-the-apply">Killing All The Apply</h2>
+<p>Now that we killed the Queen, the self-joins, which serve no purpose at all except begging for more brioche like a product owner begs for more features, we have to take care of the court: the <code>.apply()</code>.</p>
+<p>Like princesses and princes of the old days, most of them are lazy, parasitic, and notoriously harmful to the whole country, and thus should be eliminated without any shred of regret. Yet, in very few instances, some might hide a little bit of common sense, and one should just tolerate them, after stripping them of their privileges, of course! Fortunately, no need for a tribunal to tell them apart because one can recognize them at first glance.</p>
+<section id="youre-too-dumb-to-press-dot-on-your-keyboard" class="level3">
+<h3 class="anchored" data-anchor-id="youre-too-dumb-to-press-dot-on-your-keyboard">You’re Too Dumb To Press “Dot” On Your Keyboard</h3>
+<p>This will be easy and quick; your shameful laziness will appear clear to all in a minute.</p>
+<p>Have you ever done something like this?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>my_awesome_df[<span class="st">"string_column"</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: x.strip().split(<span class="st">" "</span>))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>my_awesome_df[<span class="st">"datetime_column"</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: x.date())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Have you ever heard of vectorized operation? They are the ones that allow you to process gigabytes of data in a few seconds—yes, I said seconds, yes, with pandas! And do you know how ludicrous do you look? In order to use these vectorized operations, rather than rushing for the <code>.apply</code>, all you had to do was to write <code>.str.something()</code> or <code>.dt.something_else()</code> instead.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>my_awesome_df[<span class="st">"string_column"</span>].<span class="bu">str</span>.strip().<span class="bu">str</span>.split(<span class="st">" "</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>my_awesome_df[<span class="st">"datetime_column"</span>].dt.date()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Did your foggy brain, saturated with scrum vapors, happen to notice that the <code>.str</code> and <code>.dt</code> accessors made the stupid-ass names “string_column” and “datetime_column” completely irrelevant? Do you now understand how stupid you look with your automated use of <code>.apply()</code>? You exhibited a typical default flight response at the idea of looking at the documentation. You behaved like a screeching libertarian billionaire confronted with the idea that taxes are actually necessary to educate people and that he is going to have to pay. You were literally one keystroke away from producing something useful and still managed to fail…</p>
+<p>I am impressed by such dedication towards mediocrity. Anyway, go read the damn <a href="https://pandas.pydata.org/docs/user_guide/timeseries.html">documentation about <em>pandas</em> datetimes and derived</a> before we head to the next abomination.</p>
+</section>
+<section id="apply-index1-is-for-zeroes" class="level3">
+<h3 class="anchored" data-anchor-id="apply-index1-is-for-zeroes">Apply(…, index=1) Is For Zeroes</h3>
+<p>Do you really want me to start digging a grave for your challenged neo-cortex that went on permanent vacation? This is a for loop in disguise, and you know what happens to people that use for loops around here, don’t you? Great, at least you seem to have developed enough survival instinct to calm my anger…for now!</p>
+<p>From now on, you will have only one God, and its glorious name is <strong>Vectorization</strong>! You will seek its favors at all times when you write <em>pandas</em> code. This will be your sole purpose in life, your only hope for salvation. You will follow the holy scriptures derived from the mathematical operators or the built-in <code>.dt</code> and <code>.str</code> accessors.</p>
+<p>You may <em><strong>very sparsely</strong></em> consult a scripture from the nearby <em>NumPy</em> church when no solace can be found in the original divine texts. Beware: many heretics have abused the alternative scriptures and have fostered a blasphemous, unreadable hybrid, for which mercy compels us to shoot on sight. Especially, you will burn at the stake if I see any instance of nested <code>np.where()</code>, because we have seen the light of the glorious <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.case_when.html">case_when in v2.2.0</a> (replacing the venerable <a href="https://numpy.org/devdocs/reference/generated/numpy.select.html">np.select</a>).</p>
+<p>Once you do everything we mentioned so far, your code will be largely free from vomit projections or gangrenous infections. As long as you avoid those pitfalls carefully, <em>pandas</em> will become quite fast. To give you a ballpark idea, you should be able to process several GBs of <strong>real-life data</strong> in a matter of seconds—yes, I said seconds! If you reach such a state, an encounter with your code will not induce any ferocious fury fit that typically makes me reach for a flamethrower, but may actually leave me in a decent mood.</p>
+<p>This leaves us in good dispositions to talk about some edge-cases.</p>
+</section>
+<section id="quirks-of-apply-on-multiple-columns" class="level3">
+<h3 class="anchored" data-anchor-id="quirks-of-apply-on-multiple-columns">Quirks Of Apply On Multiple Columns</h3>
+<p>Now it is time for a little confession; we’re approaching the only instance where I might, maybe, perhaps, acknowledge distantly that method chaining is slightly less readable than traditional OOP syntax. Here is a quick example:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> z_score(col: pd.Series) <span class="op">-&gt;</span> pd.Series:</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (col <span class="op">-</span> col.mean()) <span class="op">/</span> col.std()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Here is the traditional way:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="op">=</span> sns.load_dataset(<span class="st">"diamonds"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>diamonds[[<span class="st">"carat"</span>, <span class="st">"depth"</span>, <span class="st">"table"</span>, <span class="st">"price"</span>]] <span class="op">=</span> diamonds[</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"carat"</span>, <span class="st">"depth"</span>, <span class="st">"table"</span>, <span class="st">"price"</span>]</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>].<span class="bu">apply</span>(z_score)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>diamonds.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Indeed, applying the same transformation on multiple columns using pure method chaining requires a combination of lambdas, dict-comprehension, and unpacking… Now, this may look a little cabalistic for unaccustomed eyes:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="op">=</span> sns.load_dataset(<span class="st">"diamonds"</span>).assign(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">**</span>{</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        col: <span class="kw">lambda</span> df: z_score(df[col])</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> col <span class="kw">in</span> [<span class="st">"carat"</span>, <span class="st">"depth"</span>, <span class="st">"table"</span>, <span class="st">"price"</span>]</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>diamonds.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Let’s decompose this quickly:</p>
+<ul>
+<li><code>**</code> to transform the dictionary into kwargs,</li>
+<li>then the column name and a lambda to reference the <strong>current DataFrame</strong>,</li>
+<li>the function to use inside the body of the lambda,</li>
+<li>the columns to iterate over, which define our dict-comprehension,</li>
+<li>you can even add a prefix/suffix by swapping the dictionary key with an f-string: <code>f"prefix_{col}"</code>/<code>f"{col}_suffix"</code>.</li>
+</ul>
+<p>Again, I will acknowledge that this may not be trivial to write, but at least I am sure you learned a thing or two.</p>
+<p>Don’t gloat, you overly inefficient entshitificator; this is not a moment of weakness from me. The atrocities you committed and indulged in disqualify you from making any desirable comment! The only reason for this is <em>pandas’</em> venerable age and sadly the absence of a unified and clear syntax. But not all hope is lost, as larger animals will demonstrate much later.</p>
+<blockquote class="blockquote">
+<p>But, Sir Rants, you just used for loops with a <em>pandas</em> DataFrame and you told me not to! That’s not fair!</p>
+</blockquote>
+<p>Sigh… Do I really have to explain everything? Since your mind is equipped with the agility of a dead bird engulfed in an oil spill, I will articulate this more clearly. What you just witnessed in the former example is indeed a for loop. This for loop is used to create a <strong><em>finite collection of functions</em></strong>, but everything is done by the <code>.assign()</code> method. This for loop is not involved in any calculation. It does not iterate over the whole fucking DataFrame, nor perform 4 levels of nasty, nested group-by operations that even a moronic ape smashing on a keyboard would not dare to do!</p>
+</section>
+<section id="advanced-apply-operations" class="level3">
+<h3 class="anchored" data-anchor-id="advanced-apply-operations">Advanced Apply Operations</h3>
+<p>Here we are mostly speaking about the pattern <code>.groupby().apply()</code>. Again there is some leeway, because on one hand it allows you to perform simply some operations that could be quite complex when written with a different syntax. On the other hand, it can become extremely fast a foot-gun loaded with unnecessary complexity, even faster than an executive sabotaging a good product because now it must use AI.</p>
+<p>Regardless, use a more straightforward and explicit syntax if possible:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    fancy_name_because_i_use_method_chaining</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    .groupby([<span class="st">"column_name_1"</span>, <span class="st">"column_name_2"</span>])</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    .agg(</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        avg_price<span class="op">=</span>(<span class="st">"price"</span>, <span class="st">"mean"</span>),</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        avg_price_change<span class="op">=</span>(<span class="st">"price"</span>, <span class="kw">lambda</span> x: x.diff().mean()),</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        awesome_feature<span class="op">=</span>(<span class="st">"scores"</span>, function_defined_elsewhere),</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This very expressive syntax is usually a good seatbelt against our own stupidity while being only slightly more verbose. But since when is the number of characters you type the bottleneck of your work?</p>
+</section>
+</section>
+<section id="final-thoughts" class="level2">
+<h2 class="anchored" data-anchor-id="final-thoughts">Final Thoughts</h2>
+<p>Let’s recap one more time how to write <em>pandas</em> that will not trigger the next maintainers of your code to spiral down into depression, hang themselves, and/or gouge their eyes out.</p>
+<ol type="1">
+<li><p>No …</p>
+<blockquote class="blockquote">
+<p>No fucking for loops, Sir Rants, I learned the message!</p>
+</blockquote>
+<p>Good lad!</p></li>
+<li><p>No <code>inplace=True</code>. It prevents method chaining and does nothing for memory.</p></li>
+<li><p>Use <code>lambda df: df...</code> to reference the current dataframe when filtering or creating new columns.</p></li>
+<li><p>Do not create DataFrame inbreeding with horrible self-joins. You should use the <code>groupby().transform()</code> which are similar to SQL window functions.</p></li>
+<li><p>The use of <code>.apply</code> is typically done be weak minded people who have no clue of the absolute glory of <em><strong>Vectorization</strong></em>.</p></li>
+<li><p>The only places where <code>.apply</code> can be tolerated are usually when using the same transformation on multiple columns for sake of readability, or after <code>.groupby</code> operations but beware of the complexity demon here!</p></li>
+<li><p>Any preprocessing of ≈10GBs on average hardware nowadays should definitely take less than a few 10s of seconds. Be extremely skeptic if you reach a minute or above.</p></li>
+</ol>
+<p>If you use these simple rules of thumb, you will have a code that is not only surprisingly fast even for <em>pandas</em> but also extremely readable and debuggable. Your coworker will stop despising you when you hand them over some code, your manager will give you the employee of the month trophy, and your significant other won’t dump your sorry ass (The last two promises are only binding for those who believe in politician lies and the tooth-fairy’s existence).</p>
+<p>Again, we are not doing any kind of optimization around here; we are just writing code that does not suck utterly and that is not a waste of CPU cycles. Method chaining is a good way to limit your own ability to do stupid shit, and it keeps you within a decent range of the “optimal” processing time you can hope to have in pure <em>pandas</em>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/ds-rants\.github\.io\/ds-rants\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

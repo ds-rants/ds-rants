@@ -6,9 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="A collection of extremely opinionated views on Data Science and Software Engineering.">
+<meta name="author" content="DS Rants">
+<meta name="dcterms.date" content="2025-12-31">
 
-<title>DS Rants Main Page – Data Science Rants</title>
+<title>Just Ask The Damn ROI – Data Science Rants</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,26 +25,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-5d4073339ea55b1ad5ce071f10a273ff.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-9433ce5a74f539ffa23693f38c94ac7f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-5d4073339ea55b1ad5ce071f10a273ff.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-9433ce5a74f539ffa23693f38c94ac7f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -71,77 +70,20 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
+<meta name="quarto:status" content="draft">
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-image','listing-date','listing-title','listing-author','listing-description','listing-categories','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>Draft</div>
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Data Science Rants</span>
     </a>
   </div>
@@ -152,7 +94,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -165,265 +107,56 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">DS Rants Main Page</h1>
-                  <div>
-        <div class="description">
-          A collection of extremely opinionated views on Data Science and Software Engineering.
-        </div>
-      </div>
-                </div>
+    <div class="quarto-title column-body">
+      <h1 class="title">Just Ask The Damn ROI</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">data science</div>
+                <div class="quarto-category">software engineering</div>
+                <div class="quarto-category">tests</div>
+                <div class="quarto-category">best practices</div>
+              </div>
+                  </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page-left">
+  <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>DS Rants </p>
+            </div>
+    </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">December 31, 2025</p>
+      </div>
+    </div>
     
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(6)</span></div><div class="category" data-category="YmVzdCUyMHByYWN0aWNlcw==">best practices <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Q1BV">CPU <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZGF0YSUyMHNjaWVuY2U=">data science <span class="quarto-category-count">(4)</span></div><div class="category" data-category="ZmFrZSUyMGFnaWxl">fake agile <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bWVldGluZ3M=">meetings <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bm9uLXBlc3NpbWl6YXRpb24=">non-pessimization <span class="quarto-category-count">(1)</span></div><div class="category" data-category="b3B0aW1pemF0aW9u">optimization <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cGFuZGFzJTIwY29kZQ==">pandas code <span class="quarto-category-count">(2)</span></div><div class="category" data-category="cGVyZm9ybWFuY2U=">performance <span class="quarto-category-count">(2)</span></div><div class="category" data-category="cHJvZHVjdGlvbg==">production <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c2NydW0lMjBjbHVzdGVyZnVjaw==">scrum clusterfuck <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c29mdHdhcmUlMjBlbmdpbmVlcmluZw==">software engineering <span class="quarto-category-count">(3)</span></div><div class="category" data-category="dGVzdHM=">tests <span class="quarto-category-count">(2)</span></div></div></div>
+    </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
+<p>You’re fucking deserving a goddamned answer!</p>
 
 
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="ZGF0YSUyMHNjaWVuY2UlMkNzb2Z0d2FyZSUyMGVuZ2luZWVyaW5nJTJDdGVzdHMlMkNiZXN0JTIwcHJhY3RpY2Vz" data-listing-date-sort="1763596800000" data-listing-file-modified-sort="1764969867835" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2496">
-<div class="thumbnail"><a href="./posts/2025/2025_11_yall_tests_for_ds/test_for_ds.html" class="no-external">
-
-<img loading="lazy" src="./posts/2025/2025_11_yall_tests_for_ds/image.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/2025/2025_11_yall_tests_for_ds/test_for_ds.html" class="no-external">Y’all Motherfuckers Need Tests, So Stop Making Lazy Excuses</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('ZGF0YSUyMHNjaWVuY2U='); return false;">data science</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('c29mdHdhcmUlMjBlbmdpbmVlcmluZw=='); return false;">software engineering</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('dGVzdHM='); return false;">tests</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YmVzdCUyMHByYWN0aWNlcw=='); return false;">best practices</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/2025/2025_11_yall_tests_for_ds/test_for_ds.html" class="no-external">
-This is the second part of a larger rant on tests with the first part available here.
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/2025/2025_11_yall_tests_for_ds/test_for_ds.html" class="no-external">
-<div class="listing-date">
-Nov 20, 2025
-</div>
-<div class="listing-author">
-DS Rants
-</div>
-<div class="listing-reading-time">13 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="ZGF0YSUyMHNjaWVuY2UlMkNzb2Z0d2FyZSUyMGVuZ2luZWVyaW5nJTJDdGVzdHMlMkNiZXN0JTIwcHJhY3RpY2Vz" data-listing-date-sort="1763596800000" data-listing-file-modified-sort="1764969867834" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="18" data-listing-word-count-sort="3448">
-<div class="thumbnail"><a href="./posts/2025/2025_11_yall_motherfuckers_need_tests/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/2025/2025_11_yall_motherfuckers_need_tests/image.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/2025/2025_11_yall_motherfuckers_need_tests/index.html" class="no-external">Y’All Motherfuckers Need Tests</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('ZGF0YSUyMHNjaWVuY2U='); return false;">data science</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('c29mdHdhcmUlMjBlbmdpbmVlcmluZw=='); return false;">software engineering</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('dGVzdHM='); return false;">tests</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YmVzdCUyMHByYWN0aWNlcw=='); return false;">best practices</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/2025/2025_11_yall_motherfuckers_need_tests/index.html" class="no-external">
-“To me, legacy code is simply code without tests.”
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/2025/2025_11_yall_motherfuckers_need_tests/index.html" class="no-external">
-<div class="listing-date">
-Nov 20, 2025
-</div>
-<div class="listing-author">
-DS Rants
-</div>
-<div class="listing-reading-time">18 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="ZGF0YSUyMHNjaWVuY2UlMkNwZXJmb3JtYW5jZSUyQ0NQVSUyQ29wdGltaXphdGlvbg==" data-listing-date-sort="1749081600000" data-listing-file-modified-sort="1764969867831" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1568">
-<div class="thumbnail"><a href="./posts/2025/2025_06_05_non-pessimization/non-pessimization.html" class="no-external">
-
-<img loading="lazy" src="./posts/2025/2025_06_05_non-pessimization/young-c.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/2025/2025_06_05_non-pessimization/non-pessimization.html" class="no-external">A Case Defense Of Casey Muratori: Non-Pessimization Vs. Optimization</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('ZGF0YSUyMHNjaWVuY2U='); return false;">data science</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cGVyZm9ybWFuY2U='); return false;">performance</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Q1BV'); return false;">CPU</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('b3B0aW1pemF0aW9u'); return false;">optimization</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/2025/2025_06_05_non-pessimization/non-pessimization.html" class="no-external">
-Sorry, I am not sorry about the orthographic pun.
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/2025/2025_06_05_non-pessimization/non-pessimization.html" class="no-external">
-<div class="listing-date">
-Jun 5, 2025
-</div>
-<div class="listing-author">
-DS Rants
-</div>
-<div class="listing-reading-time">8 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="ZGF0YSUyMHNjaWVuY2UlMkNwYW5kYXMlMjBjb2RlJTJDbm9uLXBlc3NpbWl6YXRpb24=" data-listing-date-sort="1745798400000" data-listing-file-modified-sort="1764969867829" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="15" data-listing-word-count-sort="2867">
-<div class="thumbnail"><a href="./posts/2025/2025_04_28_angry_pandas_guide/angry_pandas_tutorial.html" class="no-external">
-
-<img loading="lazy" src="./posts/2025/2025_04_28_angry_pandas_guide/cover-angry-pandas-guide.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/2025/2025_04_28_angry_pandas_guide/angry_pandas_tutorial.html" class="no-external">The Angry Guide To Pandas Code (Dummy Edition, Part 1)</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('ZGF0YSUyMHNjaWVuY2U='); return false;">data science</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cGFuZGFzJTIwY29kZQ=='); return false;">pandas code</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bm9uLXBlc3NpbWl6YXRpb24='); return false;">non-pessimization</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/2025/2025_04_28_angry_pandas_guide/angry_pandas_tutorial.html" class="no-external">
-Alright! You apparently stumbled by accident on this page after wrongly clicking on the banner: “There are single people in your area”.
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/2025/2025_04_28_angry_pandas_guide/angry_pandas_tutorial.html" class="no-external">
-<div class="listing-date">
-Apr 28, 2025
-</div>
-<div class="listing-author">
-DS Rants
-</div>
-<div class="listing-reading-time">15 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="c29mdHdhcmUlMjBlbmdpbmVlcmluZyUyQ2Zha2UlMjBhZ2lsZSUyQ3NjcnVtJTIwY2x1c3RlcmZ1Y2slMkNtZWV0aW5ncw==" data-listing-date-sort="1745107200000" data-listing-file-modified-sort="1764969867828" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="788">
-<div class="thumbnail"><a href="./posts/2025/2025_04_20_pre-pre-sprint-planning/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/2025/2025_04_20_pre-pre-sprint-planning/ouroboros.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/2025/2025_04_20_pre-pre-sprint-planning/index.html" class="no-external">I Will Not Attend Your Pre-Pre-Pre-Sprint-Planning Meeting</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('c29mdHdhcmUlMjBlbmdpbmVlcmluZw=='); return false;">software engineering</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('ZmFrZSUyMGFnaWxl'); return false;">fake agile</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('c2NydW0lMjBjbHVzdGVyZnVjaw=='); return false;">scrum clusterfuck</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWVldGluZ3M='); return false;">meetings</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/2025/2025_04_20_pre-pre-sprint-planning/index.html" class="no-external">
-Dear Product Owner / Manager / Team Leader,
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/2025/2025_04_20_pre-pre-sprint-planning/index.html" class="no-external">
-<div class="listing-date">
-Apr 20, 2025
-</div>
-<div class="listing-author">
-DS Rants
-</div>
-<div class="listing-reading-time">4 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="cGFuZGFzJTIwY29kZSUyQ3BlcmZvcm1hbmNlJTJDcHJvZHVjdGlvbg==" data-listing-date-sort="1744502400000" data-listing-file-modified-sort="1764969867827" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1648">
-<div class="thumbnail"><a href="./posts/2025/2025_04_13_your_pandas_code_is_bad/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/2025/2025_04_13_your_pandas_code_is_bad/bad_pandas_code.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/2025/2025_04_13_your_pandas_code_is_bad/index.html" class="no-external">Your Pandas Code Is Bad And You Should Feel Bad!</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('cGFuZGFzJTIwY29kZQ=='); return false;">pandas code</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cGVyZm9ybWFuY2U='); return false;">performance</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHJvZHVjdGlvbg=='); return false;">production</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/2025/2025_04_13_your_pandas_code_is_bad/index.html" class="no-external">
-That’s it! Three times! The third time is the charm, as they say!
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/2025/2025_04_13_your_pandas_code_is_bad/index.html" class="no-external">
-<div class="listing-date">
-Apr 13, 2025
-</div>
-<div class="listing-author">
-DS Rants
-</div>
-<div class="listing-reading-time">9 min</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
