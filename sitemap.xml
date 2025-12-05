@@ -2,38 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ds-rants.github.io/ds-rants/about.html</loc>
-    <lastmod>2025-12-05T21:24:27.826Z</lastmod>
+    <lastmod>2025-12-05T21:30:04.894Z</lastmod>
   </url>
   <url>
     <loc>https://ds-rants.github.io/ds-rants/posts/2025/2025_11_yall_motherfuckers_need_tests/index.html</loc>
-    <lastmod>2025-12-05T21:24:27.834Z</lastmod>
+    <lastmod>2025-12-05T21:30:04.903Z</lastmod>
   </url>
   <url>
     <loc>https://ds-rants.github.io/ds-rants/posts/2025/2025_11_yall_tests_for_ds/test_for_ds.html</loc>
-    <lastmod>2025-12-05T21:24:27.835Z</lastmod>
+    <lastmod>2025-12-05T21:30:04.903Z</lastmod>
   </url>
   <url>
     <loc>https://ds-rants.github.io/ds-rants/posts/2025/2025_04_13_your_pandas_code_is_bad/index.html</loc>
-    <lastmod>2025-12-05T21:24:27.827Z</lastmod>
+    <lastmod>2025-12-05T21:30:04.895Z</lastmod>
   </url>
   <url>
     <loc>https://ds-rants.github.io/ds-rants/posts/2025/2025_06_05_non-pessimization/non-pessimization.html</loc>
-    <lastmod>2025-12-05T21:24:27.831Z</lastmod>
+    <lastmod>2025-12-05T21:30:04.900Z</lastmod>
   </url>
   <url>
     <loc>https://ds-rants.github.io/ds-rants/index.html</loc>
-    <lastmod>2025-12-05T21:24:27.826Z</lastmod>
+    <lastmod>2025-12-05T21:30:04.894Z</lastmod>
   </url>
   <url>
     <loc>https://ds-rants.github.io/ds-rants/posts/2025/2025_04_20_pre-pre-sprint-planning/index.html</loc>
-    <lastmod>2025-12-05T21:24:27.828Z</lastmod>
+    <lastmod>2025-12-05T21:30:04.896Z</lastmod>
   </url>
   <url>
     <loc>https://ds-rants.github.io/ds-rants/posts/2025/2025_04_28_angry_pandas_guide/angry_pandas_tutorial.html</loc>
-    <lastmod>2025-12-05T21:24:27.829Z</lastmod>
+    <lastmod>2025-12-05T21:30:04.897Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ds-rants.github.io/ds-rants/posts/2025/2025_12_angry_pandas_guide_the_vengeance/angry_pandas_vengeance.html</loc>
+    <lastmod>2025-12-05T21:30:04.903Z</lastmod>
   </url>
   <url>
     <loc>https://ds-rants.github.io/ds-rants/twitter.html</loc>
-    <lastmod>2025-12-05T21:24:27.836Z</lastmod>
+    <lastmod>2025-12-05T21:30:04.905Z</lastmod>
   </url>
 </urlset>
