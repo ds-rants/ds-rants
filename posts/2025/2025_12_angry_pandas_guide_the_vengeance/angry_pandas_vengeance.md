@@ -8,8 +8,6 @@ categories:
   - non-pessimization
   - performance
 image: image.png
-draft: true
-draft-mode: visible
 ---
 
 Beware I have returned and I'm looking for blood!
