@@ -267,9 +267,9 @@ Let's recap one more time how to write _pandas_ that will not trigger the next m
 1. Any preprocessing of ≈10GBs on average hardware nowadays should definitely take less than a few 10s of seconds.
    Be extremely skeptic if you reach a minute or above.
 
-If you use these simple rules of thumb, you will have a code that is not only surprisingly fast even for _pandas_ but also extremely readable and debuggable.
-Your coworker will stop despising you when you hand them over some code, your manager will give you the employee of the month trophy, and your significant other won't dump your sorry ass
-(The last two promises are only binding for those who believe in politician lies and the tooth-fairy's existence).
-
 Again, we are not doing any kind of optimization around here; we are just writing code that does not suck utterly and that is not a waste of CPU cycles.
 Method chaining is a good way to limit your own ability to do stupid shit, and it keeps you within a decent range of the "optimal" processing time you can hope to have in pure _pandas_.
+
+If you use these simple rules of thumb, you will have a code that is not only surprisingly fast even for _pandas_ but also extremely readable and debuggable.
+Your coworker will stop despising you when you hand them over some code, your manager will give you the employee of the month trophy, and your significant other won't dump your sorry ass.
+(The last two promises are only binding for those who believe in cryptocurrency or the tooth-fairy).
