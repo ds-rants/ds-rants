@@ -20,8 +20,8 @@ We just did the bare minimum such that our code does not utterly suck, just enou
 Let's recap for those who sniffed glue and ate the memo before reading it.
 There are clear signs for _pandas_ code that should be drenched in gasoline and lit on fire:
 
-1. For loops, because they literally transform your computer into a 1950's toaster, just producing waste heat.
-2. The infamous `inplace=True`, because it doesn't save memory and introduces horrible mutations like in your horrible inbreed family.
+1.  For loops, because they literally transform your computer into a 1950's toaster, just producing waste heat.
+2.  The infamous `inplace=True`, because it doesn't save memory and introduces horrible mutations like in your horrible inbreed family.
 
 On the opposite side, in the beautiful _pandas_ world, you use **method chaining** to perform successive transformations.
 There, you can use a `lambda` to reference your **current DataFrame** in methods such as `.assign()` or `.loc[]`.
@@ -150,14 +150,14 @@ Do you really want me to start digging a grave for your challenged neo-cortex th
 This is a for loop in disguise, and you know what happens to people that use for loops around here, don't you?
 Great, at least you seem to have developed enough survival instinct to calm my anger...for now!
 
-From now on, you will have only one God, and its glorious name is **Vectorization**!
+From now on, you will have only one God, and its glorious name shall be **Vectorization**!
 You will seek its favors at all times when you write _pandas_ code.
 This will be your sole purpose in life, your only hope for salvation.
 You will follow the holy scriptures derived from the mathematical operators or the built-in `.dt` and `.str` accessors.
 
 You may _**very sparsely**_ consult a scripture from the nearby _NumPy_ church when no solace can be found in the original divine texts.
 Beware: many heretics have abused the alternative scriptures and have fostered a blasphemous, unreadable hybrid, for which mercy compels us to shoot on sight.
-Especially, you will burn at the stake if I see any instance of nested `np.where()`, because we have seen the light of the glorious [case_when in v2.2.0](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.case_when.html) (replacing the venerable [np.select](https://numpy.org/devdocs/reference/generated/numpy.select.html)).
+Especially, you will burn at the stake if I see any instance of nested `np.where()`, because we have seen the light of the glorious [case_when in v2.2.0](https://pandas.pydata.org/docs/reference/api/pandas.Series.case_when.html) (replacing the venerable [np.select](https://numpy.org/devdocs/reference/generated/numpy.select.html)).
 
 Once you do everything we mentioned so far, your code will be largely free from vomit projections or gangrenous infections.
 As long as you avoid those pitfalls carefully, _pandas_ will become quite fast.
@@ -177,7 +177,6 @@ import seaborn as sns
 
 def z_score(col: pd.Series) -> pd.Series:
     return (col - col.mean()) / col.std()
-
 ```
 
 Here is the traditional way:
@@ -259,13 +258,13 @@ Let's recap one more time how to write _pandas_ that will not trigger the next m
 
    Good lad!
 
-1. No `inplace=True`. It prevents method chaining and does nothing for memory.
-1. Use `lambda df: df...` to reference the current dataframe when filtering or creating new columns.
-1. Do not create DataFrame inbreeding with horrible self-joins. You should use the `groupby().transform()` which are similar to SQL window functions.
-1. The use of `.apply` is typically done be weak minded people who have no clue of the absolute glory of _**Vectorization**_.
-1. The only places where `.apply` can be tolerated are usually when using the same transformation on multiple columns for sake of readability, or after `.groupby` operations but beware of the complexity demon here!
-1. Any preprocessing of ≈10GBs on average hardware nowadays should definitely take less than a few 10s of seconds.
-   Be extremely skeptic if you reach a minute or above.
+2. **No `inplace=True`:** It prevents method chaining and provides no memory benefits.
+3. **Embrace Method Chaining:** Use `lambda df: df...` to reference the current DataFrame when filtering or creating new columns.
+4. **Avoid Self-Joins:** Use `groupby().transform()` (similar to SQL window functions) instead of merging aggregated DataFrames back into themselves.
+5. **Prioritize Vectorization:** Prefer built-in vectorized operations (`.str`, `.dt`) over `.apply()` for simple column transformations.
+6. **Careful Use of `.apply()`:** it might be tolerated for applying the same transformation to multiple columns (for the sake of readability), or after `.groupby` operations, but beware of the complexity demon here!
+7. **Estimate How Fast You Code Should Run:** Expect the processing of ~10GB of real-life data on average hardware to take a few tens of seconds, not minutes or worse...
+   Be extremely skeptical of any code that takes longer.
 
 Again, we are not doing any kind of optimization around here; we are just writing code that does not suck utterly and that is not a waste of CPU cycles.
 Method chaining is a good way to limit your own ability to do stupid shit, and it keeps you within a decent range of the "optimal" processing time you can hope to have in pure _pandas_.
