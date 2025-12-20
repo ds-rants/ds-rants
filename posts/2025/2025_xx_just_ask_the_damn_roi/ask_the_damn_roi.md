@@ -7,4 +7,158 @@ categories: [data science, software engineering, tests, best practices]
 draft: true
 draft-mode: visible
 ---
+
 You're fucking deserving a goddamned answer!
+
+Indeed today we are going to develop mass murder weapons because we are going to face the apocalypse.
+Today, we are tackling the problem of zombie projects that should have met their demise long ago.
+These lifeless abominations are wasting resources and everyone's time, only because some people do not want to face reality or cannot simply say the word: "No".
+
+May
+
+# A Missing ROI Estimation Is A Bad Sign
+
+## How To Perform Napkin Calculation
+
+We will stick to 5th grade math, because nobody during a meeting can do anything more elaborate than that.
+Beside the whole point here is to get rid of corporate bullshit and executive self-delusions, not to assess the viability of the project against all possible outcome.
+The question you should aim to answer is: I am about to spend a potentially large amount of time on this project, so does it have any chance to produce anything even remotely useful or financially sensible?
+Think Elen Ripley in "Alien" not wanting to open the airlock, this is your new job now!
+
+Anything that does not meet this simple criterion is pointless self-jerking play that should be torched right here, right now, for everyone's benefit.
+Sadly it is not always possible to do so.
+Given that more than likely perspective, it is worth knowing that certain types of project are worse than others.
+
+## Typology Of Failed Project Without Estimated ROI
+
+You are almost certain to encounter in the wild some projects that are doomed to fail, but still receive enough political support, enthusiasm from blind colleagues or simply fly under the radar.
+Let assume for the sake of the argument that your management requires your presence on this monstrous beast.
+Depending on certain aspects of the zombie itself (and your personal situation), you could go from tolerating the situation to updating your resume for a prompt exit.
+This is mostly based on how clueless or worse malevolent are people around you:
+
+1. It can be treated as a research project.
+
+   With reasonable movement margin, support from coworkers, and decent skills it might still be possible to produce some decent bits of knowledge.
+   Let's be honest, it's probably not the worst situation to be in, unless you are facing crazy expectation from management.
+   As long as people are more or less conscious that they are burning money, with a fairly low probability of positive outcome.
+   Otherwise you can just head to the next point.
+
+1. It's corporate inefficiency at its finest!
+
+   This means your chances of producing anything of value take a drop each time a clueless executive opens their mouth to speak about your project.
+   In which case, you are definitely going to need some allies, and pretty good ones at that.
+   It's going to take lot of efforts and a insane self-imposed disciple to overcome the contradictory injections you receive from your environment.
+   Particularly, you're going to have to convince lots of people that embedding quality inside the project is not an overly defensive attitude, but the equivalent of putting on your seatbelt and check your tires before crossing half the continent.
+   The question remains are the promised rewards (if any) worth the effort you are about to deploy?
+
+1. It's a political play!
+
+   Well, you're clearly screwed, utterly doomed and absolutely fucked!
+   Produce something at all cost, abandon all desire for quality or doing thing the right way.
+   Just produce something to throw at the mouth of the executives to appease their greed.
+   Your objective here is to save the only thing that can be saved: yourself and your career.
+   Stall time until you can switch to a different position or company, because you don't want any responsibility when this cluster-fuck is falling apart!
+   There is no God, she has left the channel!
+   Everything is permitted: watermelon KPI, hardcoded lying stupidity for demos, blame shifting or kick in the nuts.
+   This thing is aiming straight for the iceberg and you don't know how to swim...
+
+Depending on your personal resilience and morbid satisfaction to head straight for burnout town, you can always try to tolerate some of this, but now you have been warned.
+
+## Yet People Still Forget The ROI
+
+# Save Your Sanity
+
+The point of demanding a ROI is not because I want to live in a libertarian dystopia where one should only work on things that generate clear money and similar outcomes.
+Quite the contrary, I want you to retain control over your life.
+
+## Save Yourself
+
+I believe it is basic human right to work on something that is not a complete garbage dumpster set of fire.
+One should only partially align themselves with their company's goal.
+
+## Save Tour Time
+
+I believe it is critical for engineers to safeguard some time from the greed of their managers or dissociating executives in order to alleviate the pressure coming from the business.
+Knowing the expected ROI on a project is precisely meant to do this.
+The point is to consciously choose when you should work on the high-profile high-return project and when you are going to take time to work on something else entirely because you're a fucking adult!
+
+Indeed, you should have some time to allocate to things that have **apparently no up-front value** for your company.
+In order to develop the creative part that is mandatory to do a good job in our profession, you will need some time to learn completely new things, or better understand some foreign concepts.
+Getting to know a new framework or programming language, understanding roughly what are conflict-free replicated data types, or being able to read a bit of assembly are valuable skills even if you don't use them in your day job!
+
+This ability to do something that is not tied to your stupid yearly objectives nor imposed by scrum-junkies overlords, is critical to the development of your IT culture. How are you going to know that there are better ways to manage your data pipelines when your are so neck deep into bug-fixing? You will not be able to see on the other side of the street that other people actually can sleep because their projects have motherfucking automated tests executed on a perfect and independent replica of the prod, deployed in minutes thanks to a merciless CI/CD.
+
+You need time to learn all of this.
+You need time to be able to learn how to do your job correctly.
+Time is your one of your most precious resources.
+Knowing what outcomes you can expect from a given project is an excellent way to retrieve control over your time.
+
+## Set Up The Right Context For Incremental Improvement
+
+With what I described so far, one person without charitable intentions might be tempted to put the following words into my mouth: "Well, from now you should work only on projects that have demonstrated from the start that they are going to deliver value".
+To this statement my answer is: "Bullshit!"
+
+Indeed, their is a tremendous difference between producing a rough estimate, even better an interval, and publishing a financial report before the project even began. In here we are going to explore the difference between project framing and waterfall approach through the lenses of DevOps and Continuous Delivery philosophies.
+
+There is a clear difference between establishing a air-tight battle plan from the start (waterfall) and making sure that expected outcomes align the the company capability, resources and plain ol' reality.
+I'm a very strong defender of approaches that aim to maintain velocity of development through the project lifecycle.
+As a consequence designing your system to encourage try and error, learning and to safeguard your ability to correct the scope, which are core components of the Continuous Delivery efforts are extremely valuable to me.
+
+But Continuous Delivery does not mean we should not produce any effort to establish the boundaries of our system, nor estimate the outcome it is likely to produce.
+What continuous delivery suggests is that our initial assumptions are unlikely to be correct in the long run.
+In terms of ROI, this means we should periodically revisit our calculations, because some will become completely moronic.
+Certain unexpected things that we will need to address through the project lifetime might completely change what we could hope to achieve, sometimes for the better some other times for the worse.
+
+NOTES :
+how to do the calculation, how to ask for ROI. Tally the number of engineers that will work on the project.
+
+
+
+The project should be drenched in gasoline and thrown into the deepest pit of Hell.
+
+There should be no possibility to continue working on a doomed project. You'd be surprised how few people actually ask themselves the question.
+The main point of this post is that 90% of the time it is better not to do anything.
+
+
+Typology of failing projects:
+- have not even done the calculation --> help them do it (less likely ot lie)
+- reasonable and with error margin
+- the overly-optimistic --> confront the numbers
+
+Why is ROI so overlooked:
+- Difficulty to estimate
+- Not part of the culture
+- Poorly defined scope
+- Project whose outcome is beneficial to almost nobody, ex: assessing the risk of the employee to leave for HR to control turnover instead of paying people correctly.
+- Dystopian project that go against regulation with an absolute disregard for legal considerations: monitoring video-surveillance to ensure that employees are wearing the protective equipments in dangerous areas.
+
+Whose responsibility is it ot estimate that? Definitely the business but most of the time you have to help and nudge them.
+
+Because everyone, myself included twice over, think their latest idea they just pulled out of their asses will be the new Sun God.
+
+Pretend to be aligned with company goals such as not loosing money give a few benefits:
+- credible actor / interlocutor  because suddenly you consider a larger scope than your notebook
+- ability to say the magic word "NO" --> very powerful
+- ability to form judgement of the project you are currently working and transmit that vision to upper management
+
+Thesis:
+- working on meaningful project is a human right
+- Or at least know when you are working on the latest fantasy of an executive.
+- Difference between knowing generally and intuitively vs having the numbers
+- With the numbers you can pretend to align yourself with your company goals (enriching their shareholders and executive) in order for your position to become bearable.
+
+Anti-thesis:
+- People might consult you more on high profile stuff
+- People might not lie when you pour gasoline on their stupid project
+- you will start to see more of the shit people try to shove down your throat because you have pierced the veil of ignorance
+
+
+# Missing ROI is a bad sign
+1.  typology of failed project
+1. how to calculate
+1. yet they forget about ROI
+
+# Save you sanity
+1. Save you time
+1. Save yourseil
+1. Get the right context for incremental improvement
