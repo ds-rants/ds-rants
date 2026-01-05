@@ -14,7 +14,14 @@ Indeed today we are going to develop mass murder weapons because we are going to
 Today, we are tackling the problem of zombie projects that should have met their demise long ago.
 These lifeless abominations are wasting resources and everyone's time, only because some people do not want to face reality or cannot simply say the word: "No".
 
-May
+We will start by removing some obvious considerations when people show some good will and a shred of decency:
+
+- whether they have a reasonable ROI estimation and with sensible error margin (you have no idea of your sheer amount of luck)
+- or they tend to be overly-optimistic, but are open to discussion, in which case your role as a data practitioner is to confront the numbers.
+
+No the problems arise when nobody has even tried to do some basic maths or even thought about assessing the project viability, because its utility is "so obvious".
+You'd be surprised how few people actually ask themselves this question.
+The main point of this rant is that 90% of the time it is better not to do anything.
 
 # A Missing ROI Estimation Is A Bad Sign
 
@@ -22,10 +29,11 @@ May
 
 We will stick to 5th grade math, because nobody during a meeting can do anything more elaborate than that.
 Beside the whole point here is to get rid of corporate bullshit and executive self-delusions, not to assess the viability of the project against all possible outcome.
-The question you should aim to answer is: I am about to spend a potentially large amount of time on this project, so does it have any chance to produce anything even remotely useful or financially sensible?
-Think Elen Ripley in "Alien" not wanting to open the airlock, this is your new job now!
 
-Anything that does not meet this simple criterion is pointless self-jerking play that should be torched right here, right now, for everyone's benefit.
+The question you should aim to answer is: I am about to spend a potentially large amount of time on this project, so does it have any chance to produce anything even remotely useful or financially sensible?
+Anything that does not meet this simple criterion has a 99% chance of being a pointless self-jerking play that should be torched right here, right now, for everyone's benefit.
+Think Ellen Ripley in "Alien" not wanting to open the airlock because of possible contamination, this is your new job now!
+
 Sadly it is not always possible to do so.
 Given that more than likely perspective, it is worth knowing that certain types of project are worse than others.
 
@@ -34,7 +42,7 @@ Given that more than likely perspective, it is worth knowing that certain types 
 You are almost certain to encounter in the wild some projects that are doomed to fail, but still receive enough political support, enthusiasm from blind colleagues or simply fly under the radar.
 Let assume for the sake of the argument that your management requires your presence on this monstrous beast.
 Depending on certain aspects of the zombie itself (and your personal situation), you could go from tolerating the situation to updating your resume for a prompt exit.
-This is mostly based on how clueless or worse malevolent are people around you:
+This is mostly based on how clueless or worse malevolent the people around you are:
 
 1. It can be treated as a research project.
 
@@ -73,8 +81,23 @@ Quite the contrary, I want you to retain control over your life.
 
 ## Save Yourself
 
-I believe it is basic human right to work on something that is not a complete garbage dumpster set of fire.
-One should only partially align themselves with their company's goal.
+I believe it is basic human right to work on something that is not a complete garbage dumpster setting money on fire, or at the very least to know when you are working on the latest ludicrous fantasy of the upper management.
+In the perspective, there is a huge difference between having even a rough ROI estimation versus knowing generally and intuitively.
+With the numbers you can pretend to align yourself with your company goals (enriching their shareholders and executives) in order for your position to become bearable.
+
+Being aligned (loosely) with your company goals such as not setting money on fire, or not wasting everyone's time, give a few benefits:
+First, by exercising the spectacular ability to say the magic word "NO" is very powerful.
+It needs to be used with measure otherwise people will think you are not a "team player", always shitting on others, "not constructive", and that again my dear reading friend is no bueno.
+You will start to see more of the shit people try to shove down your throat because you have pierced the veil of ignorance.
+Pick your battles, sometimes let it slide, or train your coworkers to replace you instead.
+
+Second, you can become quite quickly a credible actor / interlocutor because suddenly you consider a larger scope than your notebook.
+As direct consequence, people will likely consult you more on high profile stuff.
+Although as mentioned they will not like it when you pour liters gasoline on their stupid projects.
+
+Finally a more evanescent aspect regarding this alignment with profitability, is the progressive development of your ability to form judgement of the project you are currently working.
+Not only that, it will also improve your ability to transmit your vision to upper management, because you will start to speak a different language.
+This is the hidden language of the executives, where one devises strategy, moves pawns and allocates resources and time.
 
 ## Save Tour Time
 
@@ -112,53 +135,31 @@ Certain unexpected things that we will need to address through the project lifet
 NOTES :
 how to do the calculation, how to ask for ROI. Tally the number of engineers that will work on the project.
 
-
-
-The project should be drenched in gasoline and thrown into the deepest pit of Hell.
-
-There should be no possibility to continue working on a doomed project. You'd be surprised how few people actually ask themselves the question.
-The main point of this post is that 90% of the time it is better not to do anything.
-
-
-Typology of failing projects:
-- have not even done the calculation --> help them do it (less likely ot lie)
-- reasonable and with error margin
-- the overly-optimistic --> confront the numbers
-
 Why is ROI so overlooked:
+
 - Difficulty to estimate
 - Not part of the culture
 - Poorly defined scope
 - Project whose outcome is beneficial to almost nobody, ex: assessing the risk of the employee to leave for HR to control turnover instead of paying people correctly.
 - Dystopian project that go against regulation with an absolute disregard for legal considerations: monitoring video-surveillance to ensure that employees are wearing the protective equipments in dangerous areas.
 
-Whose responsibility is it ot estimate that? Definitely the business but most of the time you have to help and nudge them.
-
 Because everyone, myself included twice over, think their latest idea they just pulled out of their asses will be the new Sun God.
 
-Pretend to be aligned with company goals such as not loosing money give a few benefits:
-- credible actor / interlocutor  because suddenly you consider a larger scope than your notebook
-- ability to say the magic word "NO" --> very powerful
-- ability to form judgement of the project you are currently working and transmit that vision to upper management
-
 Thesis:
+
 - working on meaningful project is a human right
 - Or at least know when you are working on the latest fantasy of an executive.
 - Difference between knowing generally and intuitively vs having the numbers
 - With the numbers you can pretend to align yourself with your company goals (enriching their shareholders and executive) in order for your position to become bearable.
 
-Anti-thesis:
-- People might consult you more on high profile stuff
-- People might not lie when you pour gasoline on their stupid project
-- you will start to see more of the shit people try to shove down your throat because you have pierced the veil of ignorance
-
-
 # Missing ROI is a bad sign
-1.  typology of failed project
+
+1. typology of failed project
 1. how to calculate
 1. yet they forget about ROI
 
 # Save you sanity
+
 1. Save you time
-1. Save yourseil
+1. Save yourself
 1. Get the right context for incremental improvement
