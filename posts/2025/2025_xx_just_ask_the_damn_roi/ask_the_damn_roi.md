@@ -8,20 +8,18 @@ draft: true
 draft-mode: visible
 ---
 
-You're fucking deserving a goddamned answer!
+Hell, you're deserving a goddamned answer!
 
 Indeed today we are going to develop mass murder weapons because we are going to face the apocalypse.
 Today, we are tackling the problem of zombie projects that should have met their demise long ago.
 These lifeless abominations are wasting resources and everyone's time, only because some people do not want to face reality or cannot simply say the word: "No".
 
-We will start by removing some obvious considerations when people show some good will and a shred of decency:
+We will start by removing some obvious considerations when people show some good will and a shred of decency.
+They may have a reasonable ROI estimation with sensible error margin (you have no idea of your sheer amount of luck), or they could be overly-optimistic, but  open to discussion, in which case your role as a data practitioner is to confront the numbers with better ones.
 
-- whether they have a reasonable ROI estimation and with sensible error margin (you have no idea of your sheer amount of luck)
-- or they tend to be overly-optimistic, but are open to discussion, in which case your role as a data practitioner is to confront the numbers.
-
-No the problems arise when nobody has even tried to do some basic maths or even thought about assessing the project viability, because its utility is "so obvious".
-You'd be surprised how few people actually ask themselves this question.
-The main point of this rant is that 90% of the time it is better not to do anything.
+Our real problems arise when nobody has even tried to do some basic maths or even thought about assessing the project viability.
+You'd be surprised how few people actually ask themselves this question, because for them its utility is "so obvious".
+The main point of this rant is that 90% of the time when facing such situation not to do anything is the best course of action.
 
 # A Missing ROI Estimation Is A Bad Sign
 
@@ -125,7 +123,8 @@ Indeed, their is a tremendous difference between producing a rough estimate, eve
 
 There is a clear difference between establishing a air-tight battle plan from the start (waterfall) and making sure that expected outcomes align the the company capability, resources and plain ol' reality.
 I'm a very strong defender of approaches that aim to maintain velocity of development through the project lifecycle.
-As a consequence designing your system to encourage try and error, learning and to safeguard your ability to correct the scope, which are core components of the Continuous Delivery efforts are extremely valuable to me.
+As a consequence designing your system to encourage learning, try and error, while safeguarding your ability to correct the scope, are extremely valuable to me.
+Indeed these principles are core components of the efforts required for Continuous Delivery.
 
 But Continuous Delivery does not mean we should not produce any effort to establish the boundaries of our system, nor estimate the outcome it is likely to produce.
 What continuous delivery suggests is that our initial assumptions are unlikely to be correct in the long run.
@@ -135,6 +134,7 @@ Certain unexpected things that we will need to address through the project lifet
 NOTES :
 how to do the calculation, how to ask for ROI. Tally the number of engineers that will work on the project.
 
+<!--
 Why is ROI so overlooked:
 
 - Difficulty to estimate
@@ -144,22 +144,4 @@ Why is ROI so overlooked:
 - Dystopian project that go against regulation with an absolute disregard for legal considerations: monitoring video-surveillance to ensure that employees are wearing the protective equipments in dangerous areas.
 
 Because everyone, myself included twice over, think their latest idea they just pulled out of their asses will be the new Sun God.
-
-Thesis:
-
-- working on meaningful project is a human right
-- Or at least know when you are working on the latest fantasy of an executive.
-- Difference between knowing generally and intuitively vs having the numbers
-- With the numbers you can pretend to align yourself with your company goals (enriching their shareholders and executive) in order for your position to become bearable.
-
-# Missing ROI is a bad sign
-
-1. typology of failed project
-1. how to calculate
-1. yet they forget about ROI
-
-# Save you sanity
-
-1. Save you time
-1. Save yourself
-1. Get the right context for incremental improvement
+-->
