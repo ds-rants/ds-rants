@@ -15,7 +15,7 @@ Today, we are tackling the problem of zombie projects that should have met their
 These lifeless abominations are wasting resources and everyone's time, only because some people do not want to face reality or cannot simply say the word: "No".
 
 We will start by removing some obvious considerations when people show some good will and a shred of decency.
-They may have a reasonable ROI estimation with sensible error margin (you have no idea of your sheer amount of luck), or they could be overly-optimistic, but  open to discussion, in which case your role as a data practitioner is to confront the numbers with better ones.
+They may have a reasonable ROI estimation with sensible error margin (you have no idea of your sheer amount of luck), or they could be overly-optimistic, but open to discussion, in which case your role as a data practitioner is to confront the numbers with better ones.
 
 Our real problems arise when nobody has even tried to do some basic maths or even thought about assessing the project viability.
 You'd be surprised how few people actually ask themselves this question, because for them its utility is "so obvious".
@@ -107,7 +107,9 @@ Indeed, you should have some time to allocate to things that have **apparently n
 In order to develop the creative part that is mandatory to do a good job in our profession, you will need some time to learn completely new things, or better understand some foreign concepts.
 Getting to know a new framework or programming language, understanding roughly what are conflict-free replicated data types, or being able to read a bit of assembly are valuable skills even if you don't use them in your day job!
 
-This ability to do something that is not tied to your stupid yearly objectives nor imposed by scrum-junkies overlords, is critical to the development of your IT culture. How are you going to know that there are better ways to manage your data pipelines when your are so neck deep into bug-fixing? You will not be able to see on the other side of the street that other people actually can sleep because their projects have motherfucking automated tests executed on a perfect and independent replica of the prod, deployed in minutes thanks to a merciless CI/CD.
+This ability to do something that is not tied to your stupid yearly objectives nor imposed by scrum-junkies overlords, is critical to the development of your IT culture.
+How are you going to know that there are better ways to manage your data pipelines when your are so neck deep into bug-fixing?
+You will not be able to see on the other side of the street that other people actually can sleep because their projects have motherfucking automated tests executed on a perfect and independent replica of the prod, deployed in minutes thanks to a merciless CI/CD.
 
 You need time to learn all of this.
 You need time to be able to learn how to do your job correctly.
@@ -119,7 +121,8 @@ Knowing what outcomes you can expect from a given project is an excellent way to
 With what I described so far, one person without charitable intentions might be tempted to put the following words into my mouth: "Well, from now you should work only on projects that have demonstrated from the start that they are going to deliver value".
 To this statement my answer is: "Bullshit!"
 
-Indeed, their is a tremendous difference between producing a rough estimate, even better an interval, and publishing a financial report before the project even began. In here we are going to explore the difference between project framing and waterfall approach through the lenses of DevOps and Continuous Delivery philosophies.
+Indeed, their is a tremendous difference between producing a rough estimate, even better an interval, and publishing a financial report before the project even began.
+In here we are going to explore the difference between project framing and waterfall approach through the lenses of DevOps and Continuous Delivery philosophies.
 
 There is a clear difference between establishing a air-tight battle plan from the start (waterfall) and making sure that expected outcomes align the the company capability, resources and plain ol' reality.
 I'm a very strong defender of approaches that aim to maintain velocity of development through the project lifecycle.
