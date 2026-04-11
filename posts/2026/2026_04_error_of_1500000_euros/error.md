@@ -32,5 +32,50 @@ So how did things escalated so comically?
 
 
 
+```sql
+DECLARE batch_size INT64 DEFAULT 200000000;  -- Adjust the batch size according to your resources
+DECLARE offset_value INT64 DEFAULT 0;
+DECLARE row_count INT64;
+
+CREATE TABLE `project.dataset.new_partitioned_table`
+    PARTITION BY DATE(column_with_insertion_date)
+    OPTIONS(partition_expiration_days = 730)
+AS SELECT * FROM `project.dataset.original_table` WHERE 1 = 0;
+
+-- Get the total number of rows in the original table
+SET row_count = (SELECT COUNT(*) FROM `project.dataset.original_table`);
+
+-- Loop to insert data in batches
+my_loop: WHILE offset_value < row_count DO
+
+    EXECUTE IMMEDIATE FORMAT("""
+        INSERT INTO `project.dataset.new_partitioned_table`
+        SELECT * FROM `project.dataset.old_table`
+        LIMIT %d OFFSET %d
+        """, batch_size, offset_value);
+
+    -- Increase offset for the next batch
+    SET offset_value = offset_value + batch_size;
+    -- Break the loop after the first insertion
+    -- LEAVE my_loop;
+END WHILE;
+```
+
+
 
 ## The Final Nightmare
+
+
+The last part of the story is quite different. Here I receive only some echoes and. Only an assumor 's, but indirect. Summary for a treaty happen. Call birth picture. We were trying to integrate Dataiku into our current technical stack.
+Things were looking pretty good, despite the fact that this tool is obviously utter garbage, and a creator of technical debt on par with the average LLM.
+
+Regardless, there are a few things you should know about its so called intuitive recipes.
+For some of them, it can be almost impossible to actually determine what will be the behavior.
+Some could be executed in your database, here BigQuery, or run on your cluster GKE, or some by the frail DSS instance supporting the UI.
+We're coming from nice work. You tends to organize things and. Missteps. That happens.
+That's all through the cracks of the Confederation. Indeed, not until. Recently.
+There was something weird with slight issue with partitioning (it starts to be a common theme...).
+Whenever you were asking in the UI to partition the underlying table because you're well meaning and wanted to use best-practices,but the actual underlying data in BigQuery were not partitioned themselves, you ran into a little hiccup.
+You received the gentle blue warning saying something like:  There was apparently a small mismatching and asking you if you wanted to proceed.
+But whenever you clicked on that "confirm" button, the Dataiku software was about to recopy the full table underneath by chunks of 10,000 or 20,000 rows.
+In this case it was combined with a bug that trigger the destruction / recreation of the table in the most wild billing loop that would give any founder a heart attack.
