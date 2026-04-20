@@ -9,24 +9,27 @@ draft-mode: visible
 ---
 
 I started writing this on April 1st, and whish it was a joke.
+But yes, you read that correctly: $1,500,000!
 
 Do you remember the typical horror stories you see on Hacker News where a random bloke spits out:
 "This little configuration cost us thousand on our cloud bill and almost bankrupted our precious startup"?
 Well, let me tell you, this is nothing, you're still talking baby playground.
-Some companies bring this to the next level, and I am pretty sure there are even worse people out there, there are just not dumb enough to write their story.
+Some companies bring this to the next level, and I am pretty sure there are even worse people out there.
+They are just not dumb enough to write their story.
 
-But this one is worth being told, it's about the dilution of responsibilities, poor understanding of key principles of databases, little mistakes spiralling into giant ones because of a buggy software.
-And Like any good story this one has 3 parts.
+Yet, this one is worth being told.
+It's a tale about the dilution of responsibilities, poor understanding of databases, organizational utter stupidity, and little mistakes spiralling into because of a buggy software.
+Like any good story, this one has three parts.
 
-## The $40K Rehearsal
+## A Disastrous $40K Rehearsal
 
 It's interesting that in many small companies a similar event would have probably generated strong guardrails to prevent it from ever happening again.
 However, in large companies this kind of bill might be a drop in a large ocean.
 This is probably the reason why nothing was really done, and the stage was set for yet another disaster.
 
-## The $150K Fireball
+## The $150K Fireball Destruction
 
-Did you notice that the spending increased by an order of magnitude from the last one?
+This failure was epic in multiple proportion with spending increased by an order of magnitude from the last one.
 
 ### What Actually Happened
 
@@ -97,7 +100,7 @@ Let's dissect this monstrosity for learning purpose:
    BigQuery is a column oriented database, that means the `limit` does absolutely jack shit for data selection.
    It only applies at the very end for display and combined with the `select *` statement right above, it means your are scanning and being billed for the **whole** table for each iteration of this retarded loop!
    Yes this means $1000 per iteration! How many are you asking?
-   Motherfucker, we were lucky that this job was actually cancelled "rapidly" because the whole shit-show would have resulted in about 700-800 iterations for a total cost of $700-800k!
+   Motherfucker, we were lucky that this job was actually cancelled "rapidly" because the whole shit-show would have resulted in about 700-800 iterations for a total cost of $700-800K!
 
 1. The rest is basically a continuation of the same stupid imperative logic to update the selection window and exit the loop upon completion.
    This is also sprinkled with the stains indicating the crime committed by the LLM.
@@ -130,7 +133,8 @@ He at least gets a shred of correct intuition when after two hours the job conti
 
 This whole thing could have been stopped dead in its tracks if only we had set quotas across the organization to limit the BigQuery spending per project.
 Hold on! Now, is the time for a short trip to corporate vaudeville.
-As it happens, this project was part of our data platform and our datalake team **used** to have quotas in place to catch footguns like this.
+As it happens, this project was part of our data platform.
+Quite ironically our datalake team used to have quotas in place to catch footguns like this.
 But then what happened?
 In a beautiful move, it was decided that the responsibility of setting quotas was to be handed to the finops team.
 Thus the datalake team removed the ones they had, while the finops never had the time to implement theirs.
@@ -142,25 +146,28 @@ But surely after such an episode, one can hope that we learned from our mistakes
 
 Oh my sweet sweet summer child...
 
-## The Final $1.5M Armageddon
+## The Holy $1.5M Armageddon
 
-The last part of the story is quite different.
-Here, I receive the information from the people who dealt with the aftermath because we were in the same team.
+We're in the endgame now! Buckle up, crack a couple Xanax under your tongue, have a sip of whisky or all of them at once.
+
+The information I receive were from the people who dealt with the aftermath because we were in the same team.
 For the general picture, we were integrating Dataiku into our current technical stack.
-Things were looking pretty good, despite the fact that this tool is obviously utter garbage, and a creator of technical debt on par with the average LLM.
+Things were looking pretty good, despite the fact that this tool is obviously utter garbage, spitting technical debt like the average LLM.
 But hey, who am I to judge?
 
 Regardless, there are a few things you should know about Dataiku and its so called "intuitive" recipes.
 For some of them, it can be almost impossible to actually determine what will be the behavior.
-Some could be executed in your database, here BigQuery, or run on your GKE cluster, or some by the frail DSS instance supporting the Web UI, which have the nasty little habit to take down the whole instance when there are too many.
+Some could be executed in your database, here BigQuery, or run on your GKE cluster, or some by the frail machine supporting the Web UI or DSS.
+The latter have the nasty little habit to take down the whole DSS instance when there are too many.
 
-Life is so full of happy little accidents.
+But it's not the worst because life is so full of happy little accidents.
 Among those accidents something really hilarious happens when you fall through the cracks.
 Indeed, until recently there was some kind of weird little issue with partitioning (it starts to be a common theme...).
 
 Whenever you were trying to do good and use best-practices like a reasonable human being, as you were asking in the UI to partition your data because but the actual underlying data in BigQuery was not itself partitioned, you ran into a little hiccup.
 You received the gentle blue warning saying something like: There was apparently a small mismatching and asking you if you wanted to proceed.
 But whenever you clicked on that "confirm" button, the Dataiku software was about to recopy the full table underneath by chunks of 10,000 or 20,000 rows.
+Obviously, it needed to read the whole fucking table each time, because a doomsday is even better with methodic annihilation.
 In this case it was combined with a bug that trigger the destruction / recreation of the table in the most wild billing loop that would give any founder a heart attack.
 
 ## Conclusion
