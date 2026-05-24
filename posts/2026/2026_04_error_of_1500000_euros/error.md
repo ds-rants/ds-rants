@@ -36,7 +36,7 @@ This failure was epic in multiple proportion with spending increased by an order
 This is the one I know best because I started sniffing around less than a day after it happened.
 I was fortunate enough to lay my hands on the actual "code" that could generate a bill able to flatten your average startup 3 km under the ground.
 
-Let's say you have a small database, nothing fancy, only 200 TB of data that is stored in a single table that has no partition, no cluster, no index.
+Let's say you have a small table in your datalake, nothing fancy, fully denormalized totaling only 200 TB of data that is stored in a single table that has no partition, no cluster, no index.
 Yes your eyebrows correctly jumped through the ceiling to take a vacation on the rooftop, this in itself is already egregious.
 But people are not so malevolent, because this mistake originated in the will to copy everything in a properly managed table with partition and clusters.
 Such an operation would at the time of the crime represent a $1000 bill (200 TB \* $5 / TB of data processing).
@@ -148,6 +148,8 @@ Oh my sweet sweet summer child...
 
 ## The Holy $1.5M Armageddon
 
+### Some Context For The Brave
+
 We're in the endgame now! Buckle up, crack a couple Xanax under your tongue, have a sip of whisky or all of them at once.
 
 The information I receive were from the people who dealt with the aftermath because we were in the same team.
@@ -164,11 +166,25 @@ But it's not the worst because life is so full of happy little accidents.
 Among those accidents something really hilarious happens when you fall through the cracks.
 Indeed, until recently there was some kind of weird little issue with partitioning (it starts to be a common theme...).
 
-Whenever you were trying to do good and use best-practices like a reasonable human being, as you were asking in the UI to partition your data because but the actual underlying data in BigQuery was not itself partitioned, you ran into a little hiccup.
+### The Technical Clusterfuck
+
+Imagine, you were trying to do good and use best-practices like a reasonable human being, and click a checkbox in the UI to partition your data.
+Sadly when the actual underlying data in BigQuery was not itself partitioned, you ran into a little hiccup.
 You received the gentle blue warning saying something like: There was apparently a small mismatching and asking you if you wanted to proceed.
-But whenever you clicked on that "confirm" button, the Dataiku software was about to recopy the full table underneath by chunks of 10,000 or 20,000 rows.
-Obviously, it needed to read the whole fucking table each time, because a doomsday is even better with methodic annihilation.
-In this case it was combined with a bug that trigger the destruction / recreation of the table in the most wild billing loop that would give any founder a heart attack.
+
+But the festering lies beneath, because Dataiku table partitioning has to be agnostic to the actual database used.
+For that purpose it creates "virtual partitions" by selecting the data for each element of the partition field, then stores it a temporary table, compute the aggregates and delete the temporary table.
+This code is totally generic, and sadly on BigQuery this is can easily mean reading the whole table for each motherfucking distinct value of the partition field.
+Remember, on BigQuery you pay for what you read, even if you don't use it.
+A doomsday is even better with methodic annihilation...
+
+Although, our organization clearly fucked up beyond any reasonable doubt, it is worth noting that allegedly "low-code solutions" in which you don't have to worry about "how the calculation is done" are usually a bunch lies shoved down the throat of your executives.
+Clearly combining deficient orgs, with software has clearly be written by gangrenous feet caught in bear traps, is direct highway for your financial troubles to become existential risks.
+As a bonus, you will also be able to enjoy low-code tech-support team answer any problems with their motto: "Increase the RAM and CPU of your instance"!
+
+On a happier note, once this incident was handled, quotas have been set for our whole organization.
+Surprisingly and for an unknown reason to this, at one point in time they disappeared!
+They had to be reactivated globally once more but I guess you are never really safe from a nice surprise, lurking it way through your infrastructure...
 
 ## Conclusion
 
