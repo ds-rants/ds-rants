@@ -21,7 +21,17 @@ Yet, this one is worth being told.
 It's a tale about the dilution of responsibilities, poor understanding of databases, organizational utter stupidity, and little mistakes spiralling into because of a buggy software.
 Like any good story, this one has three parts.
 
-## A Disastrous $40K Rehearsal
+## A Ramping $200K Poisoning
+
+![alt text](ramping-cost.png)
+
+What an enjoyable moment to come back from vacations and to discover that someone managed in the meantime to accumulate a extra $200K on a single project in just a few weeks.
+For the americans and LinkedIn CEOs lurking in the background, vacations are paid time off you deserve where you actually don't have to work or even read your email.
+It may also surprise you corporate suckers, that in many parts of the world, people actually get more that 2 weeks of PTO...
+Anyhow,
+
+You are witnessing a classic example of someone scheduling a job they should not have.
+This job generated an increasing amount of data each time and the cost were progressively ramping up as each new day more data was read and written.
 
 It's interesting that in many small companies a similar event would have probably generated strong guardrails to prevent it from ever happening again.
 However, in large companies this kind of bill might be a drop in a large ocean.
@@ -30,6 +40,8 @@ This is probably the reason why nothing was really done, and the stage was set f
 ## The $150K Fireball Destruction
 
 This failure was epic in multiple proportion with spending increased by an order of magnitude from the last one.
+This type of little mistake is actually like a nice surrealist painting, meaning you get a very good looking point for this outlier in your FinOps dashboard for the next year.
+There is nothing like the completely skewed auto-scale of the cost-axis to remind you of your failures.
 
 ### What Actually Happened
 
@@ -135,7 +147,7 @@ This whole thing could have been stopped dead in its tracks if only we had set q
 Hold on! Now, is the time for a short trip to corporate vaudeville.
 As it happens, this project was part of our data platform.
 Quite ironically our datalake team used to have quotas in place to catch footguns like this.
-But then what happened?
+But then, how could such an atrocious thing happen?
 In a beautiful move, it was decided that the responsibility of setting quotas was to be handed to the finops team.
 Thus the datalake team removed the ones they had, while the finops never had the time to implement theirs.
 Ain't that fucking diabolical?
